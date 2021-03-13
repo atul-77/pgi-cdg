@@ -8,9 +8,6 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import styled from 'styled-components';
-import DatePicker from "react-datepicker";
-
-import "react-datepicker/dist/react-datepicker.css";
 
 const headerleft = {
     flexGrow: "1",
@@ -90,7 +87,7 @@ export default class AddPatient extends Component{
     render()
     {
         return(
-            <div style={{marginTop:"-100px",height:"750px",background: "linear-gradient(45deg, black, transparent)"}}>
+            <>
             <Row style={headerDiv}>
                 <div className="montserrat" 
                 style={headerleft} 
@@ -145,25 +142,11 @@ export default class AddPatient extends Component{
                     </TableRow>
                     <TableRow>
                         <TableCell><div style={{marginTop:"20px",marginLeft:"20px"}}>Date Of Birth:</div></TableCell>
-                        <TableCell>
-                            
-                        <DatePicker
-                        selected={ this.state.dob }
-                        onChange={(event)=>
-                        (
-                            console.log("Picked:",event),
-                            this.setState({dob:event})
-                        )
-                        }
-                        name="startDate"
-                        dateFormat="MM/dd/yyyy"
-                        />
-                            {/* <Input style={{marginLeft:"-80px"}}
+                        <TableCell><Input style={{marginLeft:"-80px"}}
                         onChange={event=>(
                             this.setState({dob:event.target.value})
                         )}                        
-                        ></Input> */}
-                        </TableCell>
+                        ></Input></TableCell>
                     </TableRow>
                 </TableBody>
             </Table>
@@ -190,7 +173,7 @@ export default class AddPatient extends Component{
                 .catch(error=>console.log("Error===:",error))
             )}
             >Submit</Button>
-            </div>
+            </>
         )
     }
 }

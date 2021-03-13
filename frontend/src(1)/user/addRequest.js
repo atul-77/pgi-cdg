@@ -77,7 +77,7 @@ export default function AddRequest(){
         const [surgeryType,setSurgeryType]=useState("Bypass Surgery")
 
         return(
-            <div style={{background: "linear-gradient(45deg, black, transparent)"}}>
+            <>
             <Row style={headerDiv}>
                 <div className="montserrat" 
                 style={headerleft} 
@@ -166,7 +166,7 @@ export default function AddRequest(){
             <Button style={{marginLeft:"680px",marginTop:"20px"}}>Submit</Button>
 
             <div style={{height:"20px"}}></div>
-            </div>
+            </>
         )
     
 }

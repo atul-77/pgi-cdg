@@ -146,15 +146,7 @@ export default class User extends Component{
       // },[])    
 
       return(
-        <div style={{ 
-          height:"800px",
-          width:"100%",
-          marginTop:"-20px",
-          overflow:"hidden",
-          backgroundImage: `url("https://wallpaperaccess.com/full/449895.jpg")`,
-          backgroundRepeat: "no-repeat"
-        }}>            
-            <div style={{height:"20px"}}></div>
+            <>
             {console.log("Receiveed:",this.props)}
             <Row style={headerDiv}>
                 <div className="montserrat" 
@@ -174,28 +166,20 @@ export default class User extends Component{
     <TableViewContainer >
         <PatientContainer>
           <PatientRow>
-            <h2 style={{marginLeft:"30%"}}>Patients</h2>{" "}
-            <Link to={"/addpatient"} style={{textDecoration:"none",width:"50px",height:"50px",marginTop:"-750px",marginRight:"100px"}}>
-            <div class="center">
-            <div class="btn-1">
-            <a href=""><span>+</span></a>
-            </div>
-            </div>
-              </Link>
+            <PatientHeading style={{marginLeft:"50%"}}>Patients</PatientHeading>{" "}
+            <Button><Link to={"/addpatient"} style={{textDecoration:"none"}}>+</Link></Button>
           </PatientRow>
           <HorizontalLine />
           <div>
             <HorizontalLine />
           </div>
-          <div style={{maxHeight:"270px",height:"270px",maxWidth:"700px",overflowY:"auto",overflowX:"hidden"}}>
+          <div style={{maxHeight:"270px",maxWidth:"700px",overflowY:"auto",overflowX:"hidden"}}>
           {
           this.state.patients?
           <>
-          <ul>
           {
                 this.state.patients.map((patient)=>(
                   <>
-                  <li>
                 <HotPOContainer>
                   <TableRowContainer className="row"
                   style={{marginLeft:"10px"}}
@@ -207,12 +191,11 @@ export default class User extends Component{
                       &emsp;{patient.name} - {patient.bloodgroup}
                     </ActionRequiredLabelData>
                   </TableRowContainer>
+                  <HorizontalLine style={{width:"700px"}}/>
                   </HotPOContainer>
-                  </li>
                   </>
                 ))
           }
-          </ul>
           </>
           :
           <>
@@ -223,53 +206,43 @@ export default class User extends Component{
         </TableViewContainer>
           }
 
-      <div style={{marginLeft:"850px",marginTop:"-360px",width:"650px",height:"300px"}} class="container">
-          <h2 style={{marginLeft:"-50px"}}>
-            Patient Details
-          </h2>
+      <div style={{marginLeft:"750px",marginTop:"-310px",width:"650px",height:"300px"}}>
+          <PatientHeading>
+            <div style={{marginLeft:"40%"}}>Patient Details</div>
+          </PatientHeading>
           <Table 
           // style={{marginTop:"150px",marginLeft:"400px",width:"650px"}}
           >
-            <ul class="responsive-table">
                 <TableBody>
-                    <li class="table-row">
-                        <TableCell class="col col-1" style={{width:"250px"}}><div style={{marginLeft:"20px"}}>Name of Patient:</div></TableCell>
-                        <TableCell class="col col-2" style={{width:"250px"}}>{this.state.selected_patient==""?<></>:this.state.selected_patient.name}</TableCell>
-                    </li>
-                    <li class="table-row">
-                        <TableCell class="col col-1" style={{width:"250px"}}><div style={{marginLeft:"20px"}}>Room No.:</div></TableCell>
-                        <TableCell class="col col-2" style={{width:"250px"}}>{this.state.selected_patient==""?<></>:this.state.selected_patient.wardadhaar}</TableCell>
-                    </li>
-                    <li class="table-row">
-                        <TableCell class="col col-1" style={{width:"250px"}}><div style={{marginLeft:"20px"}}>Blood Group:</div></TableCell>
-                        <TableCell class="col col-2" style={{width:"250px"}}>{this.state.selected_patient==""?<></>:this.state.selected_patient.bloodgroup}</TableCell>
-                    </li>
-                    <li class="table-row">
-                        <TableCell class="col col-1" style={{width:"250px"}}><div style={{marginLeft:"20px"}}>Gender:</div></TableCell>
-                        <TableCell class="col col-2" style={{width:"250px"}}>{this.state.selected_patient==""?<></>:this.state.selected_patient.gender}</TableCell>
-                    </li>
-                    <li class="table-row">
-                        <TableCell class="col col-1" style={{width:"250px"}}><div style={{marginLeft:"20px"}}>Date Of Birth:</div></TableCell>
-                        <TableCell class="col col-2" style={{width:"250px"}}>{this.state.selected_patient==""?<></>:this.state.selected_patient.dob}</TableCell>
-                    </li>
+                    <TableRow>
+                        <TableCell><div style={{marginTop:"5px",marginLeft:"20px"}}>Name of Patient:</div></TableCell>
+                        <TableCell>{this.state.selected_patient==""?<></>:this.state.selected_patient.name}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell><div style={{marginTop:"5px",marginLeft:"20px"}}>Room No.:</div></TableCell>
+                        <TableCell>{this.state.selected_patient==""?<></>:this.state.selected_patient.wardadhaar}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell><div style={{marginTop:"5px",marginLeft:"20px"}}>Blood Group:</div></TableCell>
+                        <TableCell>{this.state.selected_patient==""?<></>:this.state.selected_patient.bloodgroup}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell><div style={{marginTop:"5px",marginLeft:"20px"}}>Gender:</div></TableCell>
+                        <TableCell>{this.state.selected_patient==""?<></>:this.state.selected_patient.gender}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell><div style={{marginTop:"5px",marginLeft:"20px"}}>Date Of Birth:</div></TableCell>
+                        <TableCell>{this.state.selected_patient==""?<></>:this.state.selected_patient.dob}</TableCell>
+                    </TableRow>
                 </TableBody>
-                </ul>
             </Table>
       </div>
 
-      <TableViewContainer style={{marginTop:"30px"}}>
+      <TableViewContainer style={{marginTop:"20px"}}>
         <PatientContainer>
           <PatientRow>
-            <h2 style={{marginLeft:"30%"}}>Requests</h2>{" "}
-            <Link to={"/addrequest"} style={{textDecoration:"none",width:"50px",height:"50px",marginTop:"-750px",marginRight:"100px"}}>
-              
-            <div class="center">
-            <div class="btn-1">
-            <a href=""><span>+</span></a>
-            </div>
-            </div>
-              
-            </Link>
+            <PatientHeading style={{marginLeft:"50%"}}>Requests</PatientHeading>{" "}
+            <Button><Link to={"/addrequest"} style={{textDecoration:"none"}}>+</Link></Button>
           </PatientRow>
           <HorizontalLine style={{width:"650px"}}/>
           <div>
@@ -279,35 +252,30 @@ export default class User extends Component{
           {
           this.state.requests?
           <>
-          <ul>
           {
                 this.state.requests.map((request)=>(
-                  <li>
+                  <>
                 <HotPOContainer>
                   <TableRowContainer className="row"
-                  style={{marginLeft:"10px",width:"300px",maxWidth:"300px"}}
+                  style={{marginLeft:"10px"}}
                   onClick={()=>(
                     this.setState({selected_request:request})
                   )} 
                   >
-                    <div style={{width:"200px",marginTop:"-20px",fontFamily: "Roboto",fontSize: "16px",fontWeight: "400",color: "#000"}}>
-                    &emsp;{request.crnumber}-{request.wardadhaar}
-                    </div>
-                  
-                    <Link to={{
+                    <ActionRequiredLabelData>
+                    &emsp;{request.crnumber} - {request.wardadhaar}
+                    </ActionRequiredLabelData>
+                  </TableRowContainer>
+                  <Button><Link to={{
                     pathname: "/view_request",
                     search: request.crnumber, 
                   }} 
-                  style={{textDecoration:"none",marginTop:"-10px",marginLeft:"500px"}}
-                  >
-                  <div class="button_cont" align="center"><a class="example_f" href="add-website-here" target="_blank" rel="nofollow"><span>View</span></a></div>
-                  </Link>
-                  </TableRowContainer>
+                  style={{textDecoration:"none"}}>+</Link></Button>
+                  <HorizontalLine style={{width:"700px"}}/>
                   </HotPOContainer>
-                  </li>
+                  </>
                 ))
           }
-          </ul>
           </>
           :
           <>
@@ -319,40 +287,40 @@ export default class User extends Component{
 
       </TableViewContainer>
 
-      <div style={{marginLeft:"850px",marginTop:"-350px",width:"650px",height:"300px"}} class="container">
-          <h2 style={{marginLeft:"-50px"}}>Request Details</h2>
+      <div style={{marginLeft:"750px",marginTop:"-310px",width:"650px",height:"300px"}}>
+          <PatientHeading>
+            <div style={{marginLeft:"40%"}}>Request Details</div>
+          </PatientHeading>
           <Table 
           // style={{marginTop:"150px",marginLeft:"400px",width:"650px"}}
           >
-            <ul class="responsive-table">
                 <TableBody>
-                    <li class="table-row">
-                        <TableCell class="col col-1" style={{width:"250px"}}><div style={{marginTop:"5px",marginLeft:"20px"}}>CR Number:</div></TableCell>
-                        <TableCell class="col col-2" style={{width:"250px"}}>{this.state.selected_request==""?<></>:this.state.selected_request.crnumber}</TableCell>
-                    </li>
-                    <li class="table-row">
-                        <TableCell class="col col-1" style={{width:"250px"}}><div style={{marginTop:"5px",marginLeft:"20px"}}>Room No.:</div></TableCell>
-                        <TableCell class="col col-2" style={{width:"250px"}}>{this.state.selected_request==""?<></>:this.state.selected_request.wardadhaar}</TableCell>
-                    </li>
-                    <li class="table-row">
-                        <TableCell class="col col-1" style={{width:"250px"}}><div style={{marginTop:"5px",marginLeft:"20px"}}>Document Number:</div></TableCell>
-                        <TableCell class="col col-2" style={{width:"250px"}}>{this.state.selected_request==""?<></>:this.state.selected_request.docnumber}</TableCell>
-                    </li>
-                    <li class="table-row">
-                        <TableCell class="col col-1" style={{width:"250px"}}><div style={{marginTop:"5px",marginLeft:"20px"}}>Department:</div></TableCell>
-                        <TableCell class="col col-2" style={{width:"250px"}}>{this.state.selected_request==""?<></>:this.state.selected_request.department}</TableCell>
-                    </li>
-                    <li class="table-row">
-                        <TableCell class="col col-1" style={{width:"250px"}}><div style={{marginTop:"5px",marginLeft:"20px"}}>Consultant:</div></TableCell>
-                        <TableCell class="col col-2" style={{width:"250px"}}>{this.state.selected_request==""?<></>:this.state.selected_request.consultantuname}</TableCell>
-                    </li>
+                    <TableRow>
+                        <TableCell><div style={{marginTop:"5px",marginLeft:"20px"}}>CR Number:</div></TableCell>
+                        <TableCell>{this.state.selected_request==""?<></>:this.state.selected_request.crnumber}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell><div style={{marginTop:"5px",marginLeft:"20px"}}>Room No.:</div></TableCell>
+                        <TableCell>{this.state.selected_request==""?<></>:this.state.selected_request.wardadhaar}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell><div style={{marginTop:"5px",marginLeft:"20px"}}>Document Number:</div></TableCell>
+                        <TableCell>{this.state.selected_request==""?<></>:this.state.selected_request.docnumber}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell><div style={{marginTop:"5px",marginLeft:"20px"}}>Department:</div></TableCell>
+                        <TableCell>{this.state.selected_request==""?<></>:this.state.selected_request.department}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell><div style={{marginTop:"5px",marginLeft:"20px"}}>Consultant:</div></TableCell>
+                        <TableCell>{this.state.selected_request==""?<></>:this.state.selected_request.consultantuname}</TableCell>
+                    </TableRow>
                 </TableBody>
-                </ul>
             </Table>
       </div>
 
 
-      </div>
+            </>
 
         )
     }

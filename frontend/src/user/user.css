@@ -2,3 +2,263 @@
     background-color: #f5f5f5;
 }
 
+/* List */
+ul {
+    counter-reset: index;  
+    padding: 0;
+    max-width: 500px;
+  }
+  
+  /* List element */
+  li {
+    counter-increment: index; 
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    box-sizing: border-box;
+  }
+  
+  
+  /* Element counter */
+  li::before {
+    content: counters(index, ".", decimal-leading-zero);
+    font-size: 1.5rem;
+    text-align: right;
+    font-weight: bold;
+    min-width: 50px;
+    padding-right: 12px;
+    font-feature-settings: "tnum";
+    font-variant-numeric: tabular-nums;
+    align-self: flex-start;
+    background-image: linear-gradient(to bottom, #adadc9, black);
+    background-attachment: fixed;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  
+  /* Element separation */
+  li + li {
+    border-top: 1px solid rgba(255,255,255,0.2);
+  }
+  
+  .example_f {
+    border-radius: 4px;
+    background: linear-gradient(to right, #67b26b, #4ca2cb) !important;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 12px;
+    padding: 5px;
+    width: 200px;
+    transition: all 0.4s;
+    cursor: pointer;
+    margin: 5px;
+  }
+  .example_f span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.4s;
+  }
+  .example_f span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  .example_f:hover span {
+    padding-right: 25px;
+  }
+  .example_f:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+
+  body {
+    font-family: 'lato', sans-serif;
+}
+.container {
+    max-width: 2000px;
+    width: 2000px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+h2 {
+    font-size: 26px;
+    margin: 20px 0;
+    text-align: center;
+}
+h2 small {
+    font-size: 0.5em;
+}
+.responsive-table li {
+    border-radius: 3px;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.responsive-table .table-header {
+    background-color: #95a5a6;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+.responsive-table .table-row {
+    background-color: #fff;
+    box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+}
+.responsive-table .col-1 {
+    flex-basis: 30%;
+}
+.responsive-table .col-2 {
+    flex-basis: 70%;
+}
+@media all and (max-width: 1167px) {
+    .responsive-table .table-header {
+        display: none;
+   }
+    .responsive-table li {
+        display: block;
+   }
+    .responsive-table .col {
+        flex-basis: 100%;
+   }
+    .responsive-table .col {
+        display: flex;
+        padding: 10px 0;
+   }
+    .responsive-table .col:before {
+        color: #6c7a89;
+        padding-right: 10px;
+        content: attr(data-label);
+        flex-basis: 50%;
+        text-align: right;
+   }
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-size: 24px;
+  }
+  
+  .btn-1,
+  .btn-2 {
+    width: 300px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  /* Created by http://grohit.com/  */
+  footer a,
+  .btn-1 a,
+  .btn-2 a {
+    text-decoration: none;
+    border: 2px solid #010100;
+    border-radius: 30px;
+    overflow: hidden;
+    padding: 5px;
+    color: #000;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    display: inline-block;
+  }
+  
+  span {
+    position: relative;
+    /* z-index coz when we put bg to before and after this span text will not be visible */
+    z-index: 3;
+  }
+  
+  /* Button 1 styles */
+  
+  .btn-1 a::before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: -2px;
+    width: calc(100% + 6px);
+    /*100% plus double the times left values*/
+    height: calc(100% - 10px);
+    background-color: #ffffff;
+    transition: all 0.5s ease-in-out;
+    transform: scaleY(1);
+  }
+  
+  .btn-1 a:hover::before,
+  .btn-2 a:hover::before {
+    transform: scaleY(0);
+  }
+  
+  .btn-1 a::after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: -5px;
+    width: calc(100% - 10px);
+    /*100% plus double the times left values*/
+    height: calc(100% + 10px);
+    background-color: #ffffff;
+    transition: all 0.5s ease-in-out;
+    transform: scaleX(1);
+  }
+  /* Created by http://grohit.com/  */
+  
+  .btn-1 a:hover::after,
+  .btn-2 a:hover::after {
+    transform: scaleX(0);
+  }
+  
+  /* Button 2 styles */
+  
+  .btn-2 a {
+    color: #ffffff;
+    transition: all 0.5s ease-in-out;
+  }
+  
+  .btn-2 a:hover {
+    color: #000000;
+    transition: all 0.5s ease-in-out;
+  }
+  
+  .btn-2 a::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    transition: all 0.5s ease-in-out;
+    transform: scaleY(1);
+  }
+  
+  .btn-2 a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    transition: all 0.5s ease-in-out;
+    transform: scaleX(1);
+  }
+  
+  /* Created by http://grohit.com/  */
+  footer{
+      text-align: center;
+    font-size: 10px;
+  }
