@@ -75,3 +75,11 @@ class CardiacSerializer(serializers.ModelSerializer):
     class Meta:
         model = CardiacRequested
         fields = '__all__'
+
+class UpdateCardiacSerializer(serializers.ModelSerializer):
+    #code = serializers.CharField(validators=[])
+    
+    class Meta:
+        model = CardiacRequested
+        #fields = ('__all__')
+        exclude = ('request',)

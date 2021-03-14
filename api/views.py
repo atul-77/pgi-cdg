@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework import generics, status
-from rest_framework.generics import CreateAPIView, ListAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView
 from .models import Patient, Requests , User, CardiacRequested
-from .serializers import UserSerializer, RegisterSerializer,LoginSerializer, PatientSerializer, CreatePatientSerializer, RequestSerializer, CreateRequestSerializer, CardiacSerializer #,
+from .serializers import UserSerializer, RegisterSerializer,LoginSerializer, PatientSerializer, CreatePatientSerializer, RequestSerializer, CreateRequestSerializer, CardiacSerializer, UpdateCardiacSerializer #,
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from knox.models import AuthToken
@@ -115,3 +115,32 @@ class LoginAPIView(generics.GenericAPIView):
 class GetCardiacTable(CreateAPIView):
     queryset = CardiacRequested.objects.all()
     serializer_class = CardiacSerializer
+
+class UpdateCardiac(UpdateAPIView):
+    serializer_class = UpdateCardiacSerializer
+
+    def patch(self, request, format=None):
+        if not self.request.session.exists(self.request.session.session_key):
+            self.request.session.create()
+
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            A_1_descr = serializer.data.get('A_1_descr')
+            A_1_name = serializer.data.get('A_1_name')
+            code = serializer.data.get('code')
+
+            queryset = CardiacRequested.objects.filter(code=code)
+            if not queryset.exists():
+                return Response({'msg': 'Request not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+            cardiacrequest = queryset[0]
+            user_id = self.request.session.session_key
+            #if room.host != user_id:
+            #    return Response({'msg': 'You are not the host of this room.'}, status=status.HTTP_403_FORBIDDEN)
+
+            cardiacrequest.A_1_descr = A_1_descr
+            cardiacrequest.A_1_name = A_1_name
+            cardiacrequest.save(update_fields=['A_1_descr', 'A_1_name'])
+            return Response(UpdateCardiacSerializer(cardiacrequest).data, status=status.HTTP_200_OK)
+
+        return Response({'Bad Request': "Invalid Data..."}, status=status.HTTP_400_BAD_REQUEST)

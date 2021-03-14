@@ -101,6 +101,7 @@ class User(AbstractUser):
 
 
 class CardiacRequested(models.Model):
+    request = models.ForeignKey(Requests, on_delete=models.CASCADE,default='')
     A_1_name = models.CharField(max_length=500,default='_')
     A_1_descr = models.CharField(max_length=500,default='_')
     A_1_brand = models.CharField(max_length=500,default='_')

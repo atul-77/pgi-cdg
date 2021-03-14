@@ -83,7 +83,7 @@ export default function ViewRequest(){
     const [A1_4,setA1_4]=React.useState("")
     const [A1_3,setA1_3]=React.useState("")
     const [A1_2,setA1_2]=React.useState("")
-    const [A2A_1,setA2A_1]=React.useState("")
+    /*const [A2A_1,setA2A_1]=React.useState("")
     const [A2A_4,setA2A_4]=React.useState("")
     const [A2A_3,setA2A_3]=React.useState("")
     const [A2A_2,setA2A_2]=React.useState("")
@@ -1122,7 +1122,7 @@ export default function ViewRequest(){
     const [E56_1,setE56_1]=React.useState("")
     const [E56_2,setE56_2]=React.useState("")
     const [E56_3,setE56_3]=React.useState("")
-    const [E56_4,setE56_4]=React.useState("")
+    const [E56_4,setE56_4]=React.useState("")*/
 
     return(
         console.log("Location:",location),

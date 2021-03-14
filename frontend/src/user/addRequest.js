@@ -139,7 +139,7 @@ export default function AddRequest(){
                     </TableRow>
                     <TableRow>
                         <TableCell><div style={{marginTop:"20px",marginLeft:"20px"}}>Consultant Name</div></TableCell>
-                        <TableCell><Input style={{marginLeft:"-80px"}}></Input></TableCell>
+                        <TableCell><Input style={{marginLeft:"-80px"}} ></Input></TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell><div style={{marginTop:"20px",marginLeft:"20px"}}>Patient BSA</div></TableCell>
@@ -147,11 +147,11 @@ export default function AddRequest(){
                     </TableRow>
                     <TableRow>
                         <TableCell><div style={{marginTop:"20px",marginLeft:"20px"}}>Height</div></TableCell>
-                        <TableCell><Input style={{marginLeft:"-80px"}}></Input></TableCell>
+                        <TableCell><Input type="number" style={{marginLeft:"-80px"}} placeholder="Type in cm"></Input></TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell><div style={{marginTop:"20px",marginLeft:"20px"}}>Weight</div></TableCell>
-                        <TableCell><Input style={{marginLeft:"-80px"}}></Input></TableCell>
+                        <TableCell><Input type="number" style={{marginLeft:"-80px"}} placeholder="Type in kg"></Input></TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell><div style={{marginTop:"20px",marginLeft:"20px"}}>Assigned Technician</div></TableCell>

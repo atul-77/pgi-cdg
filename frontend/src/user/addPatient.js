@@ -11,6 +11,7 @@ import styled from 'styled-components';
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
+import { Select } from "@material-ui/core";
 
 const headerleft = {
     flexGrow: "1",
@@ -120,8 +121,8 @@ export default class AddPatient extends Component{
                         ></Input></TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell><div style={{marginTop:"20px",marginLeft:"20px"}}>Room No.:</div></TableCell>
-                        <TableCell><Input style={{marginLeft:"-80px"}}
+                        <TableCell><div style={{marginTop:"20px",marginLeft:"20px"}}>Wardadhaar:</div></TableCell>
+                        <TableCell><Input type="number" style={{marginLeft:"-80px"}} min="100000000000"  max="999999999999"
                         onChange={event=>(
                             this.setState({room_no:event.target.value})
                         )}                        
@@ -129,19 +130,31 @@ export default class AddPatient extends Component{
                     </TableRow>
                     <TableRow>
                         <TableCell><div style={{marginTop:"20px",marginLeft:"20px"}}>Blood Group:</div></TableCell>
-                        <TableCell><Input style={{marginLeft:"-80px"}}
+                        <TableCell><Select 
+
                         onChange={event=>(
                             this.setState({blood_group:event.target.value})
                         )}                        
-                        ></Input></TableCell>
+                        >
+                        <option value="A+">A+</option>
+                        <option value="B+">B+</option>
+                        <option selected value="AB+">AB+</option>
+                        <option value="O+">O+</option>
+                        <option value="A-">A-</option>
+                        <option value="B-">B-</option>
+                        <option selected value="AB-">AB-</option>
+                        <option value="O-">O-</option>    
+                        </Select></TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell><div style={{marginTop:"20px",marginLeft:"20px"}}>Gender:</div></TableCell>
-                        <TableCell><Input style={{marginLeft:"-80px"}}
+                        <TableCell><Select
                         onChange={event=>(
                             this.setState({gender:event.target.value})
                         )}                        
-                        ></Input></TableCell>
+                        ><option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option selected value="other">Other</option></Select></TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell><div style={{marginTop:"20px",marginLeft:"20px"}}>Date Of Birth:</div></TableCell>
@@ -156,7 +169,7 @@ export default class AddPatient extends Component{
                         )
                         }
                         name="startDate"
-                        dateFormat="MM/dd/yyyy"
+                        dateFormat="yyyy-MM-dd"
                         />
                             {/* <Input style={{marginLeft:"-80px"}}
                         onChange={event=>(
