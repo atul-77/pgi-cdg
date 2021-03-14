@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {Component, useState} from "react";
 import axios from "axios";
 import {Row} from "simple-flexbox";
 import Table from "@material-ui/core/Table";
@@ -9,6 +9,8 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import styled from 'styled-components';
 import DatePicker from "react-datepicker";
+import moment from "Moment";
+import format from 'date-fns/format';
 
 import "react-datepicker/dist/react-datepicker.css";
 import { Select } from "@material-ui/core";
@@ -81,15 +83,18 @@ export default class AddPatient extends Component{
 
     state = {
         name:"",
-        room_no:0,
+        ward_adhaar:0,
         blood_group:"",
         gender:"",
-        dob:"",
-      }
-  
+        // dob:moment().format("yyyy-MM-dd"),
+        dob: "",
+    }
+
+
 
     render()
-    {
+    {      
+        // const [dateofbirth,setdateofbirth] = useState(null);
         return(
             <div style={{marginTop:"-100px",height:"750px",background: "linear-gradient(45deg, black, transparent)"}}>
             <Row style={headerDiv}>
@@ -124,7 +129,7 @@ export default class AddPatient extends Component{
                         <TableCell><div style={{marginTop:"20px",marginLeft:"20px"}}>Wardadhaar:</div></TableCell>
                         <TableCell><Input type="number" style={{marginLeft:"-80px"}} min="100000000000"  max="999999999999"
                         onChange={event=>(
-                            this.setState({room_no:event.target.value})
+                            this.setState({ward_adhaar:event.target.value})
                         )}                        
                         ></Input></TableCell>
                     </TableRow>
@@ -137,12 +142,12 @@ export default class AddPatient extends Component{
                         )}                        
                         >
                         <option value="A+">A+</option>
-                        <option value="B+">B+</option>
-                        <option selected value="AB+">AB+</option>
-                        <option value="O+">O+</option>
                         <option value="A-">A-</option>
+                        <option value="B+">B+</option>
                         <option value="B-">B-</option>
+                        <option selected value="AB+">AB+</option>
                         <option selected value="AB-">AB-</option>
+                        <option value="O+">O+</option>
                         <option value="O-">O-</option>    
                         </Select></TableCell>
                     </TableRow>
@@ -161,11 +166,14 @@ export default class AddPatient extends Component{
                         <TableCell>
                             
                         <DatePicker
+                        placeholderText="Select DoB"
+                        showYearDropdown
+                        isClearable
                         selected={ this.state.dob }
-                        onChange={(event)=>
-                        (
-                            console.log("Picked:",event),
-                            this.setState({dob:event})
+                        onChange={(newDate)=> 
+                        (   
+                            console.log("Picked:",format(newDate,"yyyy-MM-dd")),
+                            this.setState({dob:newDate})
                         )
                         }
                         name="startDate"
@@ -188,15 +196,15 @@ export default class AddPatient extends Component{
                         credentials: 'include',
                         method:'POST',
                         headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
+                        Accept: 'application/json',
+                        "Content-Type": 'application/json',
                   },
                   body: JSON.stringify({
                     name: this.state.name,
-                    wardadhaar: this.state.room_no,
+                    wardadhaar: this.state.ward_adhaar,
                     bloodgroup: this.state.blood_group,
                     gender: this.state.gender,
-                    dob: (this.state.dob),
+                    dob: format(this.state.dob,'yyyy-MM-dd'),
                   }),
                 })
                 .then(result=>console.log("Success===:",result))

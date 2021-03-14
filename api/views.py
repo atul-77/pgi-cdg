@@ -15,6 +15,24 @@ from knox.models import AuthToken
 class PatientView(CreateAPIView): #ListAPIView for just the data
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
+    def post(self, request,format=None):
+        if not self.request.session.exists(self.request.session.session_key):
+            self.request.session.create()
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            name = serializer.data.get('name')
+            wardadhaar = serializer.data.get('wardadhaar')
+            bloodgroup = serializer.data.get('bloodgroup')
+            gender = serializer.data.get('gender')
+            dob = serializer.data.get('dob')
+            queryset = Patient.objects.filter(wardadhaar = wardadhaar)
+            if queryset.exists():
+                return Response({'BAD':'Duplicate patient Adhaar Number'},status=status.HTTP_400_BAD_REQUEST)
+            else:
+                newPatient = Patient(name=name,wardadhaar=wardadhaar,bloodgroup=bloodgroup,gender=gender,dob=dob)
+                newPatient.save()
+                return Response({'GOOD':'all done, entered new patient'},status=status.HTTP_201_CREATED)
+        return Response({'BAD':'serializer not correct'},status=status.HTTP_400_BAD_REQUEST)
 
 class RequestView(CreateAPIView):
     queryset = Requests.objects.all()
