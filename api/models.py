@@ -20,8 +20,8 @@ class Requests(models.Model):
     department = models.CharField(max_length=100,default='default-department')
     consultantuname = models.CharField(max_length=100)
     bsa = models.FloatField()
-    height = models.FloatField()
-    weight = models.FloatField()
+    height = models.IntegerField()
+    weight = models.IntegerField()
     
     
     nurseflag = models.CharField(max_length=100,default='_')
@@ -88,13 +88,13 @@ class UserManager(BaseUserManager):
         return user
 
 class User(AbstractUser):
-    #username = models.CharField(max_length=100,primary_key=True,null=False,default='yo')
-    #name = models.CharField(max_length=100,null=False,default='name')
+    username = models.CharField(max_length=100,primary_key=True,null=False,default='yo')
+    name = models.CharField(max_length=100,null=False,default='name')
     category = models.CharField(max_length=100,default='Nurse')
-    #objects = UserManager()
+    objects = UserManager()
 
-    #USERNAME_FIELD = 'username'
-    #REQUIRED_FIELDS = [ 'category','name' ]
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = [ 'category','name' ]
 
     def __str__(self):              # __unicode__ on Python 2
         return self.username

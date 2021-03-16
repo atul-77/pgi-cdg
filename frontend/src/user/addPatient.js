@@ -146,7 +146,7 @@ export default class AddPatient extends Component{
                         <option value="B+">B+</option>
                         <option value="B-">B-</option>
                         <option selected value="AB+">AB+</option>
-                        <option selected value="AB-">AB-</option>
+                        <option value="AB-">AB-</option>
                         <option value="O+">O+</option>
                         <option value="O-">O-</option>    
                         </Select></TableCell>

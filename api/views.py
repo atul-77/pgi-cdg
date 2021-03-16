@@ -7,7 +7,9 @@ from .serializers import UserSerializer, RegisterSerializer,LoginSerializer, Pat
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from knox.models import AuthToken
+import math
 # Create your views here.
+
 
 # class UsersView(CreateAPIView): #ListAPIView for just the data
 #    queryset = User.objects.all()
@@ -32,11 +34,36 @@ class PatientView(CreateAPIView): #ListAPIView for just the data
                 newPatient = Patient(name=name,wardadhaar=wardadhaar,bloodgroup=bloodgroup,gender=gender,dob=dob)
                 newPatient.save()
                 return Response({'GOOD':'all done, entered new patient'},status=status.HTTP_201_CREATED)
-        return Response({'BAD':'serializer not correct'},status=status.HTTP_400_BAD_REQUEST)
+        msg = serializer.errors
+        return Response({'BAD serializer':msg},status=status.HTTP_400_BAD_REQUEST)
 
-class RequestView(CreateAPIView):
+class RequestView(APIView):
     queryset = Requests.objects.all()
     serializer_class = RequestSerializer
+    def post(self, request,format=None):
+        if not self.request.session.exists(self.request.session.session_key):
+            self.request.session.create()
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            crnumber = serializer.data.get('crNumber')
+            wardadhaar = serializer.data.get('wardAdhaar')
+            docnumber = serializer.data.get('docNumber')
+            # createdby = serializer.data.get('') #THIS NEEDS TO CAPTURE THE USER NAME of who created this request
+            # createdat = models.DateTimeField(auto_now_add=True)
+            department = serializer.data.get('department')
+            consultantuname = serializer.data.get('consultantUname')
+            height = serializer.data.get('height')
+            weight = serializer.data.get('weight')
+            bsa = math.sqrt(float(height*weight)/float(3600))
+            queryset = Requests.objects.filter(docnumber=docnumber)
+            if len(queryset)>0:
+                return Response({'BAD':'Duplicate Request with same Document Number'},status=status.HTTP_400_BAD_REQUEST)
+            else:
+                newRequest = Requests(crnumber=crnumber,wardadhaar=wardadhaar,docnumber=docnumber,department=department,consultantuname=consultantuname,height=height,weight=weight,bsa=bsa)
+                newRequest.save()
+                return Response({'GOOD':'entered new Request'},status=status.HTTP_201_CREATED)
+        msg = serializer.errors
+        return Response({'BAD':msg},status=status.HTTP_400_BAD_REQUEST)
 # class CreateUsers(APIView):
 #     serializer_class = CreateUsersSerializer
 #     def post(self,request,format=None):

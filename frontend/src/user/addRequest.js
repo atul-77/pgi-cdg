@@ -10,6 +10,8 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import styled from 'styled-components';
 
+const REQUEST_TABLE_API='http://127.0.0.1:8000/api/requests'
+
 const headerleft = {
     flexGrow: "1",
     cursor:'pointer',
@@ -74,10 +76,19 @@ const Input = styled.input`
 
 export default function AddRequest(){
 
-        const [surgeryType,setSurgeryType]=useState("Bypass Surgery")
+        const [department,setDepartment]=useState("Bypass Surgery");
+        const [crNumber,setCrNumber]=useState("_");
+        const [wardAdhaar,setWardAdhaar]=useState(0);
+        const [wardName,setWardName]=useState("_");
+        const [patientName,setPatientName]=useState("_");
+        const [docNumber,setDocNumber]=useState("_");
+        const [consultantUname,setConsultantUname]=useState("_");
+        const [height,setHeight] = useState(0);
+        const [weight,setWeight] = useState(0);
 
         return(
-            <div style={{background: "linear-gradient(45deg, black, transparent)"}}>
+        <div style={{background: "linear-gradient(45deg, lightblue , transparent)",position:"fixed",padding:0,margin:0,top:0,left:0,width: "100%",height: "100%"}}
+        >
             <Row style={headerDiv}>
                 <div className="montserrat" 
                 style={headerleft} 
@@ -99,74 +110,129 @@ export default function AddRequest(){
             <Table style={{marginTop:"50px",marginLeft:"400px",width:"650px"}}>
                 <TableBody>
                     <TableRow>
-                        <TableCell><div style={{marginTop:"20px",marginLeft:"20px"}}>CR Number:</div></TableCell>
-                        <TableCell><Input style={{marginLeft:"-80px"}}></Input></TableCell>
+                        <TableCell><div style={{marginTop:"0px",marginLeft:"20px"}}>CR Number:</div></TableCell>
+                        <TableCell><Input style={{marginTop:"0px",marginLeft:"-80px",height:"8px"}}
+                            onChange={(event)=>{
+                                setCrNumber(event.target.value)
+                            }}
+                        ></Input></TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell><div style={{marginTop:"20px",marginLeft:"20px"}}>Room No.:</div></TableCell>
-                        <TableCell><Input style={{marginLeft:"-80px"}}></Input></TableCell>
+                        <TableCell><div style={{marginTop:"0px",marginLeft:"20px"}}>Ward Adhaar No.:</div></TableCell>
+                        <TableCell><Input type="number" style={{marginTop:"0px",marginLeft:"-80px",height:"8px"}} min="100000000000"  max="999999999999"
+                            onChange={(event)=>{
+                                setWardAdhaar(event.target.value)
+                            }}
+                        ></Input></TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell><div style={{marginTop:"20px",marginLeft:"20px"}}>Department:</div></TableCell>
+                        <TableCell><div style={{marginTop:"0px",marginLeft:"20px"}}>Ward Name:</div></TableCell>
+                        <TableCell><Input style={{marginTop:"0px",marginLeft:"-80px",height:"8px"}}
+                            onChange={(event)=>{
+                                setWardName(event.target.value)
+                            }}
+                        ></Input></TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell><div style={{marginTop:"0px",marginLeft:"20px"}}>Department:</div></TableCell>
                         <TableCell>
-                            <Select>
-                                <MenuItem onClick={()=>{
-                                    setSurgeryType("Cardiology")
+                            <Select style={{marginTop:"0px",marginLeft:"-80px",width:"80%"}}
+                                onChange={(event)=>{
+                                    setDepartment(event.target.value)
+                                }}
+                            >   
+                                <option value="Cardiology">Cardiology</option>
+                                <option value="Immunology">Immunology</option>
+                                <option value="Oncology">Oncology</option>
+                                <option value="Psychiatry">Psychiatry</option>
+                                {/* <MenuItem onClick={()=>{
+                                    setDepartment("Cardiology")
                                 }}>
                                 Cardiology
                                 </MenuItem>
                                 <MenuItem onClick={()=>{
-                                    setSurgeryType("Immunology")
+                                    setDepartment("Immunology")
                                 }}>
                                 Immunology
                                 </MenuItem>
                                 <MenuItem onClick={()=>{
-                                    setSurgeryType("Oncology")
+                                    setDepartment("Oncology")
                                 }}>
                                 Oncology
                                 </MenuItem>
                                 <MenuItem onClick={()=>{
-                                    setSurgeryType("Psychiatry")
+                                    setDepartment("Psychiatry")
                                 }}>
                                 Psychiatry
-                                </MenuItem>
+                                </MenuItem> */}
                             </Select>
                         </TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell><div style={{marginTop:"20px",marginLeft:"20px"}}>Document Number:</div></TableCell>
-                        <TableCell><Input style={{marginLeft:"-80px"}}></Input></TableCell>
+                        <TableCell><div style={{marginTop:"0px",marginLeft:"20px"}}>Document Number:</div></TableCell>
+                        <TableCell><Input style={{marginTop:"0px",marginLeft:"-80px",height:"8px"}}
+                            onChange={(event)=>{
+                                setDocNumber(event.target.value)
+                            }}
+                        ></Input></TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell><div style={{marginTop:"20px",marginLeft:"20px"}}>Consultant Name</div></TableCell>
-                        <TableCell><Input style={{marginLeft:"-80px"}} ></Input></TableCell>
+                        <TableCell><div style={{marginTop:"0px",marginLeft:"20px"}}>Consultant User Name:</div></TableCell>
+                        <TableCell><Input style={{marginTop:"0px",marginLeft:"-80px",height:"8px"}}
+                            onChange={(event)=>{
+                                setConsultantUname(event.target.value)
+                            }}
+                        ></Input></TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell><div style={{marginTop:"20px",marginLeft:"20px"}}>Patient BSA</div></TableCell>
-                        <TableCell><Input style={{marginLeft:"-80px"}}></Input></TableCell>
+                        <TableCell><div style={{marginTop:"0px",marginLeft:"20px"}}>Height</div></TableCell>
+                        <TableCell><Input type="number" style={{marginTop:"1px",marginLeft:"-80px",height:"8px"}} placeholder="Type in cm"
+                            onChange={(event)=>{
+                                setHeight(event.target.value);
+                            }}
+                        ></Input></TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell><div style={{marginTop:"20px",marginLeft:"20px"}}>Height</div></TableCell>
-                        <TableCell><Input type="number" style={{marginLeft:"-80px"}} placeholder="Type in cm"></Input></TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell><div style={{marginTop:"20px",marginLeft:"20px"}}>Weight</div></TableCell>
-                        <TableCell><Input type="number" style={{marginLeft:"-80px"}} placeholder="Type in kg"></Input></TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell><div style={{marginTop:"20px",marginLeft:"20px"}}>Assigned Technician</div></TableCell>
-                        <TableCell><Input style={{marginLeft:"-80px"}}></Input></TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell><div style={{marginTop:"20px",marginLeft:"20px"}}>Assigned Perfusionist</div></TableCell>
-                        <TableCell><Input style={{marginLeft:"-80px"}}></Input></TableCell>
+                        <TableCell><div style={{marginTop:"0px",marginLeft:"20px"}}>Weight</div></TableCell>
+                        <TableCell><Input type="number" style={{marginTop:"0px",marginLeft:"-80px",height:"8px"}} placeholder="Type in kg"
+                            onChange={(event)=>{
+                                setWeight(event.target.value);
+                            }}
+                        ></Input></TableCell>
                     </TableRow>
                 </TableBody>
             </Table>
-            <Button style={{marginLeft:"680px",marginTop:"20px"}}>Submit</Button>
-
+            <Button style={{fontSize:"16px",marginLeft:"680px",marginTop:"20px",height:"40px",width:"150px",font:"message-box"}}
+                onClick={()=>(
+                    console.log(crNumber,wardAdhaar,wardName,department,docNumber,consultantUname,height,weight),
+                    fetch(REQUEST_TABLE_API,
+                        {
+                        credentials: 'include',
+                        method:'POST',
+                        headers: {
+                        Accept: 'application/json',
+                        "Content-Type": 'application/json',
+                        },
+                        body: JSON.stringify({
+                            crnumber: crNumber,
+                            wardadhaar: wardAdhaar,
+                            wardname: wardName,
+                            department: department,
+                            docnumber: docNumber,
+                            consultantuname: consultantUname,
+                            height: height,
+                            weight:weight,
+                            bsa:0,
+                        }),
+                    })
+                    .then(result=>console.log("Success===:",result))
+                    .catch(error=>console.log("Error===:",error))
+                )}
+                
+            ><h3>SUBMIT</h3>
+            </Button>
             <div style={{height:"20px"}}></div>
-            </div>
+        </div>
         )
     
 }
