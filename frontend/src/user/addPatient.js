@@ -9,7 +9,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import styled from 'styled-components';
 import DatePicker from "react-datepicker";
-import moment from "Moment";
+//import moment from "Moment";
 import format from 'date-fns/format';
 
 import "react-datepicker/dist/react-datepicker.css";

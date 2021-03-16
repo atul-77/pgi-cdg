@@ -7,7 +7,7 @@ import Routes from './routes';
 import {BrowserRouter as Router,Route,Switch,Link,Redirect} from "react-router-dom";
 import PatientDetails from './patient/patientDetails';
 import ViewRequest from './user/viewRequest';
-
+import CardiacForm from './patient/cardiacforms';
 function App() {
   return (
     <Router>
@@ -18,6 +18,7 @@ function App() {
       <Route exact path={"/addrequest"} component={AddRequest}/>
       <Route exact path={"/view_request"} component={ViewRequest}/>
       <Route path={"/patientdetails/"} component={PatientDetails}/>
+      <Route path={"/form"} component={CardiacForm}/>
       </Switch>
 
     </Router>
