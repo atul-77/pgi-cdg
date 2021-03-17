@@ -15,6 +15,32 @@ import format from 'date-fns/format';
 import "react-datepicker/dist/react-datepicker.css";
 import { Select } from "@material-ui/core";
 
+import clsx from 'clsx';
+import { makeStyles } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Drawer from '@material-ui/core/Drawer';
+import Box from '@material-ui/core/Box';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import List from '@material-ui/core/List';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import Badge from '@material-ui/core/Badge';
+import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import {Link} from 'react-router-dom'
+import MenuIcon from '@material-ui/icons/Menu';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import Button from '@material-ui/core/Button';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import AssignmentIcon from '@material-ui/icons/Assignment';
+
+
 const headerleft = {
     flexGrow: "1",
     cursor:'pointer',
@@ -56,31 +82,32 @@ const Input = styled.input`
   border: solid 2px #0052cc;
   `;
 
-  const Button = styled.button`
-  width: 88px;
-  height: 30px;
-  color: #0052cc;
-  border-radius: 4px;
-  border: solid 1px #0052cc;
-  background-color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  &:focus {
-    outline: none;
-    border: solid 2px #0052cc;
-  }
-  font-family: Roboto;
-  font-size: 11px;
-  font-weight: normal;
-  // margin-bottom: 20px;
-`;
+//   const Button = styled.button`
+//   width: 88px;
+//   height: 30px;
+//   color: #0052cc;
+//   border-radius: 4px;
+//   border: solid 1px #0052cc;
+//   background-color: #ffffff;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   &:focus {
+//     outline: none;
+//     border: solid 2px #0052cc;
+//   }
+//   font-family: Roboto;
+//   font-size: 11px;
+//   font-weight: normal;
+//   // margin-bottom: 20px;
+// `;
 
 const PATIENT_TABLE_API='http://127.0.0.1:8000/api/patients'
 
 
 export default class AddPatient extends Component{
-
+    
+    
     state = {
         name:"",
         ward_adhaar:0,
@@ -94,6 +121,7 @@ export default class AddPatient extends Component{
     render()
     {      
         // const [dateofbirth,setdateofbirth] = useState(null);
+        // const classes = useStyles();
         return(
             <div style={{marginTop:"-100px",height:"750px",background:"linear-gradient(45deg, lightblue , transparent)"}}>
             <Row style={headerDiv}>
@@ -113,6 +141,33 @@ export default class AddPatient extends Component{
                 <span style={help}>
               </span>
             </Row>
+
+            {/* <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
+                <Toolbar className={classes.toolbar}>
+                <IconButton
+                    edge="start"
+                    color="inherit"
+                    aria-label="open drawer"
+                    onClick={handleDrawerOpen}
+                    className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
+                >
+                <MenuIcon />
+                </IconButton>
+                <Typography component="h1" variant="h6" color="inherit" align="center" noWrap className={classes.title}>
+                    ADD PATIENT 
+                </Typography>
+                <IconButton color="inherit">
+                    <Badge badgeContent={4} color="secondary">
+                    <NotificationsIcon />
+                    </Badge>
+                </IconButton>
+                <Link to="/user">
+                <Button variant="contained" color="secondary">
+                    Go Back
+                </Button>
+                </Link>
+                </Toolbar>
+            </AppBar> */}
 
             <Table style={{marginTop:"150px",marginLeft:"400px",width:"650px"}}>
                 <TableBody>
