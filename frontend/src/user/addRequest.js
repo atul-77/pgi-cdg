@@ -145,26 +145,6 @@ export default function AddRequest(){
                                 <option value="Immunology">Immunology</option>
                                 <option value="Oncology">Oncology</option>
                                 <option value="Psychiatry">Psychiatry</option>
-                                {/* <MenuItem onClick={()=>{
-                                    setDepartment("Cardiology")
-                                }}>
-                                Cardiology
-                                </MenuItem>
-                                <MenuItem onClick={()=>{
-                                    setDepartment("Immunology")
-                                }}>
-                                Immunology
-                                </MenuItem>
-                                <MenuItem onClick={()=>{
-                                    setDepartment("Oncology")
-                                }}>
-                                Oncology
-                                </MenuItem>
-                                <MenuItem onClick={()=>{
-                                    setDepartment("Psychiatry")
-                                }}>
-                                Psychiatry
-                                </MenuItem> */}
                             </Select>
                         </TableCell>
                     </TableRow>

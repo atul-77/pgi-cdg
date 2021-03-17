@@ -45,13 +45,13 @@ class RequestView(APIView):
             self.request.session.create()
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
-            crnumber = serializer.data.get('crNumber')
-            wardadhaar = serializer.data.get('wardAdhaar')
-            docnumber = serializer.data.get('docNumber')
+            crnumber = serializer.data.get('crnumber')
+            wardadhaar = serializer.data.get('wardadhaar')
+            docnumber = serializer.data.get('docnumber')
             # createdby = serializer.data.get('') #THIS NEEDS TO CAPTURE THE USER NAME of who created this request
             # createdat = models.DateTimeField(auto_now_add=True)
             department = serializer.data.get('department')
-            consultantuname = serializer.data.get('consultantUname')
+            consultantuname = serializer.data.get('consultantuname')
             height = serializer.data.get('height')
             weight = serializer.data.get('weight')
             bsa = math.sqrt(float(height*weight)/float(3600))

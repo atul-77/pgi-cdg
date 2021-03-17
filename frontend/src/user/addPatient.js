@@ -86,7 +86,6 @@ export default class AddPatient extends Component{
         ward_adhaar:0,
         blood_group:"",
         gender:"",
-        // dob:moment().format("yyyy-MM-dd"),
         dob: "",
     }
 
@@ -96,7 +95,7 @@ export default class AddPatient extends Component{
     {      
         // const [dateofbirth,setdateofbirth] = useState(null);
         return(
-            <div style={{marginTop:"-100px",height:"750px",background: "linear-gradient(45deg, black, transparent)"}}>
+            <div style={{marginTop:"-100px",height:"750px",background:"linear-gradient(45deg, lightblue , transparent)"}}>
             <Row style={headerDiv}>
                 <div className="montserrat" 
                 style={headerleft} 
@@ -118,25 +117,24 @@ export default class AddPatient extends Component{
             <Table style={{marginTop:"150px",marginLeft:"400px",width:"650px"}}>
                 <TableBody>
                     <TableRow>
-                        <TableCell><div style={{marginTop:"20px",marginLeft:"20px"}}>Name of Patient:</div></TableCell>
-                        <TableCell><Input style={{marginLeft:"-80px"}}
+                        <TableCell><div style={{marginTop:"20px",marginLeft:"10%"}}>Name of Patient:</div></TableCell>
+                        <TableCell><Input style={{marginLeft:"0px",height:"15px",width:"70%"}}
                         onChange={event=>(
                             this.setState({name:event.target.value})
                         )}
                         ></Input></TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell><div style={{marginTop:"20px",marginLeft:"20px"}}>Wardadhaar:</div></TableCell>
-                        <TableCell><Input type="number" style={{marginLeft:"-80px"}} min="100000000000"  max="999999999999"
+                        <TableCell><div style={{marginTop:"20px",marginLeft:"10%"}}>Wardadhaar:</div></TableCell>
+                        <TableCell><Input type="number" style={{marginLeft:"0px",height:"15px",width:"70%"}} min="100000000000"  max="999999999999"
                         onChange={event=>(
                             this.setState({ward_adhaar:event.target.value})
                         )}                        
                         ></Input></TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell><div style={{marginTop:"20px",marginLeft:"20px"}}>Blood Group:</div></TableCell>
-                        <TableCell><Select 
-
+                        <TableCell><div style={{marginTop:"20px",marginLeft:"10%",width:"80%"}}>Blood Group:</div></TableCell>
+                        <TableCell><Select style={{marginLeft:"0px",width:"40%"}}
                         onChange={event=>(
                             this.setState({blood_group:event.target.value})
                         )}                        
@@ -152,8 +150,8 @@ export default class AddPatient extends Component{
                         </Select></TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell><div style={{marginTop:"20px",marginLeft:"20px"}}>Gender:</div></TableCell>
-                        <TableCell><Select
+                        <TableCell><div style={{marginTop:"20px",marginLeft:"10%"}}>Gender:</div></TableCell>
+                        <TableCell><Select style={{marginLeft:"0px",width:"50%"}}
                         onChange={event=>(
                             this.setState({gender:event.target.value})
                         )}                        
@@ -162,9 +160,9 @@ export default class AddPatient extends Component{
                         <option selected value="other">Other</option></Select></TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell><div style={{marginTop:"20px",marginLeft:"20px"}}>Date Of Birth:</div></TableCell>
+                        <TableCell><div style={{marginTop:"20px",marginLeft:"10%"}}>Date Of Birth:</div></TableCell>
                         <TableCell>
-                            
+                        <div style={{marginLeft:"0px"}}>
                         <DatePicker
                         placeholderText="Select DoB"
                         showYearDropdown
@@ -178,7 +176,7 @@ export default class AddPatient extends Component{
                         }
                         name="startDate"
                         dateFormat="yyyy-MM-dd"
-                        />
+                        /></div>
                             {/* <Input style={{marginLeft:"-80px"}}
                         onChange={event=>(
                             this.setState({dob:event.target.value})
