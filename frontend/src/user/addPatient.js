@@ -17,9 +17,7 @@ import { Select } from "@material-ui/core";
 
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Drawer from '@material-ui/core/Drawer';
-import Box from '@material-ui/core/Box';
+import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
@@ -40,6 +38,47 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 
+
+const useStyles = (theme) => ({
+    root: {
+      display: 'flex',
+      overflow: 'hidden',
+    },
+    customdiv: {
+      height: '100%'
+    },
+    toolbar: {
+      paddingRight: 24, // keep right padding when drawer closed
+    },
+    toolbarIcon: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      padding: '0 8px',
+      ...theme.mixins.toolbar,
+    },
+    appBar: {
+      zIndex: theme.zIndex.drawer + 1,
+    },
+    title: {
+      flexGrow: 1,
+    },
+    appBarSpacer: theme.mixins.toolbar,
+    content: {
+      flexGrow: 1,
+      height: '100vh',
+      overflow: 'auto',
+      // position: 'fixed', 
+    },
+    container: {
+      paddingTop: theme.spacing(4),
+      paddingBottom: theme.spacing(4),
+    },
+    fixedHeight: {
+      height: '100%'
+      // height: 240,
+    },
+});
 
 const headerleft = {
     flexGrow: "1",
@@ -67,8 +106,8 @@ const headerDiv = {
     top: 0,
     position: "fixed",
     zIndex: "100",
-
 };
+
 const Input = styled.input`
   width: 100%;
   height: 20px;
@@ -82,30 +121,11 @@ const Input = styled.input`
   border: solid 2px #0052cc;
   `;
 
-//   const Button = styled.button`
-//   width: 88px;
-//   height: 30px;
-//   color: #0052cc;
-//   border-radius: 4px;
-//   border: solid 1px #0052cc;
-//   background-color: #ffffff;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   &:focus {
-//     outline: none;
-//     border: solid 2px #0052cc;
-//   }
-//   font-family: Roboto;
-//   font-size: 11px;
-//   font-weight: normal;
-//   // margin-bottom: 20px;
-// `;
 
 const PATIENT_TABLE_API='http://127.0.0.1:8000/api/patients'
 
 
-export default class AddPatient extends Component{
+class AddPatient extends Component{
     
     
     state = {
@@ -122,9 +142,11 @@ export default class AddPatient extends Component{
     {      
         // const [dateofbirth,setdateofbirth] = useState(null);
         // const classes = useStyles();
+        const { classes } = this.props;
         return(
-            <div style={{marginTop:"-100px",height:"750px",background:"linear-gradient(45deg, lightblue , transparent)"}}>
-            <Row style={headerDiv}>
+            
+            <div style={{marginTop:"0px",height:"750px",background:"linear-gradient(45deg, lightblue , transparent)",overflow:"hidden"}}>
+            {/* <Row style={headerDiv}>
                 <div className="montserrat" 
                 style={headerleft} 
                 >
@@ -140,36 +162,23 @@ export default class AddPatient extends Component{
                  </span>                
                 <span style={help}>
               </span>
-            </Row>
+            </Row> */}
 
-            {/* <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
+            <AppBar position="absolute" className={clsx(classes.appBar)}>
                 <Toolbar className={classes.toolbar}>
-                <IconButton
-                    edge="start"
-                    color="inherit"
-                    aria-label="open drawer"
-                    onClick={handleDrawerOpen}
-                    className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
-                >
-                <MenuIcon />
-                </IconButton>
                 <Typography component="h1" variant="h6" color="inherit" align="center" noWrap className={classes.title}>
                     ADD PATIENT 
                 </Typography>
-                <IconButton color="inherit">
-                    <Badge badgeContent={4} color="secondary">
-                    <NotificationsIcon />
-                    </Badge>
-                </IconButton>
+                
                 <Link to="/user">
                 <Button variant="contained" color="secondary">
                     Go Back
                 </Button>
                 </Link>
                 </Toolbar>
-            </AppBar> */}
+            </AppBar>
 
-            <Table style={{marginTop:"150px",marginLeft:"400px",width:"650px"}}>
+            <Table style={{marginTop:"100px",marginLeft:"400px",width:"650px"}}>
                 <TableBody>
                     <TableRow>
                         <TableCell><div style={{marginTop:"20px",marginLeft:"10%"}}>Name of Patient:</div></TableCell>
@@ -206,7 +215,7 @@ export default class AddPatient extends Component{
                     </TableRow>
                     <TableRow>
                         <TableCell><div style={{marginTop:"20px",marginLeft:"10%"}}>Gender:</div></TableCell>
-                        <TableCell><Select style={{marginLeft:"0px",width:"50%"}}
+                        <TableCell><Select style={{marginLeft:"0px",width:"40%"}}
                         onChange={event=>(
                             this.setState({gender:event.target.value})
                         )}                        
@@ -241,7 +250,8 @@ export default class AddPatient extends Component{
                     </TableRow>
                 </TableBody>
             </Table>
-            <Button style={{marginLeft:"680px",marginTop:"20px"}}
+            <Button variant="contained" color="primary" 
+            style={{marginLeft:"680px",marginTop:"20px"}}
             onClick={(event)=>(
                 console.log("Posting"),
                 fetch(PATIENT_TABLE_API,
@@ -268,3 +278,5 @@ export default class AddPatient extends Component{
         )
     }
 }
+
+export default withStyles(useStyles)(AddPatient)
