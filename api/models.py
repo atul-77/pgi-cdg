@@ -12,10 +12,10 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 
 
 class Requests(models.Model):
-    crnumber = models.CharField(max_length=100)
+    crnumber = models.CharField(max_length=100,default="_")
     wardadhaar = models.IntegerField()
     docnumber = models.CharField(max_length=100,null=False,primary_key=True)
-    createdby = models.CharField(max_length=100,default='god')
+    createdby = models.CharField(max_length=100,default='admin')
     createdat = models.DateTimeField(auto_now_add=True)
     department = models.CharField(max_length=100,default='default-department')
     consultantuname = models.CharField(max_length=100)
@@ -50,7 +50,7 @@ class Requests(models.Model):
 class Patient(models.Model): 
     name = models.CharField(max_length=100)
     wardadhaar = models.IntegerField(primary_key=True)
-    bloodgroup = models.CharField(max_length=100)
+    bloodgroup = models.CharField(max_length=50)
     gender = models.CharField(max_length=100)
     dob =  models.DateField(null=False)
 
@@ -88,13 +88,13 @@ class UserManager(BaseUserManager):
         return user
 
 class User(AbstractUser):
-    username = models.CharField(max_length=100,primary_key=True,null=False,default='yo')
-    name = models.CharField(max_length=100,null=False,default='name')
+    # username = models.CharField(max_length=100,primary_key=True,null=False,default='yo')
+    # name = models.CharField(max_length=100,null=False,default='name')
     category = models.CharField(max_length=100,default='Nurse')
-    objects = UserManager()
+    # objects = UserManager()
 
-    USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = [ 'category','name' ]
+    # USERNAME_FIELD = 'username'
+    # REQUIRED_FIELDS = [ 'category','name' ]
 
     def __str__(self):              # __unicode__ on Python 2
         return self.username
