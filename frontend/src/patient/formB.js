@@ -149,7 +149,7 @@ export default function FormB() {
                             </select> 
                         </TableCell>
                         <TableCell >
-                            <input type="date"></input>
+                            <input></input>
                         </TableCell>
                     </TableRow>
                     <TableRow style={{marginTop:"0px"}}>
@@ -191,12 +191,32 @@ export default function FormB() {
                     </TableRow>
                     <TableRow style={{marginTop:"0px"}}>
                         <TableCell >3A</TableCell>
-                        <TableCell >Blood transfusion sset</TableCell>
+                        <TableCell >Autovent cum Filter</TableCell>
                         <TableCell >
-                            <select onChange={(event)=>(setA2A_1(event.target.value))}>     
-                                <option value="with leur lock">with leur lock</option>
-                                <option value="other">other</option>
-                            </select> 
+                            <div>
+                                <label>
+                                <input type="radio" value="Adult" />
+                                Adult
+                                </label>
+                                </div>
+                                <div className="radio">
+                                <label>
+                                    <input type="radio" value="Pediatric" />
+                                    Pediatric
+                            </label> 
+                         </div>
+                         <div className="radio">
+                                <label>
+                                    <input type="radio" value="Neonate and Infant" />
+                                    Neonate and infant
+                            </label> 
+                         </div>
+                         <div className="radio">
+                                <label>
+                                    <input type="radio" value="infant" />
+                                    Infant
+                            </label> 
+                         </div>
                                 {/* <input></input> */}
                         </TableCell>
                         <TableCell >

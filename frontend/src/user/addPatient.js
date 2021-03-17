@@ -32,6 +32,10 @@ import {Link} from 'react-router-dom'
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+//import {NotificationContainer, NotificationManager} from 'react-notifications';
+import ReactNotification from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
+import { store } from 'react-notifications-component';
 import Button from '@material-ui/core/Button';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -126,7 +130,26 @@ const PATIENT_TABLE_API='http://127.0.0.1:8000/api/patients'
 
 
 class AddPatient extends Component{
-    
+    // createNotification = (type) => {
+    //     return () => {
+    //       switch (type) {
+    //         case 'info':
+    //           NotificationManager.info('Info message');
+    //           break;
+    //         case 'success':
+    //           NotificationManager.success('Success message', 'Title here');
+    //           break;
+    //         case 'warning':
+    //           NotificationManager.warning('Warning message', 'Close after 3000ms', 3000);
+    //           break;
+    //         case 'error':
+    //           NotificationManager.error('Error message', 'Click me!', 5000, () => {
+    //             alert('callback');
+    //           });
+    //           break;
+    //       }
+    //     };
+      //};
     
     state = {
         name:"",
@@ -146,6 +169,7 @@ class AddPatient extends Component{
         return(
             
             <div style={{marginTop:"0px",height:"750px",background:"linear-gradient(45deg, lightblue , transparent)",overflow:"hidden"}}>
+                <ReactNotification />
             {/* <Row style={headerDiv}>
                 <div className="montserrat" 
                 style={headerleft} 
@@ -252,8 +276,9 @@ class AddPatient extends Component{
             </Table>
             <Button variant="contained" color="primary" 
             style={{marginLeft:"680px",marginTop:"20px"}}
-            onClick={(event)=>(
+            onClick={()=>(
                 console.log("Posting"),
+                //this.createNotification('success'),
                 fetch(PATIENT_TABLE_API,
                     {
                         credentials: 'include',
@@ -270,10 +295,35 @@ class AddPatient extends Component{
                     dob: format(this.state.dob,'yyyy-MM-dd'),
                   }),
                 })
-                .then(result=>console.log("Success===:",result))
-                .catch(error=>console.log("Error===:",error))
+                .then((result)=>{store.addNotification({
+                    title: "Success",
+                    message: "Patient added successfully",
+                    type: "success",
+                    insert: "top",
+                    container: "bottom-right",
+                    animationIn: ["animate__animated", "animate__fadeIn"],
+                    animationOut: ["animate__animated", "animate__fadeOut"],
+                    dismiss: {
+                      duration: 5000,
+                      onScreen: true
+                    }
+                  });console.log("Success===:",result)})
+                .catch((error)=>{store.addNotification({
+                    title: "Failed",
+                    message: "Patient could not be added",
+                    type: "danger",
+                    insert: "top",
+                    container: "bottom-right",
+                    animationIn: ["animate__animated", "animate__fadeIn"],
+                    animationOut: ["animate__animated", "animate__fadeOut"],
+                    dismiss: {
+                      duration: 5000,
+                      onScreen: true
+                    }
+                  });console.log("Error===:",error)})
             )}
             >Submit</Button>
+            
             </div>
         )
     }
