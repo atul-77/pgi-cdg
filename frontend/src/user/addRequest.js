@@ -1,14 +1,69 @@
-import React, {Component,useState} from "react";
-import {Row} from "simple-flexbox";
+import React, {Component, useState} from "react";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
 import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import styled from 'styled-components';
+import DatePicker from "react-datepicker";
+//import moment from "Moment";
+import format from 'date-fns/format';
+
+import "react-datepicker/dist/react-datepicker.css";
+import { Select } from "@material-ui/core";
+
+import clsx from 'clsx';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import {Link} from 'react-router-dom'
+import MenuIcon from '@material-ui/icons/Menu';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import Button from '@material-ui/core/Button';
+
+const drawerWidth = 240;
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+      display: 'flex',
+    },
+    customdiv: {
+      height: '100%'
+    },
+    toolbar: {
+      paddingRight: 24, // keep right padding when drawer closed
+    },
+    toolbarIcon: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      padding: '0 8px',
+      ...theme.mixins.toolbar,
+    },
+    appBar: {
+      zIndex: theme.zIndex.drawer + 1,
+    },
+    title: {
+      flexGrow: 1,
+    },
+    appBarSpacer: theme.mixins.toolbar,
+    content: {
+      flexGrow: 1,
+      height: '100vh',
+      overflow: 'auto',
+      // position: 'fixed', 
+    },
+    container: {
+      paddingTop: theme.spacing(4),
+      paddingBottom: theme.spacing(4),
+    },
+    fixedHeight: {
+      height: '100%'
+      // height: 240,
+    },
+}));
 
 const REQUEST_TABLE_API='http://127.0.0.1:8000/api/requests'
 
@@ -38,7 +93,6 @@ const headerDiv = {
     top: 0,
     position: "fixed",
     zIndex: "100",
-
 };
 const Input = styled.input`
   width: 100%;
@@ -53,27 +107,6 @@ const Input = styled.input`
   border: solid 2px #0052cc;
   `;
 
-  const Button = styled.button`
-  width: 88px;
-  height: 30px;
-  color: #0052cc;
-  border-radius: 4px;
-  border: solid 1px #0052cc;
-  background-color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  &:focus {
-    outline: none;
-    border: solid 2px #0052cc;
-  }
-  font-family: Roboto;
-  font-size: 11px;
-  font-weight: normal;
-  // margin-bottom: 20px;
-`;
-
-
 export default function AddRequest(){
 
         const [department,setDepartment]=useState("Bypass Surgery");
@@ -86,10 +119,12 @@ export default function AddRequest(){
         const [height,setHeight] = useState(0);
         const [weight,setWeight] = useState(0);
 
+        const classes = useStyles();
+
         return(
         <div style={{background: "linear-gradient(45deg, lightblue , transparent)",position:"fixed",padding:0,margin:0,top:0,left:0,width: "100%",height: "100%"}}
         >
-            <Row style={headerDiv}>
+            {/* <Row style={headerDiv}>
                 <div className="montserrat" 
                 style={headerleft} 
                 >
@@ -105,9 +140,28 @@ export default function AddRequest(){
                  </span>                
                 <span style={help}>
               </span>
-            </Row>
+            </Row> */}
 
-            <Table style={{marginTop:"50px",marginLeft:"400px",width:"650px"}}>
+            <AppBar position="absolute" className={clsx(classes.appBar)}>
+                <Toolbar className={classes.toolbar}>
+                
+                <Typography component="h1" variant="h6" color="inherit" align="center" noWrap className={classes.title}>
+                    ADD PATIENT 
+                </Typography>
+                {/* <IconButton color="inherit">
+                    <Badge badgeContent={4} color="secondary">
+                    <NotificationsIcon />
+                    </Badge>
+                </IconButton> */}
+                <Link to="/user">
+                <Button variant="contained" color="secondary">
+                    Go Back
+                </Button>
+                </Link>
+                </Toolbar>
+            </AppBar>
+
+            <Table style={{marginTop:"80px",marginLeft:"400px",width:"650px"}}>
                 <TableBody>
                     <TableRow>
                         <TableCell><div style={{marginTop:"0px",marginLeft:"20px"}}>CR Number:</div></TableCell>
@@ -182,7 +236,8 @@ export default function AddRequest(){
                     </TableRow>
                 </TableBody>
             </Table>
-            <Button style={{fontSize:"16px",marginLeft:"680px",marginTop:"20px",height:"40px",width:"150px",font:"message-box"}}
+            <Button variant="contained" color="primary"
+            style={{fontSize:"16px",marginLeft:"680px",marginTop:"20px",height:"40px",width:"150px",font:"message-box"}}
                 onClick={()=>(
                     console.log(crNumber,wardAdhaar,wardName,department,docNumber,consultantUname,height,weight),
                     fetch(REQUEST_TABLE_API,
