@@ -145,7 +145,7 @@ export default function FormA() {
                             </select> 
                         </TableCell>
                         <TableCell >
-                            <input type="date"></input>
+                            <input></input>
                         </TableCell>
                     </TableRow>
                     <TableRow style={{marginTop:"0px"}}>
@@ -160,12 +160,39 @@ export default function FormA() {
                             </select> 
                         </TableCell>
                         <TableCell >
-                            <select onChange={(event)=>(setA2B_2(event.target.value))}>     
+                            {/* <select onChange={(event)=>(setA2B_2(event.target.value))}>     
                                 <option value="Arkay factory">Arkay Factory</option>
                                 <option value="Nipro">Nipro</option>
                                 <option value="Optium">Optium</option>
                                 <option value="other">other</option>
-                            </select> 
+                            </select>  */
+                            }
+                            <div>
+                                <label>
+                                <input type="checkbox" value="Arkay factory" />
+                                Arkay factory
+                                </label>
+                                </div>
+                                <div className="radio">
+                                <label>
+                                    <input type="checkbox" value="Nipro" />
+                                    Nipro
+                            </label> 
+                         </div>
+                         <div className="radio">
+                                <label>
+                                    <input type="checkbox" value="Optium" />
+                                    Optium
+                            </label> 
+                         </div>
+                         <div>
+                         <label>
+                         <input type="checkbox" id="yourBox" onChange={(event)=>(document.getElementById('yourText').disabled = !(event.target.checked))}></input>
+                         Other
+                         </label>
+                         <input placeholder="" id="yourText" disabled></input>
+                         
+                         </div>
                         </TableCell>
                         <TableCell >
                         {/* <input></input>     */}

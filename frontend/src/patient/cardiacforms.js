@@ -226,11 +226,11 @@ export default function CardiacForm() {
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
             PGIMER-Cardiac Form
           </Typography>
-          <IconButton color="inherit">
+          {/* <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
+              <NotificationsIcon /> 
             </Badge>
-          </IconButton>
+          </IconButton> */}
           <Link to="/user">
           <Button variant="contained" color="secondary">
             Go Back

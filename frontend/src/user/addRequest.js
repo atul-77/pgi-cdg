@@ -8,7 +8,9 @@ import styled from 'styled-components';
 import DatePicker from "react-datepicker";
 //import moment from "Moment";
 import format from 'date-fns/format';
-
+import ReactNotification from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
+import { store } from 'react-notifications-component';
 import "react-datepicker/dist/react-datepicker.css";
 import { Select } from "@material-ui/core";
 
@@ -124,6 +126,7 @@ export default function AddRequest(){
         return(
         <div style={{background: "linear-gradient(45deg, lightblue , transparent)",position:"fixed",padding:0,margin:0,top:0,left:0,width: "100%",height: "100%"}}
         >
+            <ReactNotification />
             {/* <Row style={headerDiv}>
                 <div className="montserrat" 
                 style={headerleft} 
@@ -260,8 +263,32 @@ export default function AddRequest(){
                             bsa:0,
                         }),
                     })
-                    .then(result=>console.log("Success===:",result))
-                    .catch(error=>console.log("Error===:",error))
+                    .then((result)=>{store.addNotification({
+                        title: "Success",
+                        message: "Request added successfully",
+                        type: "success",
+                        insert: "top",
+                        container: "bottom-right",
+                        animationIn: ["animate__animated", "animate__fadeIn"],
+                        animationOut: ["animate__animated", "animate__fadeOut"],
+                        dismiss: {
+                          duration: 5000,
+                          onScreen: true
+                        }
+                      });console.log("Success===:",result)})
+                    .catch((error)=>{store.addNotification({
+                        title: "Failed",
+                        message: "Request could not be added",
+                        type: "danger",
+                        insert: "top",
+                        container: "bottom-right",
+                        animationIn: ["animate__animated", "animate__fadeIn"],
+                        animationOut: ["animate__animated", "animate__fadeOut"],
+                        dismiss: {
+                          duration: 5000,
+                          onScreen: true
+                        }
+                      });console.log("Error===:",error)})
                 )}
                 
             ><h3>SUBMIT</h3>

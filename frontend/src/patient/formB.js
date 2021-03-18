@@ -195,27 +195,34 @@ export default function FormB() {
                         <TableCell >
                             <div>
                                 <label>
-                                <input type="radio" value="Adult" />
+                                <input type="checkbox" value="Adult" />
                                 Adult
                                 </label>
                                 </div>
                                 <div className="radio">
                                 <label>
-                                    <input type="radio" value="Pediatric" />
+                                    <input type="checkbox" value="Pediatric" />
                                     Pediatric
                             </label> 
                          </div>
                          <div className="radio">
                                 <label>
-                                    <input type="radio" value="Neonate and Infant" />
+                                    <input type="checkbox" value="Neonate and Infant" />
                                     Neonate and infant
                             </label> 
                          </div>
                          <div className="radio">
                                 <label>
-                                    <input type="radio" value="infant" />
+                                    <input type="checkbox" value="infant" />
                                     Infant
                             </label> 
+                         </div>
+                         <div>
+                         <label>
+                         <input type="checkbox" id="yourBox" onChange={(event)=>(document.getElementById('yourText').disabled = !(event.target.checked))}></input>
+                         Other
+                         </label>
+                         <input placeholder="" id="yourText" disabled></input>
                          </div>
                                 {/* <input></input> */}
                         </TableCell>
