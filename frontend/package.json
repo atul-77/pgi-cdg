@@ -17,6 +17,8 @@
     "react-notifications-component": "^3.0.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-switch": "^6.0.0",
+    "recharts": "^2.0.8",
     "simple-flexbox": "^2.3.2",
     "styled-components": "^5.2.1",
     "web-vitals": "^1.1.0"

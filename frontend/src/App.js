@@ -8,6 +8,8 @@ import {BrowserRouter as Router,Route,Switch,Link,Redirect} from "react-router-d
 import PatientDetails from './patient/patientDetails';
 import ViewRequest from './user/viewRequest';
 import CardiacForm from './patient/cardiacforms';
+import Dashboard from './user/dashboard/Dashboard';
+import ManagerDashboard from './user/unitmanager/ManagerDashboard';
 function App() {
   return (
     <Router>
@@ -19,6 +21,8 @@ function App() {
       <Route exact path={"/view_request"} component={ViewRequest}/>
       <Route path={"/patientdetails/"} component={PatientDetails}/>
       <Route path={"/form"} component={CardiacForm}/>
+      <Route path={"/consultantDash"} component={Dashboard}/>
+      <Route path={"/unitmanDash"} component={ManagerDashboard}/>
       </Switch>
 
     </Router>
