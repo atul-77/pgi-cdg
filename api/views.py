@@ -164,16 +164,18 @@ class GetCardiacTable(CreateAPIView):
 class UpdateCardiac(UpdateAPIView):
     queryset = CardiacRequested.objects.all()
     serializer_class = UpdateCardiacSerializer
-    lookup_field = 'slug'
+    #lookup_field = 'pk'
 
-    def patch(self, request, format=None):
+    def patch(self, request,pk, format=None):
         if not self.request.session.exists(self.request.session.session_key):
             self.request.session.create()
 
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
-            A_1_descr = serializer.data.get('A_1_spec')
-            A_1_brand = serializer.data.get('A_1_comp')
+            print(serializer.data)
+            print("-------------------------------------------------------------------------------------------------------------")
+            A_1_descr = serializer.data.get('A_1_descr')
+            A_1_brand = serializer.data.get('A_1_brand')
             A_1_qty = serializer.data.get('A_1_qty')
             
             A_2A_descr = serializer.data.get('A_2A_spec')
@@ -194,7 +196,7 @@ class UpdateCardiac(UpdateAPIView):
 
             code = serializer.data.get('code')
 
-            queryset = CardiacRequested.objects.filter(request=code)
+            queryset = CardiacRequested.objects.filter(pk=pk)
 
             if not queryset.exists():
                 newRow = CardiacRequested(

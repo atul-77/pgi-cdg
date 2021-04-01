@@ -81,5 +81,5 @@ class UpdateCardiacSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = CardiacRequested
-        #fields = ('__all__')
-        exclude = ('request',)
+        fields = ('__all__')
+        #exclude = ('request',)

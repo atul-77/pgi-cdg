@@ -22,12 +22,12 @@ const Input = styled.input`
   border: solid 2px #0052cc;
   `;
 
-const SUBMIT_FORM_API = 'http://127.0.0.1:8000/api/update-cardiac'
+const SUBMIT_FORM_API = 'http://127.0.0.1:8000/api/update-cardiac/1'
 
 export default function FormA() {
 
-    const [A_1_spec,setA_1_spec]=React.useState("")
-    const [A_1_comp,setA_1_comp]=React.useState("")
+    const [A_1_descr,setA_1_descr]=React.useState("")
+    const [A_1_brand,setA_1_brand]=React.useState("")
     const [A_1_qty,setA_1_qty]=React.useState("")
     const [A_1_remarks,setA_1_remarks]=React.useState("")
     const [A_2A_spec,setA_2A_spec]=React.useState("")
@@ -87,19 +87,19 @@ export default function FormA() {
                         <TableCell >ACT Tubes</TableCell>
                         <TableCell >
                             {/* <imput
-                            val={A_1_spec}
-                            onChange={(event)=>(setA_1_spec(event.target.value))}
+                            val={A_1_descr}
+                            onChange={(event)=>(setA_1_descr(event.target.value))}
                             ></input> */}
 
                             {/* 1st input*/ } 
-                            <select onChange={(event)=>(setA_1_spec(event.target.value))}>     
+                            <select onChange={(event)=>(setA_1_descr(event.target.value))}>     
                             {/* <option value="volvo">Volvo</option> */}
                                 <option value="Compatible to our machine">Compatible to our machine</option>
                                 <option value="other">other</option>
                             </select> 
                         </TableCell>
                         <TableCell >
-                            <select onChange={(event)=>(setA_1_comp(event.target.value))}>     
+                            <select onChange={(event)=>(setA_1_brand(event.target.value))}>     
                                 <option value="Helena Lab">Helena Lab</option>
                                 <option value="Beaumount Texas">Beaumount Texas</option>
                                 <option value="other">other</option>
@@ -301,7 +301,7 @@ export default function FormA() {
                 </Table>
             <button
                 onClick={
-                    console.log('values====>\ncompany_name:',A_3A_comp,'\nQty_required:',A_3A_qty,'\nSpecification:',A_3A_spec,'\nRemarks:',A_3A_remarks),
+                    console.log('values====>\ncompany_name:',A_3A_comp,'\nQty_required:',A_3A_qty,'\nSpecification:',A_1_descr,'\nRemarks:',A_3A_remarks),
                     
                     fetch(SUBMIT_FORM_API,
                         {
@@ -313,8 +313,8 @@ export default function FormA() {
                         },
                         body: JSON.stringify({
                             code         : '199',
-                            A_1_spec     :A_1_spec,
-                            A_1_comp     :A_1_comp,
+                            A_1_descr     :A_1_descr,
+                            A_1_brand     :A_1_brand,
                             A_1_qty      :A_1_qty,
                             A_1_remarks  :A_1_remarks,
                             A_2A_spec     :A_2A_spec,           
