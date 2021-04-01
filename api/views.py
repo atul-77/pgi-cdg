@@ -162,7 +162,9 @@ class GetCardiacTable(CreateAPIView):
     serializer_class = CardiacSerializer
 
 class UpdateCardiac(UpdateAPIView):
+    queryset = CardiacRequested.objects.all()
     serializer_class = UpdateCardiacSerializer
+    lookup_field = 'slug'
 
     def patch(self, request, format=None):
         if not self.request.session.exists(self.request.session.session_key):

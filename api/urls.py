@@ -12,5 +12,5 @@ urlpatterns = [
     path('login',LoginAPIView.as_view()),
     path('register',RegisterAPIView.as_view()),
     path('cardiac-table',GetCardiacTable.as_view()),
-    path('update-cardiac', UpdateCardiac.as_view()),
+    path('update-cardiac/<slug>', UpdateCardiac.as_view()),
 ]
