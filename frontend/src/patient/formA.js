@@ -26,22 +26,30 @@ const SUBMIT_FORM_API = 'http://127.0.0.1:8000/api/update-cardiac/1'
 
 export default function FormA() {
 
-    const [A_1_descr,setA_1_descr]=React.useState("")
-    const [A_1_brand,setA_1_brand]=React.useState("")
-    const [A_1_qty,setA_1_qty]=React.useState("")
-    const [A_1_remarks,setA_1_remarks]=React.useState("")
-    const [A_2A_spec,setA_2A_spec]=React.useState("")
-    const [A_2A_comp,setA_2A_comp]=React.useState("")
-    const [A_2A_qty,setA_2A_qty]=React.useState("")
-    const [A_2A_remarks,setA_2A_remarks]=React.useState("")
-    const [A_3A_spec,setA_3A_spec]=React.useState("")
-    const [A_3A_comp,setA_3A_comp]=React.useState("")
-    const [A_3A_qty,setA_3A_qty]=React.useState("")
-    const [A_3A_remarks,setA_3A_remarks]=React.useState("")
-    const [A_3B_spec,setA_3B_spec]=React.useState("")
-    const [A_3B_comp,setA_3B_comp]=React.useState("")
-    const [A_3B_qty,setA_3B_qty]=React.useState("")
-    const [A_3B_remarks,setA_3B_remarks]=React.useState("")
+    const [A_1_descr,setA_1_descr]=React.useState("a")
+    const [A_1_brand,setA_1_brand]=React.useState("b")
+    const [A_1_qty,setA_1_qty]=React.useState("c")
+    const [A_1_remarks,setA_1_remarks]=React.useState("d")
+
+    const [A_2A_descr,setA_2A_descr]=React.useState("a")
+    const [A_2A_brand,setA_2A_brand]=React.useState("b")
+    const [A_2A_qty,setA_2A_qty]=React.useState("c")
+    const [A_2A_remarks,setA_2A_remarks]=React.useState("d")
+    
+    const [A_2B_descr,setA_2B_descr]=React.useState("a")
+    const [A_2B_brand,setA_2B_brand]=React.useState("b")
+    const [A_2B_qty,setA_2B_qty]=React.useState("c")
+    const [A_2B_remarks,setA_2B_remarks]=React.useState("d")
+    
+    const [A_3A_descr,setA_3A_descr]=React.useState("a")
+    const [A_3A_brand,setA_3A_brand]=React.useState("b")
+    const [A_3A_qty,setA_3A_qty]=React.useState("c")
+    const [A_3A_remarks,setA_3A_remarks]=React.useState("d")
+    
+    const [A_3B_descr,setA_3B_descr]=React.useState("a")
+    const [A_3B_brand,setA_3B_brand]=React.useState("b")
+    const [A_3B_qty,setA_3B_qty]=React.useState("c")
+    const [A_3B_remarks,setA_3B_remarks]=React.useState("d")
 
 
     // state = {
@@ -82,112 +90,86 @@ export default function FormA() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    <TableRow style={{padding:"0px"}}>
+                    {/* <TableRow style={{padding:"0px"}}>
                         <TableCell >1</TableCell>
                         <TableCell >ACT Tubes</TableCell>
                         <TableCell >
-                            {/* <imput
-                            val={A_1_descr}
-                            onChange={(event)=>(setA_1_descr(event.target.value))}
-                            ></input> */}
-
-                            {/* 1st input*/ } 
-                            <select onChange={(event)=>(setA_1_descr(event.target.value))}>     
-                            {/* <option value="volvo">Volvo</option> */}
+                            <Select 
+                            onChange={(event)=>(setA_1_descr(event.target.value))}>     
+                                <option value="volvo">Volvo</option>
                                 <option value="Compatible to our machine">Compatible to our machine</option>
                                 <option value="other">other</option>
-                            </select> 
+                            </Select> 
                         </TableCell>
                         <TableCell >
-                            <select onChange={(event)=>(setA_1_brand(event.target.value))}>     
+                            <Select onChange={(event)=>(setA_1_brand(event.target.value))}>     
                                 <option value="Helena Lab">Helena Lab</option>
                                 <option value="Beaumount Texas">Beaumount Texas</option>
                                 <option value="other">other</option>
-                            </select> 
+                            </Select> 
                         </TableCell>
                         <TableCell >
-                            {/* <input
-                            val={A_1_qty}
-                            onChange={(event)=>(setA_1_qty(event.target.value))}
-                            ></input>     */}
-                            <select onChange={(event)=>(setA_1_qty(event.target.value))}>     
+                            <Select onChange={(event)=>(setA_1_qty(event.target.value))}>     
                             <option value="10">10</option>
                             <option value="other">other</option>
-                        </select> 
+                        </Select> 
                         </TableCell>
                         <TableCell >
                             <input val={A_1_remarks} onChange={(event)=>(setA_1_remarks(event.target.value))}></input>
-                            {/* <select onChange={(event)=>(setA_1_remarks(event.target.value))}>     
-                            <option value="Helena Lab">Helena Lab</option>
-                            <option value="Beaumount Texas">Beaumount Texas</option>
-                            <option value="other">other</option>
-                            </select>  */}
                         </TableCell>
                     </TableRow>
                     <TableRow style={{marginTop:"0px"}}>
                         <TableCell >2A</TableCell>
                         <TableCell >Arterial line cannula (Adult)</TableCell>
                         <TableCell >
-
-                            <select onChange={(event)=>(setA_2A_spec(event.target.value))}>     
+                            <Select onChange={(event)=>(setA_2A_descr(event.target.value))}>     
                                 <option value="18G">18G</option>
                                 <option value="20G">20G</option>
                                 <option value="other">other</option>
-                            </select> 
-                                {/* <input></input> */}
+                            </Select>
                         </TableCell>
                         <TableCell >
-                            {/* <input></input> */}
-                            <select onChange={(event)=>(setA_2A_comp(event.target.value))}> 
+                            <Select onChange={(event)=>(setA_2A_brand(event.target.value))}> 
                                 <option value="Vygon">Vygon</option>
                                 <option value="other">other</option>
-                            </select> 
+                            </Select> 
                         </TableCell>
                         <TableCell >
-                            {/* <input></input>     */}
-                            <select onChange={(event)=>(setA_2A_qty(event.target.value))}>     
+                            <Select onChange={(event)=>(setA_2A_qty(event.target.value))}>     
                                 <option value="1">1</option>
                                 <option value="other">other</option>
-                            </select> 
+                            </Select> 
                         </TableCell>
                         <TableCell >
                             <input val={A_2A_remarks} onChange={(event)=>(setA_2A_remarks(event.target.value))}></input>
                         </TableCell>
-                    </TableRow>
+                    </TableRow> */}
                     <TableRow style={{marginTop:"0px"}}>
                         <TableCell >3A</TableCell>
                         <TableCell >Blood glucose strip</TableCell>
                         <TableCell >
-                            {/* <input></input> */}
-                            <select onChange={(event)=>(setA_3A_spec(event.target.value))}>     
-                            {/* <option value="volvo">Volvo</option> */}
-                                <option selected value="Compatible to our machine">Compatible to our machine</option>
+                            <Select onChange={(event)=>(setA_3A_descr(event.target.value))}>     
+                                <option value="volvo">Volvo</option>
+                                <option Selected value="Compatible to our machine">Compatible to our machine</option>
                                 <option value="other">other</option>
-                            </select> 
+                            </Select> 
                         </TableCell>
                         <TableCell >
-                            {/* <select onChange={(event)=>(setA2B_comp(event.target.value))}>     
-                                <option value="Arkay factory">Arkay Factory</option>
-                                <option value="Nipro">Nipro</option>
-                                <option value="Optium">Optium</option>
-                                <option value="other">other</option>
-                            </select>  */
-                            }
                         <div>
                             <label>
-                                <input type="checkbox" value="Arkay factory" onClick={(event)=>setA_3A_comp(event.target.value)}/>
+                                <input type="checkbox" value="Arkay factory" onClick={(event)=>setA_3A_brand(event.target.value)}/>
                                 Arkay factory
                             </label>
                         </div>
                         <div className="radio">
                             <label>
-                                <input type="checkbox" value="Nipro" onClick={(event)=>setA_3A_comp(event.target.value)}/>
+                                <input type="checkbox" value="Nipro" onClick={(event)=>setA_3A_brand(event.target.value)}/>
                                 Nipro
                             </label> 
                         </div>
                         <div className="radio">
                             <label>
-                                <input type="checkbox" value="Optium" onClick={(event)=>setA_3A_comp(event.target.value)}/>
+                                <input type="checkbox" value="Optium" onClick={(event)=>setA_3A_brand(event.target.value)}/>
                                 Optium
                             </label> 
                         </div>
@@ -196,72 +178,70 @@ export default function FormA() {
                                 <input type="checkbox" id="yourBox" onChange={(event)=>(document.getElementById('yourText').disabled = !(event.target.checked))}></input>
                                 Other
                             </label>
-                            <input placeholder="" id="yourText" disabled onChange={(event)=>setA_3A_comp(event.target.value)}></input> 
+                            <input placeholder="" id="yourText" disabled onChange={(event)=>setA_3A_brand(event.target.value)}></input> 
                         </div>
                         </TableCell>
                         <TableCell >
                         {/* <input></input>     */}
-                            <select onChange={(event)=>(setA_3A_qty(event.target.value))}>     
+                            <Select value={A_3A_qty} defaultValue={{value:'1',label:'1'}} 
+                                onChange={(event)=>(setA_3A_qty(event.target.value))}>     
                                 <option value="1">1</option>
                                 <option value="other">other</option>
-                            </select> 
+                            </Select> 
                         </TableCell>
                         <TableCell >
                             <input val={A_3A_remarks} onChange={(event)=>(setA_3A_remarks(event.target.value))}></input>
                         </TableCell>
                     </TableRow>
-                    <TableRow style={{marginTop:"0px"}}>
+                    {/* <TableRow style={{marginTop:"0px"}}>
                         <TableCell >3B</TableCell>
                         <TableCell >Blood transfusion set</TableCell>
                         <TableCell >
-                            <select onChange={(event)=>(setA_3B_spec(event.target.value))}>     
+                            <Select onChange={(event)=>(setA_3B_descr(event.target.value))}>     
                                 <option value="with leur lock">with leur lock</option>
                                 <option value="other">other</option>
-                            </select> 
-                                {/* <input></input> */}
+                            </Select>
                         </TableCell>
                         <TableCell >
-                        {/* <input></input> */}
-                        <select onChange={(event)=>(setA_3B_comp(event.target.value))}> 
+                        <Select onChange={(event)=>(setA_3B_brand(event.target.value))}> 
                             <option value="BD">BD</option>
                             <option value="Romson">Romson</option>
                             <option value="other">other</option>
-                        </select> 
+                        </Select> 
                         </TableCell>
                         <TableCell >
-                        {/* <input></input>     */}
-                        <select onChange={(event)=>(setA_3B_qty(event.target.value))}>     
+                        <Select onChange={(event)=>(setA_3B_qty(event.target.value))}>     
                             <option value="1">1</option>
                             <option value="other">other</option>
-                        </select> 
+                        </Select> 
                         </TableCell>
                         <TableCell >
                         <input val={A_3B_remarks} onChange={(event)=>(setA_3B_remarks(event.target.value))}></input>
                         </TableCell>
-                    </TableRow>
+                    </TableRow> */}
                     
                     {/* <TableRow style={{marginTop:"0px"}}>
                         <TableCell >4</TableCell>
                         <TableCell >BIS Sensor</TableCell>
                         <TableCell > */}
                             {/* <input></input> */}
-                            {/* <select onChange={(event)=>(setA2B_spec(event.target.value))}>     
+                            {/* <Select onChange={(event)=>(setA2B_descr(event.target.value))}>     
                                 <option value="Adult Pediatric">Adult Pediatric</option>
                                 <option value="other">other</option>
-                            </select> 
+                            </Select> 
                         </TableCell>
                         <TableCell >
-                            <select onChange={(event)=>(setA2B_comp(event.target.value))}>     
+                            <Select onChange={(event)=>(setA2B_brand(event.target.value))}>     
                                 <option value="Medtronic">Medtronic</option>
                                 <option value="other">other</option>
-                            </select> 
+                            </Select> 
                         </TableCell>
                         <TableCell > */}
                             {/* <input></input>     */}
-                            {/* <select onChange={(event)=>(setA2B_qty(event.target.value))}>     
+                            {/* <Select onChange={(event)=>(setA2B_qty(event.target.value))}>     
                                 <option value="1">1</option>
                                 <option value="other">other</option>
-                            </select> 
+                            </Select> 
                         </TableCell>
                         <TableCell >
                             <input></input>
@@ -273,25 +253,25 @@ export default function FormA() {
                         <TableCell >Bronchial blocker</TableCell>
                         <TableCell > */}
                             {/* <input></input> */}
-                            {/* <select onChange={(event)=>(setA2B_spec(event.target.value))}>     
+                            {/* <Select onChange={(event)=>(setA2B_descr(event.target.value))}>     
                                 <option value="5F">5F</option>
                                 <option value="7F">7F</option>
                                 <option value="other">other</option>
-                            </select> 
+                            </Select> 
                         </TableCell>
                         <TableCell >
-                            <select onChange={(event)=>(setA2B_comp(event.target.value))}>     
+                            <Select onChange={(event)=>(setA2B_brand(event.target.value))}>     
                                 <option value="Portex">Portex</option>
                                 <option value="Rusch">Rusch</option>
                                 <option value="other">other</option>
-                            </select> 
+                            </Select> 
                         </TableCell>
                         <TableCell > */}
                             {/* <input></input>     */}
-                            {/* <select onChange={(event)=>(setA2B_qty(event.target.value))}>     
+                            {/* <Select onChange={(event)=>(setA2B_qty(event.target.value))}>     
                                 <option value="1">1</option>
                                 <option value="other">other</option>
-                            </select> 
+                            </Select> 
                         </TableCell>
                         <TableCell >
                             <input></input>
@@ -300,9 +280,8 @@ export default function FormA() {
                     </TableBody>
                 </Table>
             <button
-                onClick={
-                    console.log('values====>\ncompany_name:',A_3A_comp,'\nQty_required:',A_3A_qty,'\nSpecification:',A_1_descr,'\nRemarks:',A_3A_remarks),
-                    
+                onClick={()=>(
+                    console.log('values====>\ncompany_name:',A_3A_brand,'\nQty_required:',A_3A_qty,'\nSpecification:',A_3A_descr,'\nRemarks:',A_3A_remarks),
                     fetch(SUBMIT_FORM_API,
                         {
                         credentials: 'include',
@@ -317,19 +296,22 @@ export default function FormA() {
                             A_1_brand     :A_1_brand,
                             A_1_qty      :A_1_qty,
                             A_1_remarks  :A_1_remarks,
-                            A_2A_spec     :A_2A_spec,           
-                            A_2A_comp     :A_2A_comp,
+                            A_2A_descr     :A_2A_descr,           
+                            A_2A_brand     :A_2A_brand,
                             A_2A_qty      :A_2A_qty,
                             A_2A_remarks  :A_2A_remarks,
-                            A_3A_spec     :A_3A_spec,
-                            A_3A_comp     :A_3A_comp,
+                            A_2B_descr     :A_2B_descr,           
+                            A_2B_brand     :A_2B_brand,
+                            A_2B_qty      :A_2B_qty,
+                            A_2B_remarks  :A_2B_remarks,
+                            A_3A_descr     :A_3A_descr,
+                            A_3A_brand     :A_3A_brand,
                             A_3A_qty      :A_3A_qty,
                             A_3A_remarks  :A_3A_remarks,
-                            A_3B_spec     :A_3B_spec,
-                            A_3B_comp     :A_3B_comp,
+                            A_3B_descr     :A_3B_descr,
+                            A_3B_brand     :A_3B_brand,
                             A_3B_qty      :A_3B_qty,
-                            A_3B_remarks  :A_3B_remarks,
-                            
+                            A_3B_remarks  :A_3B_remarks, 
                         }),
                     })
                     // .then((result)=>{store.addNotification({
@@ -358,8 +340,7 @@ export default function FormA() {
                     //       onScreen: true
                     //     }
                     //   });console.log("Error===:",error)})
-
-                } 
+                )}
             >Submit</button>
             </div>
         )

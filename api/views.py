@@ -171,27 +171,29 @@ class UpdateCardiac(UpdateAPIView):
             self.request.session.create()
 
         serializer = self.serializer_class(data=request.data)
+        
         if serializer.is_valid():
+            print("-------------------------------------------------------------------------------------------------------------")
             print(serializer.data)
             print("-------------------------------------------------------------------------------------------------------------")
             A_1_descr = serializer.data.get('A_1_descr')
             A_1_brand = serializer.data.get('A_1_brand')
             A_1_qty = serializer.data.get('A_1_qty')
             
-            A_2A_descr = serializer.data.get('A_2A_spec')
-            A_2A_brand = serializer.data.get('A_2A_comp')
+            A_2A_descr = serializer.data.get('A_2A_descr')
+            A_2A_brand = serializer.data.get('A_2A_brand')
             A_2A_qty = serializer.data.get('A_2A_qty')
 
-            A_2B_descr = serializer.data.get('A_2B_spec')
-            A_2B_brand = serializer.data.get('A_2B_comp')
+            A_2B_descr = serializer.data.get('A_2B_descr')
+            A_2B_brand = serializer.data.get('A_2B_brand')
             A_2B_qty = serializer.data.get('A_2B_qty')
 
-            A_3A_descr = serializer.data.get('A_2A_spec')
-            A_3A_brand = serializer.data.get('A_2A_comp')
-            A_3A_qty = serializer.data.get('A_2A_qty')
+            A_3A_descr = serializer.data.get('A_3A_descr')
+            A_3A_brand = serializer.data.get('A_3A_brand')
+            A_3A_qty = serializer.data.get('A_3A_qty')
 
-            A_3B_descr = serializer.data.get('A_3B_spec')
-            A_3B_brand = serializer.data.get('A_3B_comp')
+            A_3B_descr = serializer.data.get('A_3B_descr')
+            A_3B_brand = serializer.data.get('A_3B_brand')
             A_3B_qty = serializer.data.get('A_3B_qty')
 
             code = serializer.data.get('code')
@@ -199,6 +201,7 @@ class UpdateCardiac(UpdateAPIView):
             queryset = CardiacRequested.objects.filter(pk=pk)
 
             if not queryset.exists():
+                print("\nCREATING NEW\n")
                 newRow = CardiacRequested(
                 request=code,
                 A_1_brand=A_1_brand,A_1_descr=A_1_descr,A_1_qty=A_1_qty,
@@ -211,6 +214,7 @@ class UpdateCardiac(UpdateAPIView):
                 return Response({'msg': 'created new entry'}, status=status.HTTP_201_CREATED)
 
             else:
+                print("\nUPDATING EXISTING\n")
                 cardiacrequest = queryset[0]
                 user_id = self.request.session.session_key
                 #if room.host != user_id:
@@ -231,7 +235,9 @@ class UpdateCardiac(UpdateAPIView):
                 cardiacrequest.A_3B_descr = A_3B_descr
                 cardiacrequest.A_3B_brand = A_3B_brand
                 cardiacrequest.A_3B_qty = A_3B_qty
+                print(cardiacrequest.A_3A_descr,A_3A_descr,cardiacrequest.A_3A_brand,A_3A_brand,cardiacrequest.A_3A_qty,A_3A_qty)
                 cardiacrequest.save(update_fields=['A_1_descr', 'A_1_brand','A_1_qty','A_2A_descr', 'A_2A_brand','A_2A_qty','A_2B_descr', 'A_2B_brand','A_2B_qty','A_3A_descr', 'A_3A_brand','A_3A_qty','A_3B_descr', 'A_3B_brand','A_3B_qty',])
+                
                 return Response(UpdateCardiacSerializer(cardiacrequest).data, status=status.HTTP_200_OK)
 
-        return Response({'Bad Request': "Invalid Data..."}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'Bad Request': "Invalid Data...",'error':serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
