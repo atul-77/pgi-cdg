@@ -237,7 +237,7 @@ export default class User extends Component{
                         <TableCell class="col col-2" style={{width:"250px"}}>{this.state.selected_patient==""?<></>:this.state.selected_patient.name}</TableCell>
                     </li>
                     <li class="table-row">
-                        <TableCell class="col col-1" style={{width:"250px"}}><div style={{marginLeft:"20px"}}>Room No.:</div></TableCell>
+                        <TableCell class="col col-1" style={{width:"250px"}}><div style={{marginLeft:"20px"}}>ward adhaar No.:</div></TableCell>
                         <TableCell class="col col-2" style={{width:"250px"}}>{this.state.selected_patient==""?<></>:this.state.selected_patient.wardadhaar}</TableCell>
                     </li>
                     <li class="table-row">
@@ -282,26 +282,32 @@ export default class User extends Component{
           <ul>
           {
                 this.state.requests.map((request)=>(
-                  <li>
+                  <li class='table-row'>
                 <HotPOContainer>
                   <TableRowContainer className="row"
-                  style={{marginLeft:"10px",width:"300px",maxWidth:"300px"}}
+                  style={{marginLeft:"10px",width:"300px",height:"22px",maxWidth:"300px"}}
                   onClick={()=>(
                     this.setState({selected_request:request})
                   )} 
                   >
-                    <div style={{width:"200px",marginTop:"-20px",fontFamily: "Roboto",fontSize: "16px",fontWeight: "400",color: "#000"}}>
-                    &emsp;{request.crnumber}-{request.wardadhaar}
+                    <div style={{width:"200px",marginTop:"0px",fontFamily: "Roboto",fontSize: "16px",fontWeight: "400",color: "#000"}}>
+                    &emsp;
+                    {/* {request.crnumber}- */}
+                    {request.docnumber}-{request.wardadhaar}
                     </div>
                   
-                    <Link to={{
-                    pathname: "/view_request",
-                    search: request.crnumber, 
-                  }} 
-                  style={{textDecoration:"none",marginTop:"-10px",marginLeft:"500px"}}
-                  >
-                  <div class="button_cont" align="center"><a class="example_f" href="add-website-here" target="_blank" rel="nofollow"><span>View</span></a></div>
-                  </Link>
+                    {/* <Link to={{
+                    // pathname: "/form",
+                    // search: request.crnumber, 
+                    }} 
+                    style={{textDecoration:"none",marginTop:"-10px",marginLeft:"400px"}}
+                    > */}
+                  {/* <Button align="center" onClick={()=>(this.setState({selected_request:request}),console.log(this.state.selected_request.docnumber))}> */}
+                    {/* <a class="example_f" href="add-website-here" target="_blank" rel="nofollow"> */}
+                    {/* <span>update</span> */}
+                    {/* </a> */}
+                  {/* </Button> */}
+                  {/* </Link> */}
                   </TableRowContainer>
                   </HotPOContainer>
                   </li>
@@ -321,6 +327,14 @@ export default class User extends Component{
 
       <div style={{marginLeft:"850px",marginTop:"-350px",width:"650px",height:"300px"}} class="container">
           <h2 style={{marginLeft:"-50px"}}>Request Details</h2>
+          {/* <Link to='/form'>   */}
+          <Button 
+              style={{align:"center",marginLeft:"250px"}} 
+              onClick={()=>(console.log(this.state.selected_request.docnumber))}
+            >
+              Update
+            </Button>  
+          {/* </Link>  */}
           <Table 
           // style={{marginTop:"150px",marginLeft:"400px",width:"650px"}}
           >
@@ -330,6 +344,10 @@ export default class User extends Component{
                         <TableCell class="col col-1" style={{width:"250px"}}><div style={{marginTop:"5px",marginLeft:"20px"}}>CR Number:</div></TableCell>
                         <TableCell class="col col-2" style={{width:"250px"}}>{this.state.selected_request==""?<></>:this.state.selected_request.crnumber}</TableCell>
                     </li>
+                    {/* <li class="table-row">
+                        <TableCell class="col col-1" style={{width:"250px"}}><div style={{marginTop:"5px",marginLeft:"20px"}}>ID:</div></TableCell>
+                        <TableCell class="col col-2" style={{width:"250px"}}>{this.state.selected_request==""?<></>:this.state.selected_request.id}</TableCell>
+                    </li> */}
                     <li class="table-row">
                         <TableCell class="col col-1" style={{width:"250px"}}><div style={{marginTop:"5px",marginLeft:"20px"}}>Room No.:</div></TableCell>
                         <TableCell class="col col-2" style={{width:"250px"}}>{this.state.selected_request==""?<></>:this.state.selected_request.wardadhaar}</TableCell>

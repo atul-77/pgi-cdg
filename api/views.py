@@ -82,7 +82,6 @@ class GetRequestTable(ListAPIView):
     queryset = Requests.objects.all()
     serializer_class = RequestSerializer
 
-
 #class GetUsers(APIView):
 #    serializer_class = CreateUsersSerializer
 #    def post(self, request, format=None):

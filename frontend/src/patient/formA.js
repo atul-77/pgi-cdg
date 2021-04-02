@@ -9,6 +9,8 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import styled from 'styled-components';
+import { Multiselect } from 'multiselect-react-dropdown';
+
 import { useLocation } from "react-router";
 import { store } from 'react-notifications-component';
 const Input = styled.input`
@@ -51,7 +53,8 @@ export default function FormA() {
     const [A_3B_qty,setA_3B_qty]=React.useState("c")
     const [A_3B_remarks,setA_3B_remarks]=React.useState("d")
 
-
+    // const brand_3A_options = [{name:'volvo',value:'volvo'},{name:"Compatible to our machine",value:"Compatible to our machine"}]
+    const brand_3A_options = ["volvo","Compatible to our machine","others"]
     // state = {
     //     name:"",
     //     ward_adhaar:0,
@@ -148,11 +151,19 @@ export default function FormA() {
                         <TableCell >3A</TableCell>
                         <TableCell >Blood glucose strip</TableCell>
                         <TableCell >
-                            <Select onChange={(event)=>(setA_3A_descr(event.target.value))}>     
+                            {/* <Select onChange={(event)=>(setA_3A_descr(event.target.value))}>     
                                 <option value="volvo">Volvo</option>
                                 <option Selected value="Compatible to our machine">Compatible to our machine</option>
                                 <option value="other">other</option>
-                            </Select> 
+                            </Select>  */}
+                            {/* <Select options={brand_3A_options}> */}
+                            {/* </Select> */}
+                            <Multiselect
+                                options={brand_3A_options}
+                                isObject={false}
+                                showCheckbox={false}
+                                onChange={(e)=>(setA_3A_descr(e.target.value),console.log(A_3A_descr))}
+                            />
                         </TableCell>
                         <TableCell >
                         <div>
