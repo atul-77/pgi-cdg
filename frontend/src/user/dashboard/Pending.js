@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState , useEffect} from 'react';
 import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -8,44 +8,34 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Title from './Title';
 import Switch from "react-switch";
+import axios from 'axios';
 
-// const SwitchExample = () => {
-//   // render() {
-//     return (
-//       <label>
-//         {/* <span>Switch with default style</span> */}
-//         {/* <Switch onChange={handleChange} checked={checked} /> */}
-//         <Switch button onChange={()=>{ setChecked(checked^1) }} checked={checked}/>
-//       </label>
-//     );
-//   // }
-// }
 
 // Generate Order Data
 
 
-  const SwitchExample = (checked,setChecked) => {
-    // render() {
-      return (
-        <label>
-          {/* <span>Switch with default style</span> */}
-          {/* <Switch onChange={handleChange} checked={checked} /> */}
-          <Switch button onChange={()=>{ setChecked(checked^1) }} checked={0}/>
-        </label>
-      );
-    // }
-  }
+  // const SwitchExample = (checked,setChecked) => {
+  //   // render() {
+  //     return (
+  //       <label>
+  //         {/* <span>Switch with default style</span> */}
+  //         {/* <Switch onChange={handleChange} checked={checked} /> */}
+  //         <Switch button onChange={()=>{ setChecked(checked^1) }} checked={0}/>
+  //       </label>
+  //     );
+  //   // }
+  // }
 
-function createData(id, CRNumber, Wardadhaar, ViewRequest, Toggle) {
-  return {id, CRNumber, Wardadhaar, ViewRequest, Toggle};
-}
+  function createData(docnumber,wardadhaar,name , ViewRequest, Toggle) {
+    return {docnumber,wardadhaar,name ,ViewRequest, Toggle};
+  }
 var i;
-const rows = [
-  createData(0, 'Pending: 19', '777', <a href="http://localhost:8000/addrequest">click here</a>,<SwitchExample state={0}/>),
-];
-for(i=0;i<20;i++){
-  rows.push(createData(0, 'Pending: '+13*i+11, 73*i+97, <a href="http://localhost:8000/addrequest">click here</a>,<SwitchExample state={0} />));
-}
+// const rows = [
+//   createData(0, 'Pending: 19', '777', <a href="http://localhost:8000/addrequest">click here</a>,<SwitchExample state={0}/>),
+// ];
+// for(i=0;i<20;i++){
+//   rows.push(createData(0, 'Pending: '+13*i+11, 73*i+97, <a href="http://localhost:8000/addrequest">click here</a>,<SwitchExample state={0} />));
+// }
 
 
 function preventDefault(event) {
@@ -63,6 +53,60 @@ const useStyles = makeStyles((theme) => ({
 export default function Pending() {
   const classes = useStyles();
   const [checked,setChecked]=React.useState(false);
+  function dobutton(){
+    // Boolean x = !checked;
+    setChecked(checked? false : true);
+    console.log("checked = ",checked);
+  }
+    const SwitchExample = () => {
+      return (
+        <label>
+          <button  onClick={()=>{ dobutton() } }  >Approve this</button>
+        </label>
+      );
+  }
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+  const [books, setBooks] = React. useState(null);
+  const [rows, setRows] = React. useState(createData(1231241,11,"atul","link","state"));
+  const apiURL = "http://127.0.0.1:8000/api/view-request-table/";
+  const updateURL = "http://127.0.0.1:8000/api/get-request-table/";
+  const fetchData = async () => {
+    console.log("in fetch");
+    const response = await axios.get(apiURL)
+    // const response = await fetch(apiURL);
+    const books = await response.data;
+    // console.log("see here bruh : "+books[0].createdby);
+    // books[0].createdby = "atul op";
+    // axios.patch(updateURL+"199/",books[0]);
+    console.log("response\n");
+    console.log(response);
+
+    var temp = [];
+    for(i=0;i<books.length;i++){
+      if(books[i].state != "Pending")continue;
+      var naam = books[i].patientname;
+      var ward = books[i].wardadhaar;
+      var link = "insert link here";
+      var doc = books[i].docnumber;
+      var booktemp = books[i];
+      var tog = booktemp;
+      temp.push({doc,ward,naam,link,tog});
+    } 
+    setRows(temp);
+    // books[0].name = "Thischangedname";
+    // axios.put(updateURL,books);
+}
+
+  console.log("globe");
+  useEffect(()=>{
+    console.log("in use effect");  
+    fetchData()
+    
+      // getPatientList()
+    },[])   
+// const rows;
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
   return (
     <React.Fragment>
@@ -70,7 +114,7 @@ export default function Pending() {
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell>CRNumber</TableCell>
+            <TableCell>Name</TableCell>
             <TableCell>Wardadhaar</TableCell>
             <TableCell>View The request</TableCell>
             <TableCell>Toggle</TableCell>
@@ -78,15 +122,25 @@ export default function Pending() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.CRNumber}</TableCell>
-              <TableCell>{row.Wardadhaar}</TableCell>
-              <TableCell>{row.ViewRequest}</TableCell>
-              <TableCell>{row.Toggle}</TableCell>
+        {rows.length>0 ? 
+          rows.map((row) => (
+            <TableRow key={row.doc}>
+              <TableCell>{row.naam}</TableCell>
+              <TableCell>{row.ward}</TableCell>
+              <TableCell>{row.link}</TableCell>
+              <TableCell>
+                {/* var booktemp = {row.tog}; */}
+              <button onClick={()=>{ row.tog.state = "Approved";
+      axios.patch(updateURL+row.doc+"/",row.tog); 
+      }} >
+      Move to Approved
+      </button>
+          
+                </TableCell>
               {/* <TableCell align="right">{row.amount}</TableCell> */}
             </TableRow>
-          ))}
+          ))
+          : ""}
         </TableBody>
       </Table>
       <div className={classes.seeMore}>

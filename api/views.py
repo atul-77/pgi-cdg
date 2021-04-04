@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from rest_framework import generics, status
+from rest_framework import generics, status, viewsets
 from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView
 from .models import Patient, Requests , User, CardiacRequested
 from .serializers import UserSerializer, RegisterSerializer,LoginSerializer, PatientSerializer, CreatePatientSerializer, RequestSerializer, CreateRequestSerializer, CardiacSerializer, UpdateCardiacSerializer #,
@@ -45,6 +45,8 @@ class RequestView(APIView):
             self.request.session.create()
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
+            patientname = serializer.data.get('patientname')
+            state = serializer.data.get('state')
             crnumber = serializer.data.get('crnumber')
             wardadhaar = serializer.data.get('wardadhaar')
             docnumber = serializer.data.get('docnumber')
@@ -59,7 +61,7 @@ class RequestView(APIView):
             if len(queryset)>0:
                 return Response({'BAD':'Duplicate Request with same Document Number'},status=status.HTTP_400_BAD_REQUEST)
             else:
-                newRequest = Requests(crnumber=crnumber,wardadhaar=wardadhaar,docnumber=docnumber,department=department,consultantuname=consultantuname,height=height,weight=weight,bsa=bsa)
+                newRequest = Requests(crnumber=crnumber,wardadhaar=wardadhaar,docnumber=docnumber,department=department,consultantuname=consultantuname,height=height,weight=weight,bsa=bsa,patientname=patientname,state=state)
                 newRequest.save()
                 return Response({'GOOD':'entered new Request'},status=status.HTTP_201_CREATED)
         msg = serializer.errors
@@ -78,10 +80,14 @@ class GetPatientTable(ListAPIView):
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
 
-class GetRequestTable(ListAPIView):
+class ViewRequestTable(ListAPIView):
     queryset = Requests.objects.all()
     serializer_class = RequestSerializer
 
+class GetRequestTable(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Requests.objects.all()
+    lookup_url_kwarg = 'docnumber'
+    serializer_class = RequestSerializer
 
 #class GetUsers(APIView):
 #    serializer_class = CreateUsersSerializer

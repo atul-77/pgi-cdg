@@ -14,6 +14,7 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 class Requests(models.Model):
     crnumber = models.CharField(max_length=100,default="_")
     wardadhaar = models.IntegerField()
+    patientname = models.CharField(max_length=100,default="Patient")
     docnumber = models.CharField(max_length=100,null=False,primary_key=True)
     createdby = models.CharField(max_length=100,default='admin')
     createdat = models.DateTimeField(auto_now_add=True)
@@ -29,7 +30,7 @@ class Requests(models.Model):
     doctorflag = models.CharField(max_length=100,default='_')
     technicianflag = models.CharField(max_length=100,default='_')
     consultantflag = models.CharField(max_length=100,default='_')
-
+    state = models.CharField(max_length=100,default="Approved")
 #doubt on number of fields, dictionary coz each item has many features..e.g. brand, quantity
 
 # class CardiacReceived(models.Model):
