@@ -12,9 +12,13 @@ import { createBrowserHistory } from 'history';
 import PatientDetails from "../patient/patientDetails";
 // import { useLocation } from "react-router-dom";
 import './user.css';
+import { withRouter } from "react-router";
 
 const history = createBrowserHistory();
 // const location = useLocation(); 
+
+// string myvar;
+var myvar;
 
 const headerleft = {
     flexGrow: "1",
@@ -327,14 +331,17 @@ export default class User extends Component{
 
       <div style={{marginLeft:"850px",marginTop:"-350px",width:"650px",height:"300px"}} class="container">
           <h2 style={{marginLeft:"-50px"}}>Request Details</h2>
-          <Link 
-            to={{
+          {/* <Link to={{
               pathname: '/form',
-              pate: this.state.selected_request.docnumber
-            }}>
+              state: {dnumber : this.state.selected_request.docnumber}
+            }}> */}
+          <Link to={'/form/'+this.state.selected_request.docnumber}>
           <Button 
               style={{align:"center",marginLeft:"250px"}} 
-              onClick={()=>(console.log(this.state.selected_request.docnumber))}
+              onClick={()=>(
+                myvar = this.state.selected_request.docnumber,
+                console.log(this.state.selected_request.docnumber,myvar)
+              )}
             >
               Update
             </Button>  
@@ -379,3 +386,5 @@ export default class User extends Component{
         )
     }
 }
+
+export { myvar } ;

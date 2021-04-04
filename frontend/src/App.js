@@ -20,7 +20,7 @@ function App() {
       <Route exact path={"/addrequest"} component={AddRequest}/>
       <Route exact path={"/view_request"} component={ViewRequest}/>
       <Route path={"/patientdetails/"} component={PatientDetails}/>
-      <Route path={"/form"} component={CardiacForm}/>
+      <Route path={"/form/:docnumber"} component={CardiacForm}/>
       <Route path={"/consultantDash"} component={Dashboard}/>
       <Route path={"/unitmanDash"} component={ManagerDashboard}/>
       </Switch>

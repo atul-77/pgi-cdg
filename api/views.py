@@ -247,6 +247,29 @@ class UpdateCardiacFormView(RetrieveUpdateDestroyAPIView):
     serializer_class = UpdateCardiacSerializer
     lookup_field = 'docnumber'
 
+    def post(self,request,docnumber,format=None):
+        serializer = self.serializer_class(data=request.data)
+        
+        A_1_descr = serializer.data.get('A_1_descr')
+        A_1_brand = serializer.data.get('A_1_brand')
+        A_1_qty = serializer.data.get('A_1_qty')
+        A_2A_descr = serializer.data.get('A_2A_descr')
+        A_2A_brand = serializer.data.get('A_2A_brand')
+        A_2A_qty = serializer.data.get('A_2A_qty')
+        A_2B_descr = serializer.data.get('A_2B_descr')
+        A_2B_brand = serializer.data.get('A_2B_brand')
+        A_2B_qty = serializer.data.get('A_2B_qty')
+        A_3A_descr = serializer.data.get('A_3A_descr')
+        A_3A_brand = serializer.data.get('A_3A_brand')
+        A_3A_qty = serializer.data.get('A_3A_qty')
+        A_3B_descr = serializer.data.get('A_3B_descr')
+        A_3B_brand = serializer.data.get('A_3B_brand')
+        A_3B_qty = serializer.data.get('A_3B_qty')
+        code = serializer.data.get('code')
+        
+        
+        
+
     def patch(self, request, docnumber, format=None):
         if not self.request.session.exists(self.request.session.session_key):
             self.request.session.create()
@@ -279,12 +302,12 @@ class UpdateCardiacFormView(RetrieveUpdateDestroyAPIView):
 
             code = serializer.data.get('code')
 
-            queryset = CardiacRequested.objects.filter(docnumber=docnumber)
+            queryset = CardiacRequested.objects.filter(docnumber = docnumber)
 
             if not queryset.exists():
-                print("\nCREATING NEW\n")
+                print("\n**************************************\nCREATING NEW",int(docnumber),"\n*****************************************************\n")
                 newRow = CardiacRequested(
-                docnumber=code,
+                docnumber=Requests.objects.get(docnumber=docnumber),
                 A_1_brand=A_1_brand,A_1_descr=A_1_descr,A_1_qty=A_1_qty,
                 A_2A_brand=A_2A_brand,A_2A_descr=A_2A_descr,A_2A_qty=A_2A_qty,
                 A_2B_brand=A_2B_brand,A_2B_descr=A_2B_descr,A_2B_qty=A_2B_qty,
@@ -292,7 +315,9 @@ class UpdateCardiacFormView(RetrieveUpdateDestroyAPIView):
                 A_3B_brand=A_3B_brand,A_3B_descr=A_3B_descr,A_3B_qty=A_3B_qty,
                 )
                 newRow.save()
+                print("\n************ \nDONE \n***********\n")
                 return Response({'msg': 'created new entry'}, status=status.HTTP_201_CREATED)
+                
 
             else:
                 print("\nUPDATING EXISTING\n")

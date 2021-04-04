@@ -1,4 +1,4 @@
-import React, {Component,useState} from "react";
+import React, {Component,useState,useEffect} from "react";
 import {Row} from "simple-flexbox";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -10,9 +10,15 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import styled from 'styled-components';
 import { Multiselect } from 'multiselect-react-dropdown';
-
-import { useLocation } from "react-router";
+import { withRouter } from "react-router";
+import { createBrowserHistory } from 'history';
+// import { useLocation } from "react-router";
 import { store } from 'react-notifications-component';
+
+import {myvar} from '../user/user.js';
+
+const history = createBrowserHistory();
+
 const Input = styled.input`
   border-radius: 4px;
   border: solid 1px #a8a8a8;
@@ -26,9 +32,13 @@ const Input = styled.input`
 
 const SUBMIT_FORM_API = 'http://127.0.0.1:8000/api/update-cardiac-form/'
 
-// const pate  = this.props.location
 
-export default function FormA() {
+export default function FormA(props) {
+
+
+    useEffect(() => {
+        console.log(myvar);
+    });
 
     const [A_1_descr,setA_1_descr]=React.useState("a")
     const [A_1_brand,setA_1_brand]=React.useState("b")
@@ -57,7 +67,6 @@ export default function FormA() {
 
     // const brand_3A_options = [{name:'volvo',value:'volvo'},{name:"Compatible to our machine",value:"Compatible to our machine"}]
     const brand_3A_options = ["volvo","Compatible to our machine","others"]
-    const state = this.props.location
     
         // const [dateofbirth,setdateofbirth] = useState(null);
         return(
@@ -287,40 +296,40 @@ export default function FormA() {
                 </Table>
             <button
                 onClick={()=>(
-                    console.log('values====>\ncompany_name:',A_3A_brand,'\nQty_required:',A_3A_qty,'\nSpecification:',A_3A_descr,'\nRemarks:',A_3A_remarks),
-                    console.log(pate)
-                    // fetch(SUBMIT_FORM_API+'199',
-                    //     {
-                    //     credentials: 'include',
-                    //     method:'PATCH',
-                    //     headers: {
-                    //     Accept: 'application/json',
-                    //     "Content-Type": 'application/json',
-                    //     },
-                    //     body: JSON.stringify({
-                    //         code         : '199',
-                    //         A_1_descr     :A_1_descr,
-                    //         A_1_brand     :A_1_brand,
-                    //         A_1_qty      :A_1_qty,
-                    //         A_1_remarks  :A_1_remarks,
-                    //         A_2A_descr     :A_2A_descr,           
-                    //         A_2A_brand     :A_2A_brand,
-                    //         A_2A_qty      :A_2A_qty,
-                    //         A_2A_remarks  :A_2A_remarks,
-                    //         A_2B_descr     :A_2B_descr,           
-                    //         A_2B_brand     :A_2B_brand,
-                    //         A_2B_qty      :A_2B_qty,
-                    //         A_2B_remarks  :A_2B_remarks,
-                    //         A_3A_descr     :A_3A_descr,
-                    //         A_3A_brand     :A_3A_brand,
-                    //         A_3A_qty      :A_3A_qty,
-                    //         A_3A_remarks  :A_3A_remarks,
-                    //         A_3B_descr     :A_3B_descr,
-                    //         A_3B_brand     :A_3B_brand,
-                    //         A_3B_qty      :A_3B_qty,
-                    //         A_3B_remarks  :A_3B_remarks, 
-                    //     }),
-                    // })
+                    console.log('values====>\ncompany_name:',A_3A_brand,'\nQty_required:',A_3A_qty,'\nSpecification:',A_3A_descr,'\nRemarks:',A_3A_remarks,"\n------------- ",props.docnumber,"\n----------------")
+                    // ,console.log(pate)
+                    ,fetch(SUBMIT_FORM_API+myvar,
+                        {
+                        credentials: 'include',
+                        method:'PATCH',
+                        headers: {
+                        Accept: 'application/json',
+                        "Content-Type": 'application/json',
+                        },
+                        body: JSON.stringify({
+                            code         : myvar,
+                            A_1_descr     :A_1_descr,
+                            A_1_brand     :A_1_brand,
+                            A_1_qty      :A_1_qty,
+                            A_1_remarks  :A_1_remarks,
+                            A_2A_descr     :A_2A_descr,           
+                            A_2A_brand     :A_2A_brand,
+                            A_2A_qty      :A_2A_qty,
+                            A_2A_remarks  :A_2A_remarks,
+                            A_2B_descr     :A_2B_descr,           
+                            A_2B_brand     :A_2B_brand,
+                            A_2B_qty      :A_2B_qty,
+                            A_2B_remarks  :A_2B_remarks,
+                            A_3A_descr     :A_3A_descr,
+                            A_3A_brand     :A_3A_brand,
+                            A_3A_qty      :A_3A_qty,
+                            A_3A_remarks  :A_3A_remarks,
+                            A_3B_descr     :A_3B_descr,
+                            A_3B_brand     :A_3B_brand,
+                            A_3B_qty      :A_3B_qty,
+                            A_3B_remarks  :A_3B_remarks, 
+                        }),
+                    })
 
                     // .then((result)=>{store.addNotification({
                     //     title: "Success",
