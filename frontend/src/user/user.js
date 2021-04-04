@@ -327,14 +327,18 @@ export default class User extends Component{
 
       <div style={{marginLeft:"850px",marginTop:"-350px",width:"650px",height:"300px"}} class="container">
           <h2 style={{marginLeft:"-50px"}}>Request Details</h2>
-          {/* <Link to='/form'>   */}
+          <Link 
+            to={{
+              pathname: '/form',
+              pate: this.state.selected_request.docnumber
+            }}>
           <Button 
               style={{align:"center",marginLeft:"250px"}} 
               onClick={()=>(console.log(this.state.selected_request.docnumber))}
             >
               Update
             </Button>  
-          {/* </Link>  */}
+          </Link> 
           <Table 
           // style={{marginTop:"150px",marginLeft:"400px",width:"650px"}}
           >

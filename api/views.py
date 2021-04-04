@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework import generics, status
-from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView, RetrieveUpdateDestroyAPIView
 from .models import Patient, Requests , User, CardiacRequested
 from .serializers import UserSerializer, RegisterSerializer,LoginSerializer, PatientSerializer, CreatePatientSerializer, RequestSerializer, CreateRequestSerializer, CardiacSerializer, UpdateCardiacSerializer #,
 from rest_framework.views import APIView
@@ -156,11 +156,11 @@ class LoginAPIView(generics.GenericAPIView):
         })
 
 
-class GetCardiacTable(CreateAPIView):
+class GetCardiacTable(ListAPIView):
     queryset = CardiacRequested.objects.all()
     serializer_class = CardiacSerializer
-
-class UpdateCardiac(UpdateAPIView):
+'''
+class UpdateCardiac(RetrieveUpdateDestroyAPIView):
     queryset = CardiacRequested.objects.all()
     serializer_class = UpdateCardiacSerializer
     #lookup_field = 'pk'
@@ -235,6 +235,88 @@ class UpdateCardiac(UpdateAPIView):
                 cardiacrequest.A_3B_brand = A_3B_brand
                 cardiacrequest.A_3B_qty = A_3B_qty
                 print(cardiacrequest.A_3A_descr,A_3A_descr,cardiacrequest.A_3A_brand,A_3A_brand,cardiacrequest.A_3A_qty,A_3A_qty)
+                cardiacrequest.save(update_fields=['A_1_descr', 'A_1_brand','A_1_qty','A_2A_descr', 'A_2A_brand','A_2A_qty','A_2B_descr', 'A_2B_brand','A_2B_qty','A_3A_descr', 'A_3A_brand','A_3A_qty','A_3B_descr', 'A_3B_brand','A_3B_qty',])
+                
+                return Response(UpdateCardiacSerializer(cardiacrequest).data, status=status.HTTP_200_OK)
+
+        return Response({'Bad Request': "Invalid Data...",'error':serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+'''
+
+class UpdateCardiacFormView(RetrieveUpdateDestroyAPIView):
+    queryset = CardiacRequested.objects.all()
+    serializer_class = UpdateCardiacSerializer
+    lookup_field = 'docnumber'
+
+    def patch(self, request, docnumber, format=None):
+        if not self.request.session.exists(self.request.session.session_key):
+            self.request.session.create()
+
+        serializer = self.serializer_class(data=request.data)
+        
+        if serializer.is_valid():
+            print("-------------------------------------------------------------------------------------------------------------")
+            print(serializer.data)
+            print("-------------------------------------------------------------------------------------------------------------")
+            A_1_descr = serializer.data.get('A_1_descr')
+            A_1_brand = serializer.data.get('A_1_brand')
+            A_1_qty = serializer.data.get('A_1_qty')
+            
+            A_2A_descr = serializer.data.get('A_2A_descr')
+            A_2A_brand = serializer.data.get('A_2A_brand')
+            A_2A_qty = serializer.data.get('A_2A_qty')
+
+            A_2B_descr = serializer.data.get('A_2B_descr')
+            A_2B_brand = serializer.data.get('A_2B_brand')
+            A_2B_qty = serializer.data.get('A_2B_qty')
+
+            A_3A_descr = serializer.data.get('A_3A_descr')
+            A_3A_brand = serializer.data.get('A_3A_brand')
+            A_3A_qty = serializer.data.get('A_3A_qty')
+
+            A_3B_descr = serializer.data.get('A_3B_descr')
+            A_3B_brand = serializer.data.get('A_3B_brand')
+            A_3B_qty = serializer.data.get('A_3B_qty')
+
+            code = serializer.data.get('code')
+
+            queryset = CardiacRequested.objects.filter(docnumber=docnumber)
+
+            if not queryset.exists():
+                print("\nCREATING NEW\n")
+                newRow = CardiacRequested(
+                docnumber=code,
+                A_1_brand=A_1_brand,A_1_descr=A_1_descr,A_1_qty=A_1_qty,
+                A_2A_brand=A_2A_brand,A_2A_descr=A_2A_descr,A_2A_qty=A_2A_qty,
+                A_2B_brand=A_2B_brand,A_2B_descr=A_2B_descr,A_2B_qty=A_2B_qty,
+                A_3A_brand=A_3A_brand,A_3A_descr=A_3A_descr,A_3A_qty=A_3A_qty,
+                A_3B_brand=A_3B_brand,A_3B_descr=A_3B_descr,A_3B_qty=A_3B_qty,
+                )
+                newRow.save()
+                return Response({'msg': 'created new entry'}, status=status.HTTP_201_CREATED)
+
+            else:
+                print("\nUPDATING EXISTING\n")
+                cardiacrequest = queryset[0]
+                user_id = self.request.session.session_key
+                #if room.host != user_id:
+                #    return Response({'msg': 'You are not the host of this room.'}, status=status.HTTP_403_FORBIDDEN)
+
+                cardiacrequest.A_1_descr = A_1_descr
+                cardiacrequest.A_1_brand = A_1_brand
+                cardiacrequest.A_1_qty = A_1_qty
+                cardiacrequest.A_2A_descr = A_2A_descr
+                cardiacrequest.A_2A_brand = A_2A_brand
+                cardiacrequest.A_2A_qty = A_2A_qty
+                cardiacrequest.A_2B_descr = A_2B_descr
+                cardiacrequest.A_2B_brand = A_2B_brand
+                cardiacrequest.A_2B_qty = A_2B_qty
+                cardiacrequest.A_3A_descr = A_3A_descr
+                cardiacrequest.A_3A_brand = A_3A_brand
+                cardiacrequest.A_3A_qty = A_3A_qty
+                cardiacrequest.A_3B_descr = A_3B_descr
+                cardiacrequest.A_3B_brand = A_3B_brand
+                cardiacrequest.A_3B_qty = A_3B_qty
+                # print(cardiacrequest.A_3A_descr,A_3A_descr,cardiacrequest.A_3A_brand,A_3A_brand,cardiacrequest.A_3A_qty,A_3A_qty)
                 cardiacrequest.save(update_fields=['A_1_descr', 'A_1_brand','A_1_qty','A_2A_descr', 'A_2A_brand','A_2A_qty','A_2B_descr', 'A_2B_brand','A_2B_qty','A_3A_descr', 'A_3A_brand','A_3A_qty','A_3B_descr', 'A_3B_brand','A_3B_qty',])
                 
                 return Response(UpdateCardiacSerializer(cardiacrequest).data, status=status.HTTP_200_OK)

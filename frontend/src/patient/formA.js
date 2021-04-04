@@ -24,7 +24,9 @@ const Input = styled.input`
   border: solid 2px #0052cc;
   `;
 
-const SUBMIT_FORM_API = 'http://127.0.0.1:8000/api/update-cardiac/1'
+const SUBMIT_FORM_API = 'http://127.0.0.1:8000/api/update-cardiac-form/'
+
+// const pate  = this.props.location
 
 export default function FormA() {
 
@@ -55,15 +57,8 @@ export default function FormA() {
 
     // const brand_3A_options = [{name:'volvo',value:'volvo'},{name:"Compatible to our machine",value:"Compatible to our machine"}]
     const brand_3A_options = ["volvo","Compatible to our machine","others"]
-    // state = {
-    //     name:"",
-    //     ward_adhaar:0,
-    //     blood_group:"",
-    //     gender:"",
-    //     // dob:moment().format("yyyy-MM-dd"),
-    //     dob: "",
-    // }
-      
+    const state = this.props.location
+    
         // const [dateofbirth,setdateofbirth] = useState(null);
         return(
             <div>
@@ -151,19 +146,19 @@ export default function FormA() {
                         <TableCell >3A</TableCell>
                         <TableCell >Blood glucose strip</TableCell>
                         <TableCell >
-                            {/* <Select onChange={(event)=>(setA_3A_descr(event.target.value))}>     
+                            <Select onChange={(event)=>(setA_3A_descr(event.target.value))}>     
                                 <option value="volvo">Volvo</option>
                                 <option Selected value="Compatible to our machine">Compatible to our machine</option>
                                 <option value="other">other</option>
-                            </Select>  */}
-                            {/* <Select options={brand_3A_options}> */}
-                            {/* </Select> */}
-                            <Multiselect
+                            </Select> 
+                            {/* <Select options={brand_3A_options}>
+                            </Select> */}
+                            {/* <Multiselect
                                 options={brand_3A_options}
                                 isObject={false}
                                 showCheckbox={false}
                                 onChange={(e)=>(setA_3A_descr(e.target.value),console.log(A_3A_descr))}
-                            />
+                            /> */}
                         </TableCell>
                         <TableCell >
                         <div>
@@ -293,38 +288,40 @@ export default function FormA() {
             <button
                 onClick={()=>(
                     console.log('values====>\ncompany_name:',A_3A_brand,'\nQty_required:',A_3A_qty,'\nSpecification:',A_3A_descr,'\nRemarks:',A_3A_remarks),
-                    fetch(SUBMIT_FORM_API,
-                        {
-                        credentials: 'include',
-                        method:'PATCH',
-                        headers: {
-                        Accept: 'application/json',
-                        "Content-Type": 'application/json',
-                        },
-                        body: JSON.stringify({
-                            code         : '199',
-                            A_1_descr     :A_1_descr,
-                            A_1_brand     :A_1_brand,
-                            A_1_qty      :A_1_qty,
-                            A_1_remarks  :A_1_remarks,
-                            A_2A_descr     :A_2A_descr,           
-                            A_2A_brand     :A_2A_brand,
-                            A_2A_qty      :A_2A_qty,
-                            A_2A_remarks  :A_2A_remarks,
-                            A_2B_descr     :A_2B_descr,           
-                            A_2B_brand     :A_2B_brand,
-                            A_2B_qty      :A_2B_qty,
-                            A_2B_remarks  :A_2B_remarks,
-                            A_3A_descr     :A_3A_descr,
-                            A_3A_brand     :A_3A_brand,
-                            A_3A_qty      :A_3A_qty,
-                            A_3A_remarks  :A_3A_remarks,
-                            A_3B_descr     :A_3B_descr,
-                            A_3B_brand     :A_3B_brand,
-                            A_3B_qty      :A_3B_qty,
-                            A_3B_remarks  :A_3B_remarks, 
-                        }),
-                    })
+                    console.log(pate)
+                    // fetch(SUBMIT_FORM_API+'199',
+                    //     {
+                    //     credentials: 'include',
+                    //     method:'PATCH',
+                    //     headers: {
+                    //     Accept: 'application/json',
+                    //     "Content-Type": 'application/json',
+                    //     },
+                    //     body: JSON.stringify({
+                    //         code         : '199',
+                    //         A_1_descr     :A_1_descr,
+                    //         A_1_brand     :A_1_brand,
+                    //         A_1_qty      :A_1_qty,
+                    //         A_1_remarks  :A_1_remarks,
+                    //         A_2A_descr     :A_2A_descr,           
+                    //         A_2A_brand     :A_2A_brand,
+                    //         A_2A_qty      :A_2A_qty,
+                    //         A_2A_remarks  :A_2A_remarks,
+                    //         A_2B_descr     :A_2B_descr,           
+                    //         A_2B_brand     :A_2B_brand,
+                    //         A_2B_qty      :A_2B_qty,
+                    //         A_2B_remarks  :A_2B_remarks,
+                    //         A_3A_descr     :A_3A_descr,
+                    //         A_3A_brand     :A_3A_brand,
+                    //         A_3A_qty      :A_3A_qty,
+                    //         A_3A_remarks  :A_3A_remarks,
+                    //         A_3B_descr     :A_3B_descr,
+                    //         A_3B_brand     :A_3B_brand,
+                    //         A_3B_qty      :A_3B_qty,
+                    //         A_3B_remarks  :A_3B_remarks, 
+                    //     }),
+                    // })
+
                     // .then((result)=>{store.addNotification({
                     //     title: "Success",
                     //     message: "Request added successfully",
