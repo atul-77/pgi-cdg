@@ -39,6 +39,7 @@ import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import FormA from './formA';
 import FormB from './formB';
+import {myvar} from '../user/user.js';
 // export const mainListItems = (
 //   <div>
 //     <ListItem button>
@@ -302,7 +303,7 @@ export default function CardiacForm() {
             {form===0? 
           <Grid item xs={12}>
           <Paper className={classes.paper}>
-            <FormA />
+            <FormA docnumber={myvar}/>
           </Paper>
         </Grid>
           :
