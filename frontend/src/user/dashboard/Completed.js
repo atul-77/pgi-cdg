@@ -42,7 +42,7 @@ export default function Approved() {
   const classes = useStyles();
   const [checked,setChecked]= React.useState(false);
 
-  const apiURL = "http://127.0.0.1:8000/api/view-request-table/";
+  const apiURL = "http://127.0.0.1:8000/api/view-request-table";
   const updateURL = "http://127.0.0.1:8000/api/get-request-table/" ;
 
   
@@ -113,6 +113,7 @@ export default function Approved() {
       <Table size="small">
         <TableHead>
           <TableRow>
+          <TableCell>DOCUMENT NUMBER</TableCell>
             <TableCell>PATIENT NAME</TableCell>
             <TableCell>WARD-ADHAAR</TableCell>
             <TableCell>VIEW COMPLETE REQEUST</TableCell>
@@ -125,13 +126,14 @@ export default function Approved() {
           {rows.length>0 ? 
           rows.map((row) => (
             <TableRow key={row.doc}>
+              <TableCell>{row.doc}</TableCell>
               <TableCell>{row.naam}</TableCell>
               <TableCell>{row.ward}</TableCell>
               <TableCell>{row.link}</TableCell>   
               <TableCell>
                 {/* var booktemp = {row.tog}; */}
               <Button color="primary" variant='contained'onClick={()=>{ row.tog.state = "Approved";
-      axios.patch(updateURL+row.doc+"/",row.tog); 
+      axios.patch(updateURL+row.doc,row.tog); 
       }} >
       Move to Approved
       </Button>
