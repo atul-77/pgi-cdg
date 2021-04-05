@@ -311,7 +311,7 @@ class AddPatient extends Component{
                   });
                   console.log("Success===:",result);
                   // browserHistory.goBack;
-                  window.location.replace("/user");
+                  // window.location.replace("/user");
                 }).catch((error)=>{store.addNotification({
                     title: "Failed",
                     message: "Patient could not be added",

@@ -18,8 +18,7 @@ class PatientSerializer(serializers.ModelSerializer):
 class RequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Requests
-        fields = ('crnumber','wardadhaar','docnumber','createdby','createdat',
-        'department','consultantuname','bsa','height','weight','nurseflag','perfusionistflag','doctorflag','technicianflag','consultantflag')
+        fields = '__all__'
 
 
 ##-----------------------------------------------------------------------------------
