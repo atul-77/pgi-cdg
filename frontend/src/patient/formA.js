@@ -3,6 +3,7 @@ import {Row} from "simple-flexbox";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import Select from "@material-ui/core/Select";
+import Checkbox from "@material-ui/core/Checkbox";
 import MenuItem from "@material-ui/core/MenuItem";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
@@ -36,9 +37,9 @@ const SUBMIT_FORM_API = 'http://127.0.0.1:8000/api/update-cardiac-form/'
 export default function FormA(props) {
 
 
-    useEffect(() => {
-        console.log(myvar);
-    });
+    // useEffect(() => {
+    //     console.log(myvar);
+    // });
 
     const [A_1_descr,setA_1_descr]=React.useState("a")
     const [A_1_brand,setA_1_brand]=React.useState("b")
@@ -62,12 +63,25 @@ export default function FormA(props) {
     
     const [A_3B_descr,setA_3B_descr]=React.useState("a")
     const [A_3B_brand,setA_3B_brand]=React.useState("b")
-    const [A_3B_qty,setA_3B_qty]=React.useState("c")
-    const [A_3B_remarks,setA_3B_remarks]=React.useState("d")
+    const [A_3B_qty,setA_3B_qty]=useState("c")
+    const [A_3B_remarks,setA_3B_remarks]=useState("d")
 
     // const brand_3A_options = [{name:'volvo',value:'volvo'},{name:"Compatible to our machine",value:"Compatible to our machine"}]
     const brand_3A_options = ["volvo","Compatible to our machine","others"]
+    const [checkboxSelected,setCheckboxSelected] = useState({cricket: false ,football: false ,golf:false,other:''})
     
+    // const qty_3A_options = ['1','10','other']
+    // const [qty3A,setQty3A] = useState
+    
+    const checkboxOptions = ['cricket','football','golf']
+    const handleChange = async (event)=>{
+        console.log(event.target.name,event.target.checked);
+        // console.log("\nbefore",checkboxSelected);
+        setCheckboxSelected({...checkboxSelected,[event.target.name]:event.target.checked});
+    }
+
+
+
         // const [dateofbirth,setdateofbirth] = useState(null);
         return(
             <div>
@@ -80,7 +94,7 @@ export default function FormA(props) {
                             Sr. No.
                         </TableCell>
                         <TableCell style={{color:"black"}}>
-                            Name
+                            {checkboxSelected.cricket}
                         </TableCell>
                         <TableCell style={{color:"black"}}>
                             Specification
@@ -154,14 +168,40 @@ export default function FormA(props) {
                     <TableRow style={{marginTop:"0px"}}>
                         <TableCell >3A</TableCell>
                         <TableCell >Blood glucose strip</TableCell>
+                        <TableCell>{checkboxSelected.cricket==true?"true":"false"},
+                        {checkboxSelected.football==true?"true":"false"},
+                        {checkboxSelected.golf==true?"true":"false"},
+                        {checkboxSelected.other}</TableCell>
+                        <TableCell>
+                            
+                                {
+                                    checkboxOptions.map(
+                                        (c,i)=><div><label key={c}><Checkbox name={c} checked={checkboxSelected.c} onChange={handleChange}/>{c}</label></div>
+                                    )
+                                }    
+                                <div><label><Checkbox type="checkbox" id="yourBox1" onChange={(event)=>(document.getElementById('yourText1').disabled = !(event.target.checked))}/>other</label>
+                                <input placeholder="" id="yourText1" disabled onChange={(event) => setCheckboxSelected({...checkboxSelected,['other']:event.target.value})}></input>
+                                </div>
+                                {/* <div> */}
+                                {/* <label>
+                                <input type="checkbox" id="yourBox1" onChange={(event)=>(document.getElementById('yourText1').disabled = !(event.target.checked))}></input>
+                                    Other
+                                </label>
+                                <input placeholder="" id="yourText" disabled onChange={(event)=>setCheckboxSelected(...checkboxSelected,other:event.target.value}></input>  */}
+                                {/* </div> */}
+                            
+                        </TableCell>
                         <TableCell >
                             <Select onChange={(event)=>(setA_3A_descr(event.target.value))}>     
                                 <option value="volvo">Volvo</option>
                                 <option Selected value="Compatible to our machine">Compatible to our machine</option>
                                 <option value="other">other</option>
                             </Select> 
-                            {/* <Select options={brand_3A_options}>
-                            </Select> */}
+                            {/* <select value={dropdown} onChange={(e)=>{setDropdown(e.target.value)}}>
+                                <option value="apple">Apple</option>
+                                <option value="orange">Orange</option>
+                                <option value="banana">Banana</option>
+                            </select> */}
                             {/* <Multiselect
                                 options={brand_3A_options}
                                 isObject={false}
@@ -170,31 +210,25 @@ export default function FormA(props) {
                             /> */}
                         </TableCell>
                         <TableCell >
-                        <div>
-                            <label>
-                                <input type="checkbox" value="Arkay factory" onClick={(event)=>setA_3A_brand(event.target.value)}/>
+                        <div><label>
+                                <input type="checkbox" id="" value="Arkay factory" onClick={(event)=>setA_3A_brand(event.target.value)}/>
                                 Arkay factory
-                            </label>
-                        </div>
-                        <div className="radio">
-                            <label>
+                        </label></div>
+                        <div className="radio"><label>
                                 <input type="checkbox" value="Nipro" onClick={(event)=>setA_3A_brand(event.target.value)}/>
                                 Nipro
-                            </label> 
-                        </div>
-                        <div className="radio">
-                            <label>
+                        </label></div>
+                        <div className="radio"><label>
                                 <input type="checkbox" value="Optium" onClick={(event)=>setA_3A_brand(event.target.value)}/>
                                 Optium
-                            </label> 
-                        </div>
-                        <div>
-                            <label>
-                                <input type="checkbox" id="yourBox" onChange={(event)=>(document.getElementById('yourText').disabled = !(event.target.checked))}></input>
+                        </label></div>
+                        <div><label>
+                            <input type="checkbox" id="yourBox" onChange={(event)=>(document.getElementById('yourText').disabled = !(event.target.checked))}></input>
                                 Other
                             </label>
                             <input placeholder="" id="yourText" disabled onChange={(event)=>setA_3A_brand(event.target.value)}></input> 
                         </div>
+
                         </TableCell>
                         <TableCell >
                         {/* <input></input>     */}
@@ -203,6 +237,11 @@ export default function FormA(props) {
                                 <option value="1">1</option>
                                 <option value="other">other</option>
                             </Select> 
+                            {/* {
+                                qty_3A_options.map(
+                                    (c,i)=><div><label key={c}><Checkbox name={c} checked={checkboxSelected.c} onChange={handleChange}/>{c}</label></div>
+                                )
+                            } */}
                         </TableCell>
                         <TableCell >
                             <input val={A_3A_remarks} onChange={(event)=>(setA_3A_remarks(event.target.value))}></input>
