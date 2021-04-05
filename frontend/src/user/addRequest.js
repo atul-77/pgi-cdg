@@ -149,7 +149,7 @@ export default function AddRequest(){
                 <Toolbar className={classes.toolbar}>
                 
                 <Typography component="h1" variant="h6" color="inherit" align="center" noWrap className={classes.title}>
-                    ADD PATIENT 
+                    ADD REQUEST
                 </Typography>
                 {/* <IconButton color="inherit">
                     <Badge badgeContent={4} color="secondary">
@@ -263,7 +263,8 @@ export default function AddRequest(){
                             bsa:0,
                         }),
                     })
-                    .then((result)=>{store.addNotification({
+                    .then((result)=>{
+                    store.addNotification({
                         title: "Success",
                         message: "Request added successfully",
                         type: "success",
@@ -275,7 +276,10 @@ export default function AddRequest(){
                           duration: 5000,
                           onScreen: true
                         }
-                      });console.log("Success===:",result)})
+                      });
+                      console.log("Success===:",result);
+                      window.location.replace("/user");
+                    })
                     .catch((error)=>{store.addNotification({
                         title: "Failed",
                         message: "Request could not be added",

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.core.validators import MaxLengthValidator, MinLengthValidator
 # Create your models here.
 
 #class Users(models.Model):
@@ -13,7 +14,7 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 
 class Requests(models.Model):
     crnumber = models.CharField(max_length=100,default="_")
-    wardadhaar = models.IntegerField()
+    wardadhaar = models.IntegerField(validators=[MinLengthValidator(12),MaxLengthValidator(12)])
     docnumber = models.CharField(max_length=100,null=False,primary_key=True)
     createdby = models.CharField(max_length=100,default='admin')
     createdat = models.DateTimeField(auto_now_add=True)
@@ -49,7 +50,7 @@ class Requests(models.Model):
 # class GuptRog
 class Patient(models.Model): 
     name = models.CharField(max_length=100)
-    wardadhaar = models.IntegerField(primary_key=True)
+    wardadhaar = models.IntegerField(primary_key=True,validators=[MinLengthValidator(12),MaxLengthValidator(12)])
     bloodgroup = models.CharField(max_length=50)
     gender = models.CharField(max_length=100)
     dob =  models.DateField(null=False)

@@ -4,7 +4,6 @@ import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import Select from "@material-ui/core/Select";
 import Checkbox from "@material-ui/core/Checkbox";
-import MenuItem from "@material-ui/core/MenuItem";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
@@ -12,7 +11,6 @@ import TableRow from "@material-ui/core/TableRow";
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import { Multiselect } from 'multiselect-react-dropdown';
-import { withRouter } from "react-router";
 import { createBrowserHistory } from 'history';
 // import { useLocation } from "react-router";
 import { store } from 'react-notifications-component';
@@ -32,7 +30,7 @@ const Input = styled.input`
   border: solid 2px #0052cc;
   `;
 
-const SUBMIT_FORM_API = 'http://127.0.0.1:8000/api/update-cardiac-form/'
+const SUBMIT_FORM_API = 'http://127.0.0.1:8000/api/update-cardiac-forma/'
 
 
 export default function FormA(props) {
@@ -41,73 +39,117 @@ export default function FormA(props) {
     // useEffect(() => {
     //     console.log(myvar);
     // });
-    function handle(){
-        var str1="";
-        var str2="";
-        if(document.getElementById('3A_ark').checked){
-            str1+="Arkayfacory;";        
-        }
-        if(document.getElementById('3A_nip').checked){
-            str1+="nipro;";        
-        }
-        if(document.getElementById('3A_opt').checked){
-            str1+="optium;";        
-        }
-        if(document.getElementById('yourBox').checked){
-            str1+=document.getElementById("yourText").value;        
-        }
-        console.log("3A_brand",str1);
-        if(document.getElementById('3A_18G').checked){
-            str2+="18G;";        
-        }
-        if(document.getElementById('3A_nip').checked){
-            str2+="20G;";        
-        }
-        if(document.getElementById('yourBox2').checked){
-            str2+=document.getElementById("yourText2").value;        
-        }
-        console.log("3A_spec",str2);
-    }
-    const [A_1_descr,setA_1_descr]=React.useState("a")
-    const [A_1_brand,setA_1_brand]=React.useState("b")
-    const [A_1_qty,setA_1_qty]=React.useState("c")
-    const [A_1_remarks,setA_1_remarks]=React.useState("d")
+    // function handle(){
+    //     var str1="";
+    //     var str2="";
+    //     if(document.getElementById('3A_ark').checked){
+    //         str1+="Arkayfacory;";        
+    //     }
+    //     if(document.getElementById('3A_nip').checked){
+    //         str1+="nipro;";        
+    //     }
+    //     if(document.getElementById('3A_opt').checked){
+    //         str1+="optium;";        
+    //     }
+    //     if(document.getElementById('yourBox').checked){
+    //         str1+=document.getElementById("yourText").value;        
+    //     }
+    //     console.log("3A_brand",str1);
+    //     if(document.getElementById('3A_18G').checked){
+    //         str2+="18G;";        
+    //     }
+    //     if(document.getElementById('3A_nip').checked){
+    //         str2+="20G;";        
+    //     }
+    //     if(document.getElementById('yourBox2').checked){
+    //         str2+=document.getElementById("yourText2").value;        
+    //     }
+    //     console.log("3A_spec",str2);
+    // };
+    
+    // function testhandle(var1){
+    //     var str_3A="";
+    //     for (const [key, value] of Object.entries(var1)) {
+    //         if(key==='other'){
+    //             str_3A+=value;
+    //             str_3A+=";";
+    //             //console.log("hello",value);
+    //         }
+    //         else if(value){
 
-    const [A_2A_descr,setA_2A_descr]=React.useState("a")
-    const [A_2A_brand,setA_2A_brand]=React.useState("b")
-    const [A_2A_qty,setA_2A_qty]=React.useState("c")
-    const [A_2A_remarks,setA_2A_remarks]=React.useState("d")
+    //             str_3A+=key;
+    //             str_3A+=";";
+    //         }
+    //       }
+    //     console.log("value=>",str_3A);
+    // }
+    const [A_1_descr,setA_1_descr]=React.useState("_")
+    const [A_1_brand,setA_1_brand]=React.useState("_")
+    const [A_1_qty,setA_1_qty]=React.useState("0")
+    const [A_1_remarks,setA_1_remarks]=React.useState("_")
+
+    const [A_2A_descr,setA_2A_descr]=React.useState("_")
+    const [A_2A_brand,setA_2A_brand]=React.useState("_")
+    const [A_2A_qty,setA_2A_qty]=React.useState("0")
+    const [A_2A_remarks,setA_2A_remarks]=React.useState("_")
     
-    const [A_2B_descr,setA_2B_descr]=React.useState("a")
-    const [A_2B_brand,setA_2B_brand]=React.useState("b")
-    const [A_2B_qty,setA_2B_qty]=React.useState("c")
-    const [A_2B_remarks,setA_2B_remarks]=React.useState("d")
+    const [A_2B_descr,setA_2B_descr]=React.useState("_")
+    const [A_2B_brand,setA_2B_brand]=React.useState("_")
+    const [A_2B_qty,setA_2B_qty]=React.useState("0")
+    const [A_2B_remarks,setA_2B_remarks]=React.useState("_")
     
-    const [A_3A_descr,setA_3A_descr]=React.useState("a")
-    const [A_3A_brand,setA_3A_brand]=React.useState("b")
-    const [A_3A_qty,setA_3A_qty]=React.useState("c")
-    const [A_3A_remarks,setA_3A_remarks]=React.useState("d")
+    const [A_3A_descr,setA_3A_descr]=React.useState("_")
+    const [A_3A_brand,setA_3A_brand]=React.useState("_")
+    const [A_3A_qty,setA_3A_qty]=React.useState("0")
+    const [A_3A_remarks,setA_3A_remarks]=React.useState("_")
     
-    const [A_3B_descr,setA_3B_descr]=React.useState("a")
-    const [A_3B_brand,setA_3B_brand]=React.useState("b")
-    const [A_3B_qty,setA_3B_qty]=useState("c")
-    const [A_3B_remarks,setA_3B_remarks]=useState("d")
+    const [A_3B_descr,setA_3B_descr]=React.useState("_")
+    const [A_3B_brand,setA_3B_brand]=React.useState("_")
+    const [A_3B_qty,setA_3B_qty]=useState("0")
+    const [A_3B_remarks,setA_3B_remarks]=useState("_")
+
+    const [A_4_descr,setA_4_descr]=React.useState("_")
+    const [A_4_brand,setA_4_brand]=React.useState("_")
+    const [A_4_qty,setA_4_qty]=useState("0")
+    const [A_4_remarks,setA_4_remarks]=useState("_")
 
     // const brand_3A_options = [{name:'volvo',value:'volvo'},{name:"Compatible to our machine",value:"Compatible to our machine"}]
     const brand_3A_options = ["volvo","Compatible to our machine","others"]
     const [checkboxSelected_1,setCheckboxSelected_1] = useState({Arkay_factory: false ,Nipro: false ,optium:false,other:''})
-    const [checkboxSelected_2,setCheckboxSelected_2] = useState({Arkay_factory: false ,Nipro: false ,optium:false,other:''})
-    
+    const [checkboxSelected_2,setCheckboxSelected_2] = useState({"18G": false ,"20G": false,other:''})
+    const [checkboxSelected_3,setCheckboxSelected_3] = useState({"helena Lab": false ,"Beaumont Texas": false,other:''})
+    const [checkboxSelected_4,setCheckboxSelected_4] = useState({"BD": false ,"Romson": false,other:''})
     // const qty_3A_options = ['1','10','other']
     // const [qty3A,setQty3A] = useState
     
-    const checkboxOptions = ['Arkay_factory','Nipro','optium']
-    const handleChange = async (event)=>{
+    const checkboxOptions_1 = ['Arkay_factory','Nipro','optium']
+    const checkboxOptions_2 = ['18G','20G']
+    const checkboxOptions_3 = ['helena lab','beaumount texas']
+    const checkboxOptions_4 = ['BD','Romson']
+    const handleChange_1 = async (event)=>{
         console.log(event.target.name,event.target.checked);
         // console.log("\nbefore",checkboxSelected_1);
         setCheckboxSelected_1({...checkboxSelected_1,[event.target.name]:event.target.checked});
     }
-
+    const handleChange_2 = async (event)=>{
+        console.log(event.target.name,event.target.checked);
+        // console.log("\nbefore",checkboxSelected_1);
+        setCheckboxSelected_2({...checkboxSelected_2,[event.target.name]:event.target.checked});
+    }
+    const handleChange_3 = async (event)=>{
+        console.log(event.target.name,event.target.checked);
+        // console.log("\nbefore",checkboxSelected_1);
+        setCheckboxSelected_3({...checkboxSelected_3,[event.target.name]:event.target.checked});
+    }
+    const handleChange_4 = async (event)=>{
+        console.log(event.target.name,event.target.checked);
+        // console.log("\nbefore",checkboxSelected_1);
+        setCheckboxSelected_4({...checkboxSelected_4,[event.target.name]:event.target.checked});
+    }
+    var final_a1brand="";
+    var final_a2a_descr="";
+    var final_a3abrand="";
+    var final_a3bbrand="";
     function testhandle(var1){
         var str_3A="";
         var otherflag = false;
@@ -129,9 +171,18 @@ export default function FormA(props) {
                 str_3A+=";";
             }
           }
+        if(str_3A===""){
+            return "_";
+        }
+        return str_3A;
         console.log("value ",otherflag," =>",str_3A,);
     }
-
+    async function change(){
+        setA_1_brand(testhandle(checkboxSelected_3));
+        setA_2A_descr(testhandle(checkboxSelected_2));
+        setA_3A_brand(testhandle(checkboxSelected_1));
+        setA_3B_brand(testhandle(checkboxSelected_4));
+    }
 
         // const [dateofbirth,setdateofbirth] = useState(null);
         return(
@@ -174,14 +225,17 @@ export default function FormA(props) {
                             </Select> 
                         </TableCell>
                         <TableCell >
-                            <Select onChange={(event)=>(setA_1_brand(event.target.value))}>     
-                                <option value="Helena Lab">Helena Lab</option>
-                                <option value="Beaumount Texas">Beaumount Texas</option>
-                                <option value="other">other</option>
-                            </Select> 
+                        {
+                                checkboxOptions_3.map(
+                                    (c,i)=><div><label key={c}><Checkbox style={{height:"11px"}} name={c} checked={checkboxSelected_3.c} onChange={handleChange_3}/>{c}</label></div>
+                                )
+                            }    
+                            <div><label><Checkbox style={{height:"11px"}} type="checkbox" id="yourBox3" onChange={(event)=>(document.getElementById('yourText3').disabled = !(event.target.checked),setCheckboxSelected_3({...checkboxSelected_3,['other']:event.target.checked}))}/>other</label>
+                            <input placeholder="" id="yourText3" disabled onChange={(event) => setCheckboxSelected_3({...checkboxSelected_3,['otherval']:event.target.value})}></input>
+                            </div>
                         </TableCell>
                         <TableCell >
-                        <input type="number" val="10" onChange={(event)=>(setA_1_remarks(event.target.value))}></input>
+                        <input type="number" val="10" onChange={(event)=>(setA_1_qty(event.target.value))}></input>
                         </TableCell>
                         <TableCell >
                             <input val={A_1_remarks} onChange={(event)=>(setA_1_remarks(event.target.value))}></input>
@@ -191,20 +245,14 @@ export default function FormA(props) {
                         <TableCell >2A</TableCell>
                         <TableCell >Arterial line cannula (Adult)</TableCell>
                         <TableCell >
-                        <div><label>
-                                <input type="checkbox" id="3A_18G" value="18G" />
-                                18G
-                        </label></div>
-                        <div className="radio"><label>
-                                <input type="checkbox" id="3A_20G" value="20G" />
-                                20G
-                        </label></div>
-                        <div><label>
-                            <input type="checkbox" id="yourBox2" onChange={(event)=>(document.getElementById('yourText2').disabled = !(event.target.checked))}></input>
-                                Other
-                            </label>
-                            <input placeholder="" id="yourText2" disabled ></input> 
-                        </div>
+                        {
+                                checkboxOptions_2.map(
+                                    (c,i)=><div><label key={c}><Checkbox style={{height:"11px"}} name={c} checked={checkboxSelected_2.c} onChange={handleChange_2}/>{c}</label></div>
+                                )
+                            }    
+                            <div><label><Checkbox style={{height:"11px"}} type="checkbox" id="yourBox2" onChange={(event)=>(document.getElementById('yourText2').disabled = !(event.target.checked),setCheckboxSelected_2({...checkboxSelected_2,['other']:event.target.checked}))}/>other</label>
+                            <input placeholder="" id="yourText2" disabled onChange={(event) => setCheckboxSelected_2({...checkboxSelected_2,['otherval']:event.target.value})}></input>
+                            </div>
                         </TableCell>
                         <TableCell >
                             <Select onChange={(event)=>(setA_2A_brand(event.target.value))}> 
@@ -213,7 +261,7 @@ export default function FormA(props) {
                             </Select> 
                         </TableCell>
                         <TableCell >
-                            <input type="number" val="10" onChange={(event)=>(setA_1_remarks(event.target.value))}></input>
+                            <input type="number" val="10" onChange={(event)=>(setA_2A_qty(event.target.value))}></input>
                         </TableCell>
                         <TableCell >
                             <input val={A_2A_remarks} onChange={(event)=>(setA_2A_remarks(event.target.value))}></input>
@@ -245,8 +293,8 @@ export default function FormA(props) {
                                 onChange={(e)=>(setA_3A_descr(e.target.value),console.log(A_3A_descr))}
                             /> */}
                         </TableCell>
-                        <TableCell >
-                        <div><label>
+                        {/* <TableCell >
+                         <div><label>
                                 <input type="checkbox" id="3A_ark" value="Arkay factory" />
                                 Arkay factory
                         </label></div>
@@ -263,18 +311,18 @@ export default function FormA(props) {
                                 Other
                             </label>
                             <input placeholder="" id="yourText" disabled ></input> 
-                        </div>
+                        </div> 
 
-                        </TableCell> 
+                        </TableCell>  */}
                         <TableCell>
                             
                             {
-                                checkboxOptions.map(
-                                    (c,i)=><div><label key={c}><Checkbox name={c} checked={checkboxSelected_1.c} onChange={handleChange}/>{c}</label></div>
+                                checkboxOptions_1.map(
+                                    (c,i)=><div><label key={c}><Checkbox style={{height:"11px"}} name={c} checked={checkboxSelected_1.c} onChange={handleChange_1}/>{c}</label></div>
                                 )
                             }    
-                            <div><label><Checkbox type="checkbox" id="yourBox1" onChange={(event)=>(document.getElementById('yourText1').disabled = !(event.target.checked))}/>other</label>
-                            <input placeholder="" id="yourText1" disabled onChange={(event) => setCheckboxSelected_1({...checkboxSelected_1,['other']:event.target.value})}></input>
+                            <div><label><Checkbox style={{height:"11px"}} id="yourBox1" onChange={(event)=>(document.getElementById('yourText1').disabled = !(event.target.checked),setCheckboxSelected_1({...checkboxSelected_1,['other']:event.target.checked}))}/>other</label>
+                            <input placeholder="" id="yourText1" disabled onChange={(event) => setCheckboxSelected_1({...checkboxSelected_1,['otherval']:event.target.value})}></input>
                             </div>
                             {/* <div> */}
                             {/* <label>
@@ -287,11 +335,7 @@ export default function FormA(props) {
                     </TableCell>
                         <TableCell >
                         {/* <input></input>     */}
-                            <Select value={A_3A_qty} defaultValue={{value:'1',label:'1'}} 
-                                onChange={(event)=>(setA_3A_qty(event.target.value))}>     
-                                <option value="1">1</option>
-                                <option value="other">other</option>
-                            </Select> 
+                        <input type="number" val="10" onChange={(event)=>(setA_3A_qty(event.target.value))}></input>
                             {/* {
                                 qty_3A_options.map(
                                     (c,i)=><div><label key={c}><Checkbox name={c} checked={checkboxSelected_1.c} onChange={handleChange}/>{c}</label></div>
@@ -302,7 +346,7 @@ export default function FormA(props) {
                             <input val={A_3A_remarks} onChange={(event)=>(setA_3A_remarks(event.target.value))}></input>
                         </TableCell>
                     </TableRow>
-                    {/* <TableRow style={{marginTop:"0px"}}>
+                    <TableRow style={{marginTop:"0px"}}>
                         <TableCell >3B</TableCell>
                         <TableCell >Blood transfusion set</TableCell>
                         <TableCell >
@@ -312,72 +356,65 @@ export default function FormA(props) {
                             </Select>
                         </TableCell>
                         <TableCell >
-                        <Select onChange={(event)=>(setA_3B_brand(event.target.value))}> 
-                            <option value="BD">BD</option>
-                            <option value="Romson">Romson</option>
-                            <option value="other">other</option>
-                        </Select> 
+                        {
+                                checkboxOptions_4.map(
+                                    (c,i)=><div><label key={c}><Checkbox style={{height:"11px"}} name={c} checked={checkboxSelected_4.c} onChange={handleChange_4}/>{c}</label></div>
+                                )
+                            }    
+                            <div><label><Checkbox style={{height:"11px"}} type="checkbox" id="yourBox4" onChange={(event)=>(document.getElementById('yourText4').disabled = !(event.target.checked),setCheckboxSelected_4({...checkboxSelected_4,['other']:event.target.checked}))}/>other</label>
+                            <input placeholder="" id="yourText4" disabled onChange={(event) => setCheckboxSelected_4({...checkboxSelected_4,['otherval']:event.target.value})}></input>
+                            </div>
                         </TableCell>
                         <TableCell >
-                        <Select onChange={(event)=>(setA_3B_qty(event.target.value))}>     
-                            <option value="1">1</option>
-                            <option value="other">other</option>
-                        </Select> 
+                        <input type="number" val="10" onChange={(event)=>(setA_3B_qty(event.target.value))}></input>
                         </TableCell>
                         <TableCell >
                         <input val={A_3B_remarks} onChange={(event)=>(setA_3B_remarks(event.target.value))}></input>
                         </TableCell>
-                    </TableRow> */}
+                    </TableRow> 
                     
-                    {/* <TableRow style={{marginTop:"0px"}}>
+                    <TableRow style={{marginTop:"0px"}}>
                         <TableCell >4</TableCell>
                         <TableCell >BIS Sensor</TableCell>
-                        <TableCell > */}
-                            {/* <input></input> */}
-                            {/* <Select onChange={(event)=>(setA2B_descr(event.target.value))}>     
+                        <TableCell > 
+                            <Select onChange={(event)=>(setA_4_descr(event.target.value))}>     
                                 <option value="Adult Pediatric">Adult Pediatric</option>
                                 <option value="other">other</option>
                             </Select> 
                         </TableCell>
                         <TableCell >
-                            <Select onChange={(event)=>(setA2B_brand(event.target.value))}>     
+                            <Select onChange={(event)=>(setA_4_brand(event.target.value))}>     
                                 <option value="Medtronic">Medtronic</option>
                                 <option value="other">other</option>
                             </Select> 
                         </TableCell>
-                        <TableCell > */}
-                            {/* <input></input>     */}
-                            {/* <Select onChange={(event)=>(setA2B_qty(event.target.value))}>     
-                                <option value="1">1</option>
-                                <option value="other">other</option>
-                            </Select> 
+                        <TableCell >
+                        <input type="number" val="10" onChange={(event)=>(setA_4_qty(event.target.value))}></input> 
                         </TableCell>
                         <TableCell >
-                            <input></input>
+                        <input onChange={(event)=>(setA_4_remarks(event.target.value))}></input>
                         </TableCell>
                     </TableRow>
                     
-                    <TableRow style={{marginTop:"0px"}}>
+                    {/* <TableRow style={{marginTop:"0px"}}>
                         <TableCell >5</TableCell>
                         <TableCell >Bronchial blocker</TableCell>
-                        <TableCell > */}
-                            {/* <input></input> */}
-                            {/* <Select onChange={(event)=>(setA2B_descr(event.target.value))}>     
+                        <TableCell >
+                             <Select onChange={(event)=>(setA_2B_descr(event.target.value))}>     
                                 <option value="5F">5F</option>
                                 <option value="7F">7F</option>
                                 <option value="other">other</option>
                             </Select> 
                         </TableCell>
                         <TableCell >
-                            <Select onChange={(event)=>(setA2B_brand(event.target.value))}>     
+                            <Select onChange={(event)=>(setA_2B_brand(event.target.value))}>     
                                 <option value="Portex">Portex</option>
                                 <option value="Rusch">Rusch</option>
                                 <option value="other">other</option>
                             </Select> 
                         </TableCell>
-                        <TableCell > */}
-                            {/* <input></input>     */}
-                            {/* <Select onChange={(event)=>(setA2B_qty(event.target.value))}>     
+                        <TableCell > 
+                            <Select onChange={(event)=>(setA_2B_qty(event.target.value))}>     
                                 <option value="1">1</option>
                                 <option value="other">other</option>
                             </Select> 
@@ -388,12 +425,15 @@ export default function FormA(props) {
                     </TableRow> */}
                     </TableBody>
                 </Table>
-            <Button variant="contained" color="secondary"
+            <Button variant="contained" color="primary"
                 onClick={()=>(
                     console.log('values====>\ncompany_name:',A_3A_brand,'\nQty_required:',A_3A_qty,'\nSpecification:',A_3A_descr,'\nRemarks:',A_3A_remarks,"\n------------- ",props.docnumber,"\n----------------")
-                    // ,testhandle(checkboxSelected)
-                    // ,fetch(SUBMIT_FORM_API+myvar,
-                    ,handle()
+                    //,console.log(testhandle(checkboxSelected_1),"---",testhandle(checkboxSelected_2),"---",testhandle(checkboxSelected_3),"---",testhandle(checkboxSelected_4))
+                    ,final_a1brand=testhandle(checkboxSelected_3)
+                    ,final_a2a_descr=testhandle(checkboxSelected_2)
+                    ,final_a3abrand=testhandle(checkboxSelected_1)
+                    ,final_a3bbrand=testhandle(checkboxSelected_4)
+                    ,console.log(final_a1brand,final_a2a_descr)
                     ,fetch(SUBMIT_FORM_API+props.docnumber,
                         {
                         credentials: 'include',
@@ -405,10 +445,10 @@ export default function FormA(props) {
                         body: JSON.stringify({
                             code         : myvar,
                             A_1_descr     :A_1_descr,
-                            A_1_brand     :A_1_brand,
+                            A_1_brand     :final_a1brand,
                             A_1_qty      :A_1_qty,
                             A_1_remarks  :A_1_remarks,
-                            A_2A_descr     :A_2A_descr,           
+                            A_2A_descr     :final_a2a_descr,           
                             A_2A_brand     :A_2A_brand,
                             A_2A_qty      :A_2A_qty,
                             A_2A_remarks  :A_2A_remarks,
@@ -417,11 +457,11 @@ export default function FormA(props) {
                             A_2B_qty      :A_2B_qty,
                             A_2B_remarks  :A_2B_remarks,
                             A_3A_descr     :A_3A_descr,
-                            A_3A_brand     :A_3A_brand,
+                            A_3A_brand     :final_a3abrand,
                             A_3A_qty      :A_3A_qty,
                             A_3A_remarks  :A_3A_remarks,
                             A_3B_descr     :A_3B_descr,
-                            A_3B_brand     :A_3B_brand,
+                            A_3B_brand     :final_a3bbrand,
                             A_3B_qty      :A_3B_qty,
                             A_3B_remarks  :A_3B_remarks, 
                         }),
@@ -433,8 +473,8 @@ export default function FormA(props) {
                     //     type: "success",
                     //     insert: "top",
                     //     container: "bottom-right",
-                    //     animationIn: ["animate__animated", "animate__fadeIn"],
-                    //     animationOut: ["animate__animated", "animate__fadeOut"],
+                    //     animationIn: ["animate_animated", "animate_fadeIn"],
+                    //     animationOut: ["animate_animated", "animate_fadeOut"],
                     //     dismiss: {
                     //       duration: 5000,
                     //       onScreen: true
@@ -446,8 +486,8 @@ export default function FormA(props) {
                     //     type: "danger",
                     //     insert: "top",
                     //     container: "bottom-right",
-                    //     animationIn: ["animate__animated", "animate__fadeIn"],
-                    //     animationOut: ["animate__animated", "animate__fadeOut"],
+                    //     animationIn: ["animate_animated", "animate_fadeIn"],
+                    //     animationOut: ["animate_animated", "animate_fadeOut"],
                     //     dismiss: {
                     //       duration: 5000,
                     //       onScreen: true

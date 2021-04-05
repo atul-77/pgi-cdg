@@ -8,12 +8,13 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+import Button from "@material-ui/core/Button";
 import styled from 'styled-components';
 import { useLocation } from "react-router";
 import Checkbox from "@material-ui/core/Checkbox";
 import {myvar} from '../user/user.js';
 
-const SUBMIT_FORM_API = 'http://127.0.0.1:8000/api/update-cardiac-form/'
+const SUBMIT_FORM_API = 'http://127.0.0.1:8000/api/update-cardiac-formb/'
 
 const Input = styled.input`
   border-radius: 4px;
@@ -53,26 +54,45 @@ export default function FormB() {
                 str_3A+=";";
             }
           }
+        
         console.log("value ",otherflag," =>",str_3A,);
+        if(str_3A===""){
+            return "_";
+        }
+        return str_3A;
     }
 
-    const [B_1_remarks,setB_1_remarks]=React.useState("")
-    const [B_1_qty,setB_1_qty]=React.useState("")
-    const [B_2A_remarks,setB_2A_remarks]=React.useState("")
-    const [B_2A_qty,setB_2A_qty]=React.useState("")
-    const [B_2B_remarks,setB_2B_remarks]=React.useState("")
-    const [B_2B_qty,setB_2B_qty]=React.useState("")
-    const [B_3A_remarks,setB_3A_remarks]=React.useState("")
-    const [B_3A_qty,setB_3A_qty]=React.useState("")
-    const [B_3B_remarks,setB_3B_remarks]=React.useState("")
-    const [B_3B_qty,setB_3B_qty]=React.useState("")
-    const [B_3C_remarks,setB_3C_remarks]=React.useState("")
-    const [B_3C_qty,setB_3C_qty]=React.useState("")
-    const [B_3D_remarks,setB_3D_remarks]=React.useState("")
-    const [B_3D_qty,setB_3D_qty]=React.useState("")
+    const [B_1_remarks,setB_1_remarks]=React.useState("_")
+    const [B_1_qty,setB_1_qty]=React.useState("1")
+    const [B_2A_remarks,setB_2A_remarks]=React.useState("_")
+    const [B_2A_qty,setB_2A_qty]=React.useState("1")
+    const [B_2B_remarks,setB_2B_remarks]=React.useState("_")
+    const [B_2B_qty,setB_2B_qty]=React.useState("1")
+    const [B_3A_remarks,setB_3A_remarks]=React.useState("_")
+    const [B_3A_qty,setB_3A_qty]=React.useState("1")
+    const [B_3B_remarks,setB_3B_remarks]=React.useState("_")
+    const [B_3B_qty,setB_3B_qty]=React.useState("1")
+    const [B_3C_remarks,setB_3C_remarks]=React.useState("_")
+    const [B_3C_qty,setB_3C_qty]=React.useState("1")
+    const [B_3D_remarks,setB_3D_remarks]=React.useState("_")
+    const [B_3D_qty,setB_3D_qty]=React.useState("1")
 
+    var finalB_1_descr = ""
+    var finalB_1_brand = ""
+    var finalB_2A_descr = ""
+    var finalB_2A_brand = ""
+    var finalB_2B_descr = ""
+    var finalB_2B_brand = ""
+    var finalB_3A_descr = ""
+    var finalB_3A_brand = ""
+    var finalB_3B_descr = ""
+    var finalB_3B_brand = ""
+    var finalB_3C_descr = ""
+    var finalB_3C_brand = ""
+    var finalB_3D_descr = ""
+    var finalB_3D_brand = ""
 
-    const [B_1_spec,setB_1_spec] = useState({"14G(Code:20014)": false ,"16G(Code:20016)": false ,other:false,otherval:''})
+    const [B_1_spec,setB_1_spec] = useState({"14G(Code:20014)": false ,"16G(Code:20016)": false ,other:false,otherval:'',finalval:''})
     const B_1_spec_options = ["14G(Code:20014)","16G(Code:20016)"]
     const handleChangeA1descr = async (event)=>{
         console.log(event.target.name,event.target.checked);
@@ -200,7 +220,7 @@ export default function FormB() {
                 <TableBody>
                     <TableRow style={{padding:"0px"}}>
                         <TableCell >1</TableCell>
-                        <TableCell >Antegrade cardioplegia Cannula, with vent</TableCell>
+                        <TableCell >Antegrade cardioplegia Cannula, with vent {finalB_1_descr} !</TableCell>
                         <TableCell >
                                 {
                                     B_1_spec_options.map(
@@ -476,11 +496,26 @@ export default function FormB() {
                     
                     </TableBody>
                 </Table>
-            <button     
+            <Button variant="contained" color="primary"
                 onClick={()=>(
                     // console.log('values====>\ncompany_name:',B_3A_brand,'\nQty_required:',B_3A_qty,'\nSpecification:',B_3A_descr,'\nRemarks:',B_3A_remarks)
-                    // ,testhandle(B_2A_brand)
-                    fetch(SUBMIT_FORM_API+myvar,
+                    console.log("yekarlopehle",testhandle(B_1_spec))
+                    ,finalB_1_descr=testhandle(B_1_spec)
+                    ,finalB_1_brand=testhandle(B_1_brand)
+                    ,finalB_2A_descr=testhandle(B_2A_descr)
+                    ,finalB_2B_descr=testhandle(B_2B_descr)
+                    ,finalB_3A_descr=testhandle(B_3A_descr)
+                    ,finalB_3B_descr=testhandle(B_3B_descr)
+                    ,finalB_3C_descr=testhandle(B_3C_descr)
+                    ,finalB_3D_descr=testhandle(B_3D_descr)
+                    ,finalB_2A_brand=testhandle(B_2A_brand)
+                    ,finalB_2B_brand=testhandle(B_2B_brand)
+                    ,finalB_3A_brand=testhandle(B_3A_brand)
+                    ,finalB_3B_brand=testhandle(B_3B_brand)
+                    ,finalB_3C_brand=testhandle(B_3C_brand)
+                    ,finalB_3D_brand=testhandle(B_3D_brand)
+                    ,console.log("***********",B_1_spec.finalval)
+                    ,fetch(SUBMIT_FORM_API+myvar,
                         {
                         credentials: 'include',
                         method:'PATCH',
@@ -490,39 +525,39 @@ export default function FormB() {
                         },
                         body: JSON.stringify({
                             code         : myvar,
-                            'B_1_descr'     :testhandle(B_1_spec),
-                            'B_1_brand'     :testhandle(B_1_brand),
+                            B_1_descr     :finalB_1_descr,
+                            B_1_brand     :finalB_1_brand,
                             B_1_qty      :B_1_qty,
                             B_1_remarks  :B_1_remarks,
-                            B_2A_descr     :testhandle(B_2A_descr),           
-                            B_2A_brand     :testhandle(B_2A_brand),
+                            B_2A_descr     :finalB_2A_descr,           
+                            B_2A_brand     :finalB_2A_brand,
                             B_2A_qty      :B_2A_qty,
                             B_2A_remarks  :B_2A_remarks,
-                            B_2B_descr     :testhandle(B_2B_descr),           
-                            B_2B_brand     :testhandle(B_2B_brand),
+                            B_2B_descr     :finalB_2B_descr,           
+                            B_2B_brand     :finalB_2B_brand,
                             B_2B_qty      :B_2B_qty,
                             B_2B_remarks  :B_2B_remarks,
-                            B_3A_descr     :testhandle(B_3A_descr),
-                            B_3A_brand     :testhandle(B_3A_brand),
+                            B_3A_descr     :finalB_3A_descr,
+                            B_3A_brand     :finalB_3A_brand,
                             B_3A_qty      :B_3A_qty,
                             B_3A_remarks  :B_3A_remarks,
-                            B_3B_descr     :testhandle(B_3B_descr),
-                            B_3B_brand     :testhandle(B_3B_brand),
+                            B_3B_descr     :finalB_3B_descr,
+                            B_3B_brand     :finalB_3B_brand,
                             B_3B_qty      :B_3B_qty,
                             B_3B_remarks  :B_3B_remarks, 
-                            B_3C_descr     :testhandle(B_3C_descr),
-                            B_3C_brand     :testhandle(B_3C_brand),
+                            B_3C_descr     :finalB_3C_descr,
+                            B_3C_brand     :finalB_3C_brand,
                             B_3C_qty      :B_3C_qty,
                             B_3C_remarks  :B_3C_remarks,
-                            B_3D_descr     :testhandle(B_3D_descr),
-                            B_3D_brand     :testhandle(B_3D_brand),
+                            B_3D_descr     :finalB_3D_descr,
+                            B_3D_brand     :finalB_3D_brand,
                             B_3D_qty      :B_3D_qty,
                             B_3D_remarks  :B_3D_remarks, 
                         }),
                     })
                 )}
             
-            >Submit</button>
+            >Submit</Button>
             </div>
         )
     }

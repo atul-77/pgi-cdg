@@ -8,6 +8,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import styled from 'styled-components';
+import Button from '@material-ui/core/Button';
 import { createBrowserHistory } from 'history';
 import PatientDetails from "../patient/patientDetails";
 // import { useLocation } from "react-router-dom";
@@ -71,25 +72,25 @@ const PatientHeading = styled.div`
   font-weight: 500;
   color: #222222;
 `;
-const Button = styled.button`
-  width: 88px;
-  height: 30px;
-  color: #0052cc;
-  border-radius: 4px;
-  border: solid 1px #0052cc;
-  background-color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  &:focus {
-    outline: none;
-    border: solid 2px #0052cc;
-  }
-  font-family: Roboto;
-  font-size: 11px;
-  font-weight: normal;
-  // margin-bottom: 20px;
-`;
+// const Button = styled.button`
+//   width: 88px;
+//   height: 30px;
+//   color: #0052cc;
+//   border-radius: 4px;
+//   border: solid 1px #0052cc;
+//   background-color: #ffffff;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   &:focus {
+//     outline: none;
+//     border: solid 2px #0052cc;
+//   }
+//   font-family: Roboto;
+//   font-size: 11px;
+//   font-weight: normal;
+//   // margin-bottom: 20px;
+// `;
 const HorizontalLine = styled.div`
   // margin-top: -10px;
   width: 100%;
@@ -129,7 +130,7 @@ export default class User extends Component{
 
   async componentDidMount() {
     let PATIENT_TABLE_API='http://127.0.0.1:8000/api/get-patient-table'
-    let REQUEST_TABLE_API='http://127.0.0.1:8000/api/get-request-table'
+    let REQUEST_TABLE_API='http://127.0.0.1:8000/api/view-request-table'
     const response=await fetch(PATIENT_TABLE_API);
     const data=await response.json();
     await this.setState({patients:data})
@@ -336,7 +337,7 @@ export default class User extends Component{
               state: {dnumber : this.state.selected_request.docnumber}
             }}> */}
           <Link to={'/form/'+this.state.selected_request.docnumber}>
-          <Button 
+          <Button color="primary" variant="contained"
               style={{align:"center",marginLeft:"250px"}} 
               onClick={()=>(
                 myvar = this.state.selected_request.docnumber,

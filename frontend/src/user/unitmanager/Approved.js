@@ -1,4 +1,5 @@
-import React from 'react';
+// import React from 'react';
+import React, { useState , useEffect} from 'react';
 import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -8,30 +9,21 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Title from './Title';
 import Switch from "react-switch";
+import axios from 'axios';
+import Button from '@material-ui/core/Button';
+import { createBrowserHistory } from 'history';
+const history = createBrowserHistory({forceRefresh:true});
 
-// const SwitchExample = () => {
-//   // render() {
-//     return (
-//       <label>
-//         {/* <span>Switch with default style</span> */}
-//         {/* <Switch onChange={handleChange} checked={checked} /> */}
-//         <Switch button onChange={()=>{ setChecked(checked^1) }} checked={checked}/>
-//       </label>
-//     );
-//   // }
-// }
-
-// Generate Order Data
-function createData(id, CRNumber, Wardadhaar, ViewRequest, ViewSent) {
-  return {id, CRNumber, Wardadhaar, ViewRequest, ViewSent};
+function createData(doc,wardadhaar,name , ViewRequest, Toggle) {
+  return {doc,wardadhaar,name ,ViewRequest, Toggle};
 }
 var i;
-const rows = [
-  createData(0, 'Approved: 797', '777', <a href="http://localhost:3000/addrequest">click here</a>,<a href="http://localhost:3000/addrequest">click here</a>),
-];
-for(i=0;i<20;i++){
-  rows.push(createData(0, 'Approved: '+i, 73*i+97, <a href="http://localhost:3000/addrequest">click here</a>,<a href="http://localhost:3000/addrequest">click here</a>));
-}
+// var rows = [
+//   createData(0, 'Approved: 867', '1100', <a href="http://localhost:8000/addrequest">click here</a>,<SwitchExample />),
+// ];
+// for(i=0;i<20;i++){
+//   rows.push(createData(0, 'Approved: '+i, 47*i+9, <a href="http://localhost:8000/addrequest">click here</a>,<SwitchExample />));
+// }
 
 
 function preventDefault(event) {
@@ -44,40 +36,122 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+
 export default function Approved() {
   const classes = useStyles();
+  const [checked,setChecked]= React.useState(false);
+
+  const apiURL = "http://127.0.0.1:8000/api/view-request-table/";
+  const updateURL = "http://127.0.0.1:8000/api/get-request-table/" ;
+
+  
+  // update(e) {
+  //   // update entity - PUT
+  //   e.preventDefault();
+  // }
+  const SwitchExample = () => {
+      return (
+        <label>
+          <button onClick={()=>{ setChecked(checked^1) }} >
+            Move to Pending
+            </button>
+        </label>
+      );
+  }
+//   const SwitchExample = (docnumber) => {
+//     return (
+//       <label>
+//         <Switch button onChange={()=>{ dotoggle(docnumber) }} />
+//       </label>
+//     );
+// }
+
+  const [books, setBooks] = React. useState(null);
+  const [rows, setRows] = React. useState(createData(123323427897,11,"atul","yo","sfsdf"));
+  const dobutton = async (docnumber,i,books) => {
+    books[i].state = "Pending";
+    axios.patch(updateURL+docnumber,books[i]);
+  }
+  const fetchData = async () => {
+      console.log("in fetch");
+      const response = await axios.get(apiURL)
+      // const response = await fetch(apiURL);
+      const books = await response.data;
+      // console.log("see here bruh : "+books[0].createdby);
+      // books[0].createdby = "atul op";
+      // axios.patch(updateURL+"199/",books[0]);
+      console.log("response\n");
+      console.log(response);
+
+      var temp = [];
+      for(i=0;i<books.length;i++){
+        if(books[i].state != "Approved")continue;
+        var naam = books[i].patientname;
+        var ward = books[i].wardadhaar;
+        var link = "insert link here";
+        var doc = books[i].docnumber;
+        var booktemp = books[i];
+        var tog = booktemp;
+        temp.push({doc,ward,naam,link,tog});
+      } 
+      setRows(temp);
+      // books[0].name = "Thischangedname";
+      // axios.put(updateURL,books);
+  }
+
+  console.log("globe");
+  useEffect(()=>{
+    console.log("in use effect");  
+    fetchData()
+    
+      // getPatientList()
+    },[])   
+// const rows;
+
   return (
     <React.Fragment>
+      
       {/* <Title>Requests</Title> */}
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell>CRNumber</TableCell>
-            <TableCell>Wardadhaar</TableCell>
-            <TableCell>View incoming request</TableCell>
-            <TableCell>Inventory Dispatched</TableCell>
-            {/* <TableCell>Payment Method</TableCell> */}
+            <TableCell>PATIENT NAME</TableCell>
+            <TableCell>WARD-ADHAAR</TableCell>
+            <TableCell>VIEW COMPLETE REQUEST</TableCell>
+            <TableCell>ACTION</TableCell>
             {/* <TableCell align="right">Sale Amount</TableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.CRNumber}</TableCell>
-              <TableCell>{row.Wardadhaar}</TableCell>
-              <TableCell>{row.ViewRequest}</TableCell>
-              <TableCell>{row.ViewSent}</TableCell>
-              {/* <TableCell>{row.paymentMethod}</TableCell> */}
+
+          {rows.length>0 ? 
+          rows.map((row) => (
+            <TableRow key={row.doc}>
+              <TableCell>{row.naam}</TableCell>
+              <TableCell>{row.ward}</TableCell>
+              <TableCell>{row.link}</TableCell>   
+              <TableCell>
+                {/* var booktemp = {row.tog}; */}
+              <Button color="primary" variant = "contained"onClick={()=>{ row.tog.state = "Completed";
+      axios.patch(updateURL+row.doc+"/",row.tog); 
+      }} >
+      Move to Completed
+      </Button>
+          
+                </TableCell>
+              {/* <TableCell>{row.doc}</TableCell>    */}
               {/* <TableCell align="right">{row.amount}</TableCell> */}
             </TableRow>
-          ))}
+          ))
+          : ""}
         </TableBody>
       </Table>
-      {/* <div className={classes.seeMore}>
+      <div className={classes.seeMore}>
         <Link color="primary" href="#" onClick={preventDefault}>
           See more orders
         </Link>
-      </div> */}
+      </div>
     </React.Fragment>
   );
 }

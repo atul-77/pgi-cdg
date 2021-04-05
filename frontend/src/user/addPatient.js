@@ -11,7 +11,6 @@ import styled from 'styled-components';
 import DatePicker from "react-datepicker";
 //import moment from "Moment";
 import format from 'date-fns/format';
-
 import "react-datepicker/dist/react-datepicker.css";
 import { Select } from "@material-ui/core";
 
@@ -42,6 +41,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 
+// window.location.href = "/user";
 
 const useStyles = (theme) => ({
     root: {
@@ -279,6 +279,7 @@ class AddPatient extends Component{
             onClick={()=>(
                 console.log("Posting"),
                 //this.createNotification('success'),
+                
                 fetch(PATIENT_TABLE_API,
                     {
                         credentials: 'include',
@@ -307,8 +308,11 @@ class AddPatient extends Component{
                       duration: 5000,
                       onScreen: true
                     }
-                  });console.log("Success===:",result)})
-                .catch((error)=>{store.addNotification({
+                  });
+                  console.log("Success===:",result);
+                  // browserHistory.goBack;
+                  window.location.replace("/user");
+                }).catch((error)=>{store.addNotification({
                     title: "Failed",
                     message: "Patient could not be added",
                     type: "danger",
