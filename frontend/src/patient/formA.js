@@ -68,7 +68,7 @@ export default function FormA(props) {
 
     // const brand_3A_options = [{name:'volvo',value:'volvo'},{name:"Compatible to our machine",value:"Compatible to our machine"}]
     const brand_3A_options = ["volvo","Compatible to our machine","others"]
-    const [checkboxSelected,setCheckboxSelected] = useState({cricket: false ,football: false ,golf:false,other:''})
+    const [checkboxSelected,setCheckboxSelected] = useState({cricket: false ,football: false ,golf:false,other:false,otherval:''})
     
     // const qty_3A_options = ['1','10','other']
     // const [qty3A,setQty3A] = useState
@@ -80,6 +80,29 @@ export default function FormA(props) {
         setCheckboxSelected({...checkboxSelected,[event.target.name]:event.target.checked});
     }
 
+    function testhandle(var1){
+        var str_3A="";
+        var otherflag = false;
+        for (const [key, value] of Object.entries(var1)) {
+            if(key==='other'){
+                if(value){
+                    otherflag=true;
+                }
+                //console.log("hello",value);
+            }
+            else if(key==='otherval'){
+                if(otherflag){
+                    str_3A+=value;
+                    str_3A+=";";
+                }
+            }
+            else if(value){
+                str_3A+=key;
+                str_3A+=";";
+            }
+          }
+        console.log("value ",otherflag," =>",str_3A,);
+    }
 
 
         // const [dateofbirth,setdateofbirth] = useState(null);
@@ -179,17 +202,9 @@ export default function FormA(props) {
                                         (c,i)=><div><label key={c}><Checkbox name={c} checked={checkboxSelected.c} onChange={handleChange}/>{c}</label></div>
                                     )
                                 }    
-                                <div><label><Checkbox type="checkbox" id="yourBox1" onChange={(event)=>(document.getElementById('yourText1').disabled = !(event.target.checked))}/>other</label>
-                                <input placeholder="" id="yourText1" disabled onChange={(event) => setCheckboxSelected({...checkboxSelected,['other']:event.target.value})}></input>
+                                <div><label><Checkbox type="checkbox" id="yourBox1" onChange={(event)=>(document.getElementById('yourText1').disabled = !(event.target.checked),setCheckboxSelected({...checkboxSelected,['other']:event.target.checked}))}/>other</label>
+                                <input placeholder="" id="yourText1" disabled onChange={(event) => setCheckboxSelected({...checkboxSelected,['otherval']:event.target.value})}></input>
                                 </div>
-                                {/* <div> */}
-                                {/* <label>
-                                <input type="checkbox" id="yourBox1" onChange={(event)=>(document.getElementById('yourText1').disabled = !(event.target.checked))}></input>
-                                    Other
-                                </label>
-                                <input placeholder="" id="yourText" disabled onChange={(event)=>setCheckboxSelected(...checkboxSelected,other:event.target.value}></input>  */}
-                                {/* </div> */}
-                            
                         </TableCell>
                         <TableCell >
                             <Select onChange={(event)=>(setA_3A_descr(event.target.value))}>     
@@ -337,6 +352,7 @@ export default function FormA(props) {
                 onClick={()=>(
                     console.log('values====>\ncompany_name:',A_3A_brand,'\nQty_required:',A_3A_qty,'\nSpecification:',A_3A_descr,'\nRemarks:',A_3A_remarks,"\n------------- ",props.docnumber,"\n----------------")
                     // ,console.log(pate)
+                    ,testhandle(checkboxSelected)
                     ,fetch(SUBMIT_FORM_API+myvar,
                         {
                         credentials: 'include',

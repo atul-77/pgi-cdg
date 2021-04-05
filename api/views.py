@@ -159,88 +159,7 @@ class LoginAPIView(generics.GenericAPIView):
 class GetCardiacTable(ListAPIView):
     queryset = CardiacRequested.objects.all()
     serializer_class = CardiacSerializer
-'''
-class UpdateCardiac(RetrieveUpdateDestroyAPIView):
-    queryset = CardiacRequested.objects.all()
-    serializer_class = UpdateCardiacSerializer
-    #lookup_field = 'pk'
 
-    def patch(self, request,pk, format=None):
-        if not self.request.session.exists(self.request.session.session_key):
-            self.request.session.create()
-
-        serializer = self.serializer_class(data=request.data)
-        
-        if serializer.is_valid():
-            print("-------------------------------------------------------------------------------------------------------------")
-            print(serializer.data)
-            print("-------------------------------------------------------------------------------------------------------------")
-            A_1_descr = serializer.data.get('A_1_descr')
-            A_1_brand = serializer.data.get('A_1_brand')
-            A_1_qty = serializer.data.get('A_1_qty')
-            
-            A_2A_descr = serializer.data.get('A_2A_descr')
-            A_2A_brand = serializer.data.get('A_2A_brand')
-            A_2A_qty = serializer.data.get('A_2A_qty')
-
-            A_2B_descr = serializer.data.get('A_2B_descr')
-            A_2B_brand = serializer.data.get('A_2B_brand')
-            A_2B_qty = serializer.data.get('A_2B_qty')
-
-            A_3A_descr = serializer.data.get('A_3A_descr')
-            A_3A_brand = serializer.data.get('A_3A_brand')
-            A_3A_qty = serializer.data.get('A_3A_qty')
-
-            A_3B_descr = serializer.data.get('A_3B_descr')
-            A_3B_brand = serializer.data.get('A_3B_brand')
-            A_3B_qty = serializer.data.get('A_3B_qty')
-
-            code = serializer.data.get('code')
-
-            queryset = CardiacRequested.objects.filter(pk=pk)
-
-            if not queryset.exists():
-                print("\nCREATING NEW\n")
-                newRow = CardiacRequested(
-                request=code,
-                A_1_brand=A_1_brand,A_1_descr=A_1_descr,A_1_qty=A_1_qty,
-                A_2A_brand=A_2A_brand,A_2A_descr=A_2A_descr,A_2A_qty=A_2A_qty,
-                A_2B_brand=A_2B_brand,A_2B_descr=A_2B_descr,A_2B_qty=A_2B_qty,
-                A_3A_brand=A_3A_brand,A_3A_descr=A_3A_descr,A_3A_qty=A_3A_qty,
-                A_3B_brand=A_3B_brand,A_3B_descr=A_3B_descr,A_3B_qty=A_3B_qty,
-                )
-                newRow.save()
-                return Response({'msg': 'created new entry'}, status=status.HTTP_201_CREATED)
-
-            else:
-                print("\nUPDATING EXISTING\n")
-                cardiacrequest = queryset[0]
-                user_id = self.request.session.session_key
-                #if room.host != user_id:
-                #    return Response({'msg': 'You are not the host of this room.'}, status=status.HTTP_403_FORBIDDEN)
-
-                cardiacrequest.A_1_descr = A_1_descr
-                cardiacrequest.A_1_brand = A_1_brand
-                cardiacrequest.A_1_qty = A_1_qty
-                cardiacrequest.A_2A_descr = A_2A_descr
-                cardiacrequest.A_2A_brand = A_2A_brand
-                cardiacrequest.A_2A_qty = A_2A_qty
-                cardiacrequest.A_2B_descr = A_2B_descr
-                cardiacrequest.A_2B_brand = A_2B_brand
-                cardiacrequest.A_2B_qty = A_2B_qty
-                cardiacrequest.A_3A_descr = A_3A_descr
-                cardiacrequest.A_3A_brand = A_3A_brand
-                cardiacrequest.A_3A_qty = A_3A_qty
-                cardiacrequest.A_3B_descr = A_3B_descr
-                cardiacrequest.A_3B_brand = A_3B_brand
-                cardiacrequest.A_3B_qty = A_3B_qty
-                print(cardiacrequest.A_3A_descr,A_3A_descr,cardiacrequest.A_3A_brand,A_3A_brand,cardiacrequest.A_3A_qty,A_3A_qty)
-                cardiacrequest.save(update_fields=['A_1_descr', 'A_1_brand','A_1_qty','A_2A_descr', 'A_2A_brand','A_2A_qty','A_2B_descr', 'A_2B_brand','A_2B_qty','A_3A_descr', 'A_3A_brand','A_3A_qty','A_3B_descr', 'A_3B_brand','A_3B_qty',])
-                
-                return Response(UpdateCardiacSerializer(cardiacrequest).data, status=status.HTTP_200_OK)
-
-        return Response({'Bad Request': "Invalid Data...",'error':serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
-'''
 
 class UpdateCardiacFormView(RetrieveUpdateDestroyAPIView):
     queryset = CardiacRequested.objects.all()
@@ -266,6 +185,8 @@ class UpdateCardiacFormView(RetrieveUpdateDestroyAPIView):
         A_3B_brand = serializer.data.get('A_3B_brand')
         A_3B_qty = serializer.data.get('A_3B_qty')
         code = serializer.data.get('code')
+
+        
         
         
         
@@ -280,32 +201,53 @@ class UpdateCardiacFormView(RetrieveUpdateDestroyAPIView):
             print("-------------------------------------------------------------------------------------------------------------")
             print(serializer.data)
             print("-------------------------------------------------------------------------------------------------------------")
+            code = serializer.data.get('code')
+            
             A_1_descr = serializer.data.get('A_1_descr')
             A_1_brand = serializer.data.get('A_1_brand')
             A_1_qty = serializer.data.get('A_1_qty')
-            
             A_2A_descr = serializer.data.get('A_2A_descr')
             A_2A_brand = serializer.data.get('A_2A_brand')
             A_2A_qty = serializer.data.get('A_2A_qty')
-
             A_2B_descr = serializer.data.get('A_2B_descr')
             A_2B_brand = serializer.data.get('A_2B_brand')
             A_2B_qty = serializer.data.get('A_2B_qty')
-
             A_3A_descr = serializer.data.get('A_3A_descr')
             A_3A_brand = serializer.data.get('A_3A_brand')
             A_3A_qty = serializer.data.get('A_3A_qty')
-
             A_3B_descr = serializer.data.get('A_3B_descr')
             A_3B_brand = serializer.data.get('A_3B_brand')
             A_3B_qty = serializer.data.get('A_3B_qty')
 
-            code = serializer.data.get('code')
+            
+
+            B_1_descr = serializer.data.get('B_1_descr')
+            B_1_brand = serializer.data.get('B_1_brand')
+            B_1_qty = serializer.data.get('B_1_qty')
+            B_2A_descr = serializer.data.get('B_2A_descr')
+            B_2A_brand = serializer.data.get('B_2A_brand')
+            B_2A_qty = serializer.data.get('B_2A_qty')
+            B_2B_descr = serializer.data.get('B_2B_descr')
+            B_2B_brand = serializer.data.get('B_2B_brand')
+            B_2B_qty = serializer.data.get('B_2B_qty')
+            B_3A_descr = serializer.data.get('B_3A_descr')
+            B_3A_brand = serializer.data.get('B_3A_brand')
+            B_3A_qty = serializer.data.get('B_3A_qty')
+            B_3B_descr = serializer.data.get('B_3B_descr')
+            B_3B_brand = serializer.data.get('B_3B_brand')
+            B_3B_qty = serializer.data.get('B_3B_qty')
+            B_3C_descr = serializer.data.get('B_3C_descr')
+            B_3C_brand = serializer.data.get('B_3C_brand')
+            B_3C_qty = serializer.data.get('B_3C_qty')
+            B_3D_descr = serializer.data.get('B_3D_descr')
+            B_3D_brand = serializer.data.get('B_3D_brand')
+            B_3D_qty = serializer.data.get('B_3D_qty')
+
 
             queryset = CardiacRequested.objects.filter(docnumber = docnumber)
 
             if not queryset.exists():
-                print("\n**************************************\nCREATING NEW",int(docnumber),"\n*****************************************************\n")
+                print("\n**************************************\nCREATING NEW",docnumber,"\n*****************************************************\n")
                 newRow = CardiacRequested(
                 docnumber=Requests.objects.get(docnumber=docnumber),
                 A_1_brand=A_1_brand,A_1_descr=A_1_descr,A_1_qty=A_1_qty,
@@ -313,6 +255,14 @@ class UpdateCardiacFormView(RetrieveUpdateDestroyAPIView):
                 A_2B_brand=A_2B_brand,A_2B_descr=A_2B_descr,A_2B_qty=A_2B_qty,
                 A_3A_brand=A_3A_brand,A_3A_descr=A_3A_descr,A_3A_qty=A_3A_qty,
                 A_3B_brand=A_3B_brand,A_3B_descr=A_3B_descr,A_3B_qty=A_3B_qty,
+                
+                B_1_brand=B_1_brand,B_1_descr=B_1_descr,B_1_qty=B_1_qty,
+                B_2A_brand=B_2A_brand,B_2A_descr=B_2A_descr,B_2A_qty=B_2A_qty,
+                B_2B_brand=B_2B_brand,B_2B_descr=B_2B_descr,B_2B_qty=B_2B_qty,
+                B_3A_brand=B_3A_brand,B_3A_descr=B_3A_descr,B_3A_qty=B_3A_qty,
+                B_3B_brand=B_3B_brand,B_3B_descr=B_3B_descr,B_3B_qty=B_3B_qty,
+                B_3C_brand=B_3C_brand,B_3C_descr=B_3C_descr,B_3C_qty=B_3C_qty,
+                B_3D_brand=B_3D_brand,B_3D_descr=B_3D_descr,B_3D_qty=B_3D_qty,
                 )
                 newRow.save()
                 print("\n************ \nDONE \n***********\n")
@@ -341,8 +291,45 @@ class UpdateCardiacFormView(RetrieveUpdateDestroyAPIView):
                 cardiacrequest.A_3B_descr = A_3B_descr
                 cardiacrequest.A_3B_brand = A_3B_brand
                 cardiacrequest.A_3B_qty = A_3B_qty
+
+                cardiacrequest.B_1_descr = B_1_descr
+                cardiacrequest.B_1_brand = B_1_brand
+                cardiacrequest.B_1_qty = B_1_qty
+                cardiacrequest.B_2A_descr = B_2A_descr
+                cardiacrequest.B_2A_brand = B_2A_brand
+                cardiacrequest.B_2A_qty = B_2A_qty
+                cardiacrequest.B_2B_descr = B_2B_descr
+                cardiacrequest.B_2B_brand = B_2B_brand
+                cardiacrequest.B_2B_qty = B_2B_qty
+                cardiacrequest.B_3A_descr = B_3A_descr
+                cardiacrequest.B_3A_brand = B_3A_brand
+                cardiacrequest.B_3A_qty = B_3A_qty
+                cardiacrequest.B_3B_descr = B_3B_descr
+                cardiacrequest.B_3B_brand = B_3B_brand
+                cardiacrequest.B_3B_qty = B_3B_qty
+                cardiacrequest.B_3C_descr = B_3C_descr
+                cardiacrequest.B_3C_brand = B_3C_brand
+                cardiacrequest.B_3C_qty = B_3C_qty
+                cardiacrequest.B_3D_descr = B_3D_descr
+                cardiacrequest.B_3D_brand = B_3D_brand
+                cardiacrequest.B_3D_qty = B_3D_qty
                 # print(cardiacrequest.A_3A_descr,A_3A_descr,cardiacrequest.A_3A_brand,A_3A_brand,cardiacrequest.A_3A_qty,A_3A_qty)
-                cardiacrequest.save(update_fields=['A_1_descr', 'A_1_brand','A_1_qty','A_2A_descr', 'A_2A_brand','A_2A_qty','A_2B_descr', 'A_2B_brand','A_2B_qty','A_3A_descr', 'A_3A_brand','A_3A_qty','A_3B_descr', 'A_3B_brand','A_3B_qty',])
+                cardiacrequest.save(update_fields=[
+                    'A_1_descr', 'A_1_brand','A_1_qty',
+                    'A_2A_descr', 'A_2A_brand','A_2A_qty',
+                    'A_2B_descr', 'A_2B_brand','A_2B_qty',
+                    'A_3A_descr', 'A_3A_brand','A_3A_qty',
+                    'A_3B_descr', 'A_3B_brand','A_3B_qty',
+
+                    'B_1_descr', 'B_1_brand','B_1_qty',
+                    'B_2A_descr', 'B_2A_brand','B_2A_qty',
+                    'B_2B_descr', 'B_2B_brand','B_2B_qty',
+                    'B_3A_descr', 'B_3A_brand','B_3A_qty',
+                    'B_3B_descr', 'B_3B_brand','B_3B_qty',
+		            'B_3C_descr', 'B_3C_brand','B_3C_qty',
+                    'B_3D_descr', 'B_3D_brand','B_3D_qty',
+
+                ])
                 
                 return Response(UpdateCardiacSerializer(cardiacrequest).data, status=status.HTTP_200_OK)
 
