@@ -205,7 +205,7 @@ class AddPatient extends Component{
             <Table style={{marginTop:"100px",marginLeft:"400px",width:"650px"}}>
                 <TableBody>
                     <TableRow>
-                        <TableCell><div style={{marginTop:"20px",marginLeft:"10%"}}>Name of Patient:</div></TableCell>
+                        <TableCell><div style={{marginTop:"20px",marginLeft:"10%",fontSize:"18px"}}>Name of Patient:</div></TableCell>
                         <TableCell><Input style={{marginLeft:"0px",height:"15px",width:"70%"}}
                         onChange={event=>(
                             this.setState({name:event.target.value})
@@ -213,7 +213,7 @@ class AddPatient extends Component{
                         ></Input></TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell><div style={{marginTop:"20px",marginLeft:"10%"}}>Wardadhaar:</div></TableCell>
+                        <TableCell><div style={{marginTop:"20px",marginLeft:"10%",fontSize:"18px"}}>Wardadhaar:</div></TableCell>
                         <TableCell><Input type="number" style={{marginLeft:"0px",height:"15px",width:"70%"}} min="100000000000"  max="999999999999"
                         onChange={event=>(
                             this.setState({ward_adhaar:event.target.value})
@@ -221,7 +221,7 @@ class AddPatient extends Component{
                         ></Input></TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell><div style={{marginTop:"20px",marginLeft:"10%",width:"80%"}}>Blood Group:</div></TableCell>
+                        <TableCell><div style={{marginTop:"20px",marginLeft:"10%",width:"80%",fontSize:"18px"}}>Blood Group:</div></TableCell>
                         <TableCell><Select style={{marginLeft:"0px",width:"40%"}}
                         onChange={event=>(
                             this.setState({blood_group:event.target.value})
@@ -238,7 +238,7 @@ class AddPatient extends Component{
                         </Select></TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell><div style={{marginTop:"20px",marginLeft:"10%"}}>Gender:</div></TableCell>
+                        <TableCell><div style={{marginTop:"20px",marginLeft:"10%",fontSize:"18px"}}>Gender:</div></TableCell>
                         <TableCell><Select style={{marginLeft:"0px",width:"40%"}}
                         onChange={event=>(
                             this.setState({gender:event.target.value})
@@ -248,7 +248,7 @@ class AddPatient extends Component{
                         <option selected value="other">Other</option></Select></TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell><div style={{marginTop:"20px",marginLeft:"10%"}}>Date Of Birth:</div></TableCell>
+                        <TableCell><div style={{marginTop:"20px",marginLeft:"10%",fontSize:"18px"}}>Date Of Birth:</div></TableCell>
                         <TableCell>
                         <div style={{marginLeft:"0px"}}>
                         <DatePicker

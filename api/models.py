@@ -30,6 +30,8 @@ class Requests(models.Model):
     doctorflag = models.CharField(max_length=100,default='_')
     technicianflag = models.CharField(max_length=100,default='_')
     consultantflag = models.CharField(max_length=100,default='_')
+    state = models.CharField(max_length=100,default="Approved")
+
 
 #doubt on number of fields, dictionary coz each item has many features..e.g. brand, quantity
 

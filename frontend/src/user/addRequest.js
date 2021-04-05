@@ -167,7 +167,7 @@ export default function AddRequest(){
             <Table style={{marginTop:"80px",marginLeft:"400px",width:"650px"}}>
                 <TableBody>
                     <TableRow>
-                        <TableCell><div style={{marginTop:"0px",marginLeft:"20px"}}>CR Number:</div></TableCell>
+                        <TableCell><div style={{marginTop:"0px",marginLeft:"20px",fontSize:"18px"}}>CR Number:</div></TableCell>
                         <TableCell><Input style={{marginTop:"0px",marginLeft:"-80px",height:"8px"}}
                             onChange={(event)=>{
                                 setCrNumber(event.target.value)
@@ -175,7 +175,7 @@ export default function AddRequest(){
                         ></Input></TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell><div style={{marginTop:"0px",marginLeft:"20px"}}>Ward Adhaar No.:</div></TableCell>
+                        <TableCell><div style={{marginTop:"0px",marginLeft:"20px",fontSize:"18px"}}>Ward Adhaar No.:</div></TableCell>
                         <TableCell><Input type="number" style={{marginTop:"0px",marginLeft:"-80px",height:"8px"}} min="100000000000"  max="999999999999"
                             onChange={(event)=>{
                                 setWardAdhaar(event.target.value)
@@ -183,7 +183,7 @@ export default function AddRequest(){
                         ></Input></TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell><div style={{marginTop:"0px",marginLeft:"20px"}}>Ward Name:</div></TableCell>
+                        <TableCell><div style={{marginTop:"0px",marginLeft:"20px",fontSize:"18px"}}>Ward Name:</div></TableCell>
                         <TableCell><Input style={{marginTop:"0px",marginLeft:"-80px",height:"8px"}}
                             onChange={(event)=>{
                                 setWardName(event.target.value)
@@ -191,7 +191,7 @@ export default function AddRequest(){
                         ></Input></TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell><div style={{marginTop:"0px",marginLeft:"20px"}}>Department:</div></TableCell>
+                        <TableCell><div style={{marginTop:"0px",marginLeft:"20px",fontSize:"18px"}}>Department:</div></TableCell>
                         <TableCell>
                             <Select style={{marginTop:"0px",marginLeft:"-80px",width:"80%"}}
                                 onChange={(event)=>{
@@ -206,7 +206,7 @@ export default function AddRequest(){
                         </TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell><div style={{marginTop:"0px",marginLeft:"20px"}}>Document Number:</div></TableCell>
+                        <TableCell><div style={{marginTop:"0px",marginLeft:"20px",fontSize:"18px"}}>Document Number:</div></TableCell>
                         <TableCell><Input style={{marginTop:"0px",marginLeft:"-80px",height:"8px"}}
                             onChange={(event)=>{
                                 setDocNumber(event.target.value)
@@ -214,7 +214,7 @@ export default function AddRequest(){
                         ></Input></TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell><div style={{marginTop:"0px",marginLeft:"20px"}}>Consultant User Name:</div></TableCell>
+                        <TableCell><div style={{marginTop:"0px",marginLeft:"20px",fontSize:"18px"}}>Consultant User Name:</div></TableCell>
                         <TableCell><Input style={{marginTop:"0px",marginLeft:"-80px",height:"8px"}}
                             onChange={(event)=>{
                                 setConsultantUname(event.target.value)
@@ -222,7 +222,7 @@ export default function AddRequest(){
                         ></Input></TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell><div style={{marginTop:"0px",marginLeft:"20px"}}>Height</div></TableCell>
+                        <TableCell><div style={{marginTop:"0px",marginLeft:"20px",fontSize:"18px"}}>Height</div></TableCell>
                         <TableCell><Input type="number" style={{marginTop:"1px",marginLeft:"-80px",height:"8px"}} placeholder="Type in cm"
                             onChange={(event)=>{
                                 setHeight(event.target.value);
@@ -230,7 +230,7 @@ export default function AddRequest(){
                         ></Input></TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell><div style={{marginTop:"0px",marginLeft:"20px"}}>Weight</div></TableCell>
+                        <TableCell><div style={{marginTop:"0px",marginLeft:"20px",fontSize:"18px"}}>Weight</div></TableCell>
                         <TableCell><Input type="number" style={{marginTop:"0px",marginLeft:"-80px",height:"8px"}} placeholder="Type in kg"
                             onChange={(event)=>{
                                 setWeight(event.target.value);
@@ -240,7 +240,7 @@ export default function AddRequest(){
                 </TableBody>
             </Table>
             <Button variant="contained" color="primary"
-            style={{fontSize:"16px",marginLeft:"680px",marginTop:"20px",height:"40px",width:"150px",font:"message-box"}}
+            style={{fontSize:"18px",marginLeft:"680px",marginTop:"20px",height:"40px",width:"150px",font:"message-box"}}
                 onClick={()=>(
                     console.log(crNumber,wardAdhaar,wardName,department,docNumber,consultantUname,height,weight),
                     fetch(REQUEST_TABLE_API,
