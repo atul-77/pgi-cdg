@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework import generics, status, viewsets
 from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView
-from .models import Patient, Requests , User, CardiacRequested
+from .models import Patient, Requests , User, CardiacRequested, CardiacSupplied
 from .serializers import UserSerializer, RegisterSerializer,LoginSerializer, PatientSerializer, CreatePatientSerializer, RequestSerializer, CreateRequestSerializer, CardiacSerializer, UpdateCardiacSerializer #,
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -165,6 +165,10 @@ class LoginAPIView(generics.GenericAPIView):
 
 class GetCardiacTable(CreateAPIView):
     queryset = CardiacRequested.objects.all()
+    serializer_class = CardiacSerializer
+
+class GetCardiacSuppliedTable(CreateAPIView):
+    queryset = CardiacSupplied.objects.all()
     serializer_class = CardiacSerializer
 
 class UpdateCardiac(UpdateAPIView):
