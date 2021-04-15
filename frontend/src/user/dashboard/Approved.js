@@ -43,6 +43,7 @@ export default function Approved() {
   const [checked,setChecked]= React.useState(false);
 
   const apiURL = "http://127.0.0.1:8000/api/view-request-table";
+  // const apiURL = "http://127.0.0.1:8000/api/view-request-table/";
   const updateURL = "http://127.0.0.1:8000/api/get-request-table/" ;
 
   

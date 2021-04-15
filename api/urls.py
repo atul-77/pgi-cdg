@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import main,GetPatientTable,GetPatients,PatientView,GetRequestTable,RequestView,LoginAPIView,ViewRequestTable,RegisterAPIView,GetCardiacTable, UpdateCardiacFormAView,UpdateCardiacFormBView
+from .views import main,GetPatientTable,GetPatients,PatientView,GetRequestTable,RequestView,LoginAPIView,ViewRequestTable,RegisterAPIView,GetCardiacTable, UpdateCardiacFormAView,UpdateCardiacFormBView, GetCardiacSuppliedTable
 urlpatterns = [
     #path('',include('frontend.urls')),
     # path('users',UsersView.as_view()),
@@ -17,4 +17,5 @@ urlpatterns = [
     # path('update-cardiac/<pk>', UpdateCardiac.as_view()),
     path('update-cardiac-forma/<str:docnumber>', UpdateCardiacFormAView.as_view()),
     path('update-cardiac-formb/<str:docnumber>', UpdateCardiacFormBView.as_view()),
+    path('get-cardiac-supplied-table',GetCardiacSuppliedTable.as_view()),
 ]
