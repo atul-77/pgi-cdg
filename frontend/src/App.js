@@ -10,6 +10,8 @@ import ViewRequest from './user/viewRequest';
 import CardiacForm from './patient/cardiacforms';
 import Dashboard from './user/dashboard/Dashboard';
 import ManagerDashboard from './user/unitmanager/ManagerDashboard';
+import CardiacForm_um from './user/unitmanager/cardiacforms_um';
+import ReturnedTable from './patient/returnedForm';
 function App() {
   return (
     <Router>
@@ -23,6 +25,8 @@ function App() {
       <Route path={"/form/:docnumber"} component={CardiacForm}/>
       <Route path={"/consultantDash"} component={Dashboard}/>
       <Route path={"/unitmanDash"} component={ManagerDashboard}/>
+      <Route path={"/cardiacform_um"} component={CardiacForm_um}/>
+      <Route path={"/returned"} component={ReturnedTable}/>
       </Switch>
 
     </Router>

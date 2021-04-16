@@ -15,7 +15,7 @@ import { createBrowserHistory } from 'history';
 // import { useLocation } from "react-router";
 import { store } from 'react-notifications-component';
 
-import {myvar} from '../user/user.js';
+import {myvar} from '../user.js';
 
 const history = createBrowserHistory();
 
@@ -33,7 +33,7 @@ const Input = styled.input`
 const SUBMIT_FORM_API = 'http://127.0.0.1:8000/api/update-cardiac-forma/'
 
 
-export default function FormA(props) {
+export default function FormA_um(props) {
 
 
     // useEffect(() => {
@@ -175,7 +175,7 @@ export default function FormA(props) {
             return "_";
         }
         return str_3A;
-        // console.log("value ",otherflag," =>",str_3A,);
+        console.log("value ",otherflag," =>",str_3A,);
     }
     async function change(){
         setA_1_brand(testhandle(checkboxSelected_3));
@@ -196,7 +196,7 @@ export default function FormA(props) {
                             Sr. No.
                         </TableCell>
                         <TableCell style={{color:"black"}}>
-                            Name
+                            {checkboxSelected_1.cricket}
                         </TableCell>
                         <TableCell style={{color:"black"}}>
                             Specification
@@ -427,14 +427,13 @@ export default function FormA(props) {
                 </Table>
             <Button variant="contained" color="primary"
                 onClick={()=>(
-                    // console.log('values====>\ncompany_name:',A_3A_brand,'\nQty_required:',A_3A_qty,'\nSpecification:',A_3A_descr,'\nRemarks:',A_3A_remarks,"\n------------- ",props.docnumber,"\n----------------")
+                    console.log('values====>\ncompany_name:',A_3A_brand,'\nQty_required:',A_3A_qty,'\nSpecification:',A_3A_descr,'\nRemarks:',A_3A_remarks,"\n------------- ",props.docnumber,"\n----------------")
                     //,console.log(testhandle(checkboxSelected_1),"---",testhandle(checkboxSelected_2),"---",testhandle(checkboxSelected_3),"---",testhandle(checkboxSelected_4))
-                    console.log("\ndocnumber from props ===> ",props.docnumber,myvar)
                     ,final_a1brand=testhandle(checkboxSelected_3)
                     ,final_a2a_descr=testhandle(checkboxSelected_2)
                     ,final_a3abrand=testhandle(checkboxSelected_1)
                     ,final_a3bbrand=testhandle(checkboxSelected_4)
-                    ,console.log("\ndocnumber from props ===> ",props.docnumber,myvar)
+                    ,console.log(final_a1brand,final_a2a_descr)
                     ,fetch(SUBMIT_FORM_API+props.docnumber,
                         {
                         credentials: 'include',
@@ -445,7 +444,6 @@ export default function FormA(props) {
                         },
                         body: JSON.stringify({
                             code         : myvar,
-                            documber    :myvar,
                             A_1_descr     :A_1_descr,
                             A_1_brand     :final_a1brand,
                             A_1_qty      :A_1_qty,

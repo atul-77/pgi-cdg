@@ -96,6 +96,8 @@ export default function Approved() {
         temp.push({doc,ward,naam,link,tog});
       } 
       setRows(temp);
+      // console.log("temp==>\n",temp);
+      // console.log("rows===>\n",rows);
       // books[0].name = "Thischangedname";
       // axios.put(updateURL,books);
   }

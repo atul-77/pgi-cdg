@@ -1,4 +1,4 @@
-import React, {Component,useState} from "react";
+import React, {Component,useState,useEffect} from "react";
 import {Row} from "simple-flexbox";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -12,9 +12,13 @@ import Button from "@material-ui/core/Button";
 import styled from 'styled-components';
 import { useLocation } from "react-router";
 import Checkbox from "@material-ui/core/Checkbox";
-import {myvar} from '../user/user.js';
+import {myvar} from '../user.js';
+import axios from 'axios';
 
-const SUBMIT_FORM_API = 'http://127.0.0.1:8000/api/update-cardiac-formb/'
+const myvar2 = 200;
+const SUBMIT_FORM_API = 'http://127.0.0.1:8000/api/update-cardiac-supplied-formb/'+myvar2;
+const GET_FORM_API = "http://127.0.0.1:8000/api/get-cardiac-request-table/"+myvar2;
+const GET_COMBINED_API = "http://127.0.0.1:8000/api/combined-form/"+myvar2;
 
 const Input = styled.input`
   border-radius: 4px;
@@ -28,10 +32,67 @@ const Input = styled.input`
   `;
 
 
+function createData(id,name,descr,brand,qty){
+    return {id,name,descr,brand,qty};
+}
 
-export default function FormB() {
 
-    
+
+export default function FormB_um() {
+    const [rows, setRows] = React.useState([createData("id","default_name","default_descr","default_brand","default_qty")]);
+    // const [rows2,setRows2] = useState(null);
+    // var rows2;
+    const fetchData = async () => {
+        console.log("in fetch");
+        const response = await axios.get(GET_COMBINED_API)
+        // const response = await fetch(apiURL);
+        const form = await response.data;
+        // console.log("see here bruh : "+books[0].createdby);
+        // books[0].createdby = "atul op";
+        // axios.patch(updateURL+"199/",books[0]);
+        console.log("response\n",form);
+
+        var x;
+        var temp = [];
+        var ids = ['1','2A','2B','3A','3B','3C','3D']
+        for (x = 0; x < ids.length; x++){
+            
+            var col1 = "B_"+ids[x]+"_name";
+            var col2 = "B_"+ids[x]+"_descr";
+            var col3 = "B_"+ids[x]+"_brand";
+            var col4 = "B_"+ids[x]+"_qty";
+            var col5 = "B_"+ids[x]+"_qty";
+            var id = ids[x];
+            var name = form["**Requested**"][0][col1];
+            var descr = form["**Requested**"][0][col2];
+            var brand = form["**Requested**"][0][col3];
+            var qty_requested= form["**Requested**"][0][col4];
+            var qty_supplied = form["**Supplied**"][0][col5];
+            
+        //     // console.log(x,val1,val2,val3,val4);
+            temp.push({id,name,descr,brand,qty_requested,qty_supplied});
+            console.log("id = ",id,"  qty_requested = ",qty_requested, "qty_supplied=",qty_supplied)
+        }
+        setRows(temp);
+
+
+        // setRows2(temp);
+        // rows2 = createData("x",'x','x','x','x');
+        
+        console.log("temp==>\n",temp);
+        // console.log("length => ",temp.length);
+        // console.log("first object =>\n",temp[0].val0,temp[0].val1,temp[0].val2,temp[0].val3,temp[0].val4);
+        console.log("rows===>\n",rows);
+        // console.log("rows2===>\n",rows2);
+    }
+
+    console.log("globe");
+    useEffect(()=>{
+        console.log("in use effect");  
+        fetchData();
+      // getPatientList()
+    },[])
+
 
     function testhandle(var1){
         var str_3A="";
@@ -55,7 +116,7 @@ export default function FormB() {
             }
           }
         
-        // console.log("value ",otherflag," =>",str_3A,);
+        console.log("value ",otherflag," =>",str_3A,);
         if(str_3A===""){
             return "_";
         }
@@ -212,39 +273,76 @@ export default function FormB() {
                         <TableCell style={{color:"black"}}>
                             Quantity Required
                         </TableCell>
+                        <TableCell>
+                            Quantity Supplied
+                        </TableCell>
                         <TableCell style={{color:"black"}}>
                             Remarks
                         </TableCell>
+                        
                     </TableRow>
                 </TableHead>
+
                 <TableBody>
+
+                {rows.length>0 ? 
+                    rows.map((row,index) => ( 
+                        <TableRow key={index}>
+                        <TableCell>{row.id}</TableCell>
+                        <TableCell>{row.name}</TableCell>
+                        <TableCell>{row.descr}</TableCell>
+                        <TableCell>{row.brand}</TableCell>
+                        <TableCell>{row.qty_requested}</TableCell>   
+                        <TableCell>
+                            <input type="number" value={row.qty_supplied} 
+                            // onChange=(()=>{})
+                            >
+                            </input>
+                        </TableCell>
+                        <TableCell></TableCell>
+                        </TableRow>
+                     ))
+                : ""} 
+
+
+
+
+
+
+
+
+
+
+
+
                     <TableRow style={{padding:"0px"}}>
-                        <TableCell >1</TableCell>
-                        <TableCell >Antegrade cardioplegia Cannula, with vent {finalB_1_descr} !</TableCell>
-                        <TableCell >
-                                {
+                        <TableCell>1</TableCell>
+                        <TableCell>Antegrade cardioplegia Cannula, with vent</TableCell>
+                        <TableCell>{rows.length}               
+                                {/* {
                                     B_1_spec_options.map(
                                         (c,i)=><div><label key={c}><Checkbox style={{height:"11px"}} name={c} checked={B_1_spec.c} onChange={handleChangeA1descr}/>{c}</label></div>
                                     )
                                 }    
                                 <div><label><Checkbox style={{height:"11px"}} type="checkbox" onChange={(event)=>(document.getElementById('text_A1descr').disabled = !(event.target.checked),setB_1_spec({...B_1_spec,['other']:event.target.checked}))}/>other</label>
                                 <input placeholder="" id="text_A1descr" disabled onChange={(event) => setB_1_spec({...B_1_spec,['otherval']:event.target.value})}></input>
-                                </div>
+                                </div> */}
                             {/* <select onChange={(event)=>(setA1_1(event.target.value))}>     
                                 <option value="14 G(Code:20014)">14 G(Code:20014)</option>
                                 <option value="16 G(Code:20016)">16 G(Code:20016)</option>
                                 <option value="other">other</option>
                             </select>  */}
                         </TableCell>
-                        <TableCell >
-                                {
+                        <TableCell>
+
+                                {/* {
                                     B_1_brand_options.map(
                                         (c,i)=><div><label key={c}><Checkbox style={{height:"11px"}} type="checkbox" name={c} checked={B_1_brand.c} onChange={handleChangeA1brand}/>{c}</label></div>
                                     )
                                 }    
                                 <div><label><Checkbox style={{height:"11px"}} type="checkbox" onChange={(event)=>(document.getElementById('text_A1brand').disabled = !(event.target.checked),setB_1_brand({...B_1_brand,['other']:event.target.checked}))}/>other</label>
                                 <input placeholder="" id="text_A1brand" disabled onChange={(event) => setB_1_brand({...B_1_brand,['otherval']:event.target.value})}></input>
-                                </div>
+                                </div> */}
                             {/* <select onChange={(event)=>(setA1_2(event.target.value))}>     
                                 <option value="Medtronic">Medtronic</option>
                                 <option value="Edward">Edward</option>
@@ -253,15 +351,14 @@ export default function FormB() {
                             </select>  */}
                         </TableCell>
                         <TableCell >
-                            {/* <input
-                            val={B_1_qty}
-                            onchange={(event)=>(setB_1_qty(event.target.value))}
-                            ></input>     */}
-                            <select onChange={(event)=>(setB_1_qty(event.target.value))}>     
+                            {/* <input type="number" val={B_1_qty} onchange={(event)=>(setB_1_qty(event.target.value))}></input>     */}
+                            {/* <select onChange={(event)=>(setB_1_qty(event.target.value))}>     
                             <option value="10">10</option>
-                            {/* <option value="Beaumount Texas">Beaumount Texas</option> */}
                             <option value="other">other</option>
-                        </select> 
+                            </select>  */}
+                        </TableCell>
+                        <TableCell>
+                            <input type="number"></input>
                         </TableCell>
                         <TableCell >
                             <input val={B_1_remarks} onchange={(event)=>(setB_1_remarks(event.target.value))}></input>
@@ -514,7 +611,7 @@ export default function FormB() {
                     ,finalB_3B_brand=testhandle(B_3B_brand)
                     ,finalB_3C_brand=testhandle(B_3C_brand)
                     ,finalB_3D_brand=testhandle(B_3D_brand)
-                    ,console.log("***********",myvar)
+                    ,console.log("***********",B_1_spec.finalval)
                     ,fetch(SUBMIT_FORM_API+myvar,
                         {
                         credentials: 'include',
@@ -525,6 +622,7 @@ export default function FormB() {
                         },
                         body: JSON.stringify({
                             code         : myvar,
+                            docnumber   :myvar,
                             B_1_descr     :finalB_1_descr,
                             B_1_brand     :finalB_1_brand,
                             B_1_qty      :B_1_qty,

@@ -254,7 +254,7 @@ export default function AddRequest(){
                         body: JSON.stringify({
                             crnumber: crNumber,
                             wardadhaar: wardAdhaar,
-                            wardname: wardName,
+                            patientname: wardName,
                             department: department,
                             docnumber: docNumber,
                             consultantuname: consultantUname,
@@ -278,7 +278,7 @@ export default function AddRequest(){
                         }
                       });
                       console.log("Success===:",result);
-                      window.location.replace("/user");
+                    //   window.location.replace("/user");
                     })
                     .catch((error)=>{store.addNotification({
                         title: "Failed",

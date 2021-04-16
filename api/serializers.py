@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CardiacRequested, Patient, Requests,User
+from .models import CardiacRequested, CardiacSupplied, Patient, Requests,User
 from django.contrib.auth import authenticate
 
 User._meta.get_field('username')._unique = True
@@ -18,7 +18,7 @@ class PatientSerializer(serializers.ModelSerializer):
 class RequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Requests
-        fields = '__all__'
+        fields = ('__all__')
 
 
 ##-----------------------------------------------------------------------------------
@@ -70,15 +70,21 @@ class LoginSerializer(serializers.Serializer):
             return user
         raise serializers.ValidationError("Incorrect Credentials")
 
-class CardiacSerializer(serializers.ModelSerializer):
+class CardiacRequestedSerializer(serializers.ModelSerializer):
     class Meta:
         model = CardiacRequested
         fields = '__all__'
 
-class UpdateCardiacSerializer(serializers.ModelSerializer):
-    #code = serializers.CharField(validators=[])
-    
+class CardiacSuppliedSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CardiacRequested
-        fields = ('__all__')
-        #exclude = ('request',)
+        model = CardiacSupplied
+        fields = '__all__'
+
+# class UpdateCardiacSerializer(serializers.ModelSerializer):
+#     #code = serializers.CharField(validators=[])
+    
+#     class Meta:
+#         model = CardiacRequested
+#         fields = ('__all__')
+#         #exclude = ('request',)
+

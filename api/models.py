@@ -104,7 +104,7 @@ class User(AbstractUser):
         return self.username
 
 class CardiacSupplied(models.Model):
-    request = models.ForeignKey(Requests, on_delete=models.CASCADE,default='')
+    docnumber = models.CharField(max_length=100,primary_key=True,default="_")
     A_1_name = models.CharField(max_length=500,default='_')
     A_1_descr = models.CharField(max_length=500,default='_')
     A_1_brand = models.CharField(max_length=500,default='_')
@@ -186,7 +186,7 @@ class CardiacSupplied(models.Model):
     # A_10A_brand = models.CharField(max_length=500,default='_')
 
 class CardiacRequested(models.Model):
-    docnumber = models.ForeignKey(Requests, on_delete=models.CASCADE,default='')
+    docnumber = models.CharField(max_length=100,primary_key=True,default="_")
     A_1_name = models.CharField(max_length=500,default='ACT Tubes')
     A_1_descr = models.CharField(max_length=500,default='_')
     A_1_brand = models.CharField(max_length=500,default='_')
@@ -1232,3 +1232,4 @@ class CardiacRequested(models.Model):
     # E_56_descr = models.CharField(max_length=500,default='_')
     # E_56_brand = models.CharField(max_length=500,default='_')
     # E_56_qty = models.CharField(max_length=100,default='0')
+
