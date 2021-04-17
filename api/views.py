@@ -414,28 +414,26 @@ class UpdateCardiacSuppliedFormAView(RetrieveUpdateDestroyAPIView):
             print(serializer.data)
             print("-------------------------------------------------------------------------------------------------------------")
             code = serializer.data.get('code')
-            
-            A_1_descr = serializer.data.get('A_1_descr')
-            A_1_brand = serializer.data.get('A_1_brand')
-            A_1_qty = serializer.data.get('A_1_qty')
-            A_2A_descr = serializer.data.get('A_2A_descr')
-            A_2A_brand = serializer.data.get('A_2A_brand')
-            A_2A_qty = serializer.data.get('A_2A_qty')
-            A_2B_descr = serializer.data.get('A_2B_descr')
-            A_2B_brand = serializer.data.get('A_2B_brand')
-            A_2B_qty = serializer.data.get('A_2B_qty')
-            A_3A_descr = serializer.data.get('A_3A_descr')
-            A_3A_brand = serializer.data.get('A_3A_brand')
-            A_3A_qty = serializer.data.get('A_3A_qty')
-            A_3B_descr = serializer.data.get('A_3B_descr')
-            A_3B_brand = serializer.data.get('A_3B_brand')
-            A_3B_qty = serializer.data.get('A_3B_qty')
-
 
             queryset = CardiacSupplied.objects.filter(docnumber = docnumber)
 
             if not queryset.exists():
                 print("\n*************\nCREATING NEW",docnumber,"\n******************\n")
+                A_1_descr = serializer.data.get('A_1_descr')
+                A_1_brand = serializer.data.get('A_1_brand')
+                A_1_qty = serializer.data.get('A_1_qty')
+                A_2A_descr = serializer.data.get('A_2A_descr')
+                A_2A_brand = serializer.data.get('A_2A_brand')
+                A_2A_qty = serializer.data.get('A_2A_qty')
+                A_2B_descr = serializer.data.get('A_2B_descr')
+                A_2B_brand = serializer.data.get('A_2B_brand')
+                A_2B_qty = serializer.data.get('A_2B_qty')
+                A_3A_descr = serializer.data.get('A_3A_descr')
+                A_3A_brand = serializer.data.get('A_3A_brand')
+                A_3A_qty = serializer.data.get('A_3A_qty')
+                A_3B_descr = serializer.data.get('A_3B_descr')
+                A_3B_brand = serializer.data.get('A_3B_brand')
+                A_3B_qty = serializer.data.get('A_3B_qty')
                 newRow = CardiacSupplied(
                 # docnumber=Requests.objects.get(docnumber=docnumber),
                 docnumber=docnumber,
@@ -457,21 +455,22 @@ class UpdateCardiacSuppliedFormAView(RetrieveUpdateDestroyAPIView):
                 #if room.host != user_id:
                 #    return Response({'msg': 'You are not the host of this room.'}, status=status.HTTP_403_FORBIDDEN)
 
-                cardiacsupply.A_1_descr = A_1_descr
-                cardiacsupply.A_1_brand = A_1_brand
-                cardiacsupply.A_1_qty = A_1_qty
-                cardiacsupply.A_2A_descr = A_2A_descr
-                cardiacsupply.A_2A_brand = A_2A_brand
-                cardiacsupply.A_2A_qty = A_2A_qty
-                cardiacsupply.A_2B_descr = A_2B_descr
-                cardiacsupply.A_2B_brand = A_2B_brand
-                cardiacsupply.A_2B_qty = A_2B_qty
-                cardiacsupply.A_3A_descr = A_3A_descr
-                cardiacsupply.A_3A_brand = A_3A_brand
-                cardiacsupply.A_3A_qty = A_3A_qty
-                cardiacsupply.A_3B_descr = A_3B_descr
-                cardiacsupply.A_3B_brand = A_3B_brand
-                cardiacsupply.A_3B_qty = A_3B_qty
+                cardiacsupply.A_1_descr = serializer.data.get('A_1_descr',cardiacsupply.A_1_descr)
+                cardiacsupply.A_1_brand = serializer.data.get('A_1_brand',cardiacsupply.A_1_brand)
+                cardiacsupply.A_1_qty = serializer.data.get('A_1_qty',cardiacsupply.A_1_qty)
+                cardiacsupply.A_2A_descr = serializer.data.get('A_2A_descr',cardiacsupply.A_2A_descr)
+                cardiacsupply.A_2A_brand = serializer.data.get('A_2A_brand',cardiacsupply.A_2A_brand)
+                cardiacsupply.A_2A_qty = serializer.data.get('A_2A_qty',cardiacsupply.A_2A_qty)
+                cardiacsupply.A_2B_descr = serializer.data.get('A_2B_descr',cardiacsupply.A_2B_descr)
+                cardiacsupply.A_2B_brand = serializer.data.get('A_2B_brand',cardiacsupply.A_2B_brand)
+                cardiacsupply.A_2B_qty = serializer.data.get('A_2B_qty',cardiacsupply.A_2B_qty)
+                cardiacsupply.A_3A_descr = serializer.data.get('A_3A_descr',cardiacsupply.A_3A_descr)
+                cardiacsupply.A_3A_brand = serializer.data.get('A_3A_brand',cardiacsupply.A_3A_brand)
+                cardiacsupply.A_3A_qty = serializer.data.get('A_3A_qty',cardiacsupply.A_3A_qty)
+                cardiacsupply.A_3B_descr = serializer.data.get('A_3B_descr',cardiacsupply.A_3B_descr)
+                cardiacsupply.A_3B_brand = serializer.data.get('A_3B_brand',cardiacsupply.A_3B_brand)
+                cardiacsupply.A_3B_qty = serializer.data.get('A_3B_qty',cardiacsupply.A_3B_qty)
+                
                 cardiacsupply.save(update_fields=[
                     'A_1_descr', 'A_1_brand','A_1_qty',
                     'A_2A_descr', 'A_2A_brand','A_2A_qty',
