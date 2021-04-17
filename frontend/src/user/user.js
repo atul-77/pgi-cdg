@@ -336,6 +336,7 @@ export default class User extends Component{
               pathname: '/form',
               state: {dnumber : this.state.selected_request.docnumber}
             }}> */}
+          {this.state.selected_request.state=="InProgress"?(
           <Link to={'/form/'+this.state.selected_request.docnumber}>
           <Button color="primary" variant="contained"
               style={{align:"center",marginLeft:"250px"}} 
@@ -346,7 +347,20 @@ export default class User extends Component{
             >
               Update
             </Button>  
-          </Link> 
+          </Link>):this.state.selected_request.state=="Approved"?
+          <Link to={'/returned/'+this.state.selected_request.docnumber}>
+          <Button color="primary" variant="contained"
+              style={{align:"center",marginLeft:"250px"}} 
+              onClick={()=>(
+                myvar = this.state.selected_request.docnumber,
+                console.log(this.state.selected_request.docnumber,myvar)
+              )}
+            >
+              Returned
+            </Button>  
+          </Link>:""
+          }
+
           <Table 
           // style={{marginTop:"150px",marginLeft:"400px",width:"650px"}}
           >

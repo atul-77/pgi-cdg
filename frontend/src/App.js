@@ -11,7 +11,7 @@ import CardiacForm from './patient/cardiacforms';
 import Dashboard from './user/dashboard/Dashboard';
 import ManagerDashboard from './user/unitmanager/ManagerDashboard';
 import CardiacForm_um from './user/unitmanager/cardiacforms_um';
-import ReturnedTable from './patient/returnedForm';
+import ReturnedCardiacForm from './patient/returnedcardiacform';
 function App() {
   return (
     <Router>
@@ -26,7 +26,7 @@ function App() {
       <Route path={"/consultantDash"} component={Dashboard}/>
       <Route path={"/unitmanDash"} component={ManagerDashboard}/>
       <Route path={"/cardiacform_um"} component={CardiacForm_um}/>
-      <Route path={"/returned"} component={ReturnedTable}/>
+      <Route path={"/returned/:docnumber"} component={ReturnedCardiacForm}/>
       </Switch>
 
     </Router>
