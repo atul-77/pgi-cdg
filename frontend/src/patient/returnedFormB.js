@@ -10,15 +10,17 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Button from "@material-ui/core/Button";
 import styled from 'styled-components';
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
 // import { useLocation } from "react-router";
 // import Checkbox from "@material-ui/core/Checkbox";
-//import {myvar} from '../user.js';
+import {myvar} from '../user/user.js';
 import axios from 'axios';
 
-const myvar2 = 200;
-const SUBMIT_FORM_API = 'http://127.0.0.1:8000/api/update-cardiac-supplied-formb/'+myvar2;
-// const GET_FORM_API = "http://127.0.0.1:8000/api/get-cardiac-request-table/"+myvar2;
-const GET_COMBINED_API = "http://127.0.0.1:8000/api/combined-form/"+myvar2;
+// const myvar2 = 200;
+const SUBMIT_FORM_API = 'http://127.0.0.1:8000/api/update-cardiac-supplied-formb/'+myvar;
+// const GET_FORM_API = "http://127.0.0.1:8000/api/get-cardiac-request-table/"+myvar;
+
 
 // const Input = styled.input`
 //   border-radius: 4px;
@@ -38,7 +40,9 @@ const GET_COMBINED_API = "http://127.0.0.1:8000/api/combined-form/"+myvar2;
 
 
 
-export default function ReturnedFormB() {
+export default function ReturnedFormB(props) {
+
+    const GET_COMBINED_API = "http://127.0.0.1:8000/api/combined-form/"+props.docnumber;
     const [rows, setRows] = React.useState([]);
     const [qtySupplied, setQtySupplied] = useState({'1':0,'2A':0,'2B':0,'3A':0,'3B':0,'3C':0,'3D':0});
     
@@ -144,7 +148,7 @@ export default function ReturnedFormB() {
         }
                 <TableHead>
                     <TableRow>
-                        <TableCell style={{color:"white"}}>
+                        <TableCell style={{color:"black"}}>
                             Sr. No.
                         </TableCell>
                         <TableCell style={{color:"black"}}>
@@ -165,9 +169,9 @@ export default function ReturnedFormB() {
                         <TableCell>
                             Difference
                         </TableCell>
-                        <TableCell style={{color:"black"}}>
+                        {/* <TableCell style={{color:"black"}}>
                             Remarks
-                        </TableCell>
+                        </TableCell> */}
                         
                     </TableRow>
                 </TableHead>
@@ -195,8 +199,18 @@ export default function ReturnedFormB() {
                             >
                             </input>
                         </TableCell>
-                        <TableCell>{row.difference}</TableCell>
-                        <TableCell></TableCell>
+                        
+                        {row.difference > 0?
+                        <TableCell style={{background:"#fc6456"}}>{row.difference}</TableCell>
+                        :""}
+                        {row.difference < 0?
+                        <TableCell style={{background:"yellow"}}>{row.difference}</TableCell>
+                        :""}
+                        {row.difference == 0?
+                        <TableCell style={{background:"#6bff89"}}>{row.difference}</TableCell>
+                        :""}
+
+                        {/* <TableCell></TableCell> */}
                         </TableRow>
                      ))
                 : ""}
@@ -204,12 +218,30 @@ export default function ReturnedFormB() {
 
                 </TableBody>
             </Table>
-            <Button variant="contained" color="primary"
+            <div style={{padding:"10px"}}>
+                <Grid container >
+                    <Grid item xs={10}>
+                    <TextField
+                        id="outlined-multiline-static"
+                        label="Remarks"
+                        style={{width:"95%"}}
+                        multiline
+                        rows={4}
+                        // cols={12}
+                        // defaultValue="Default Value"
+                        placeholder="enter comments/remarks"
+                        variant="outlined"
+                    />
+                    </Grid>
+                
+                <Grid item xs={2} style={{padding:"3.5%"}}>
+                <Button 
+            variant="contained" color="primary"
                 onClick={()=>(
                     
                     console.log("********** SUBMIT ***********")
                     ,console.log(JSON.stringify({
-                        code         : myvar2,
+                        code         : myvar,
                         B_1_qty      :qtySupplied['1'],
                         // B_1_remarks  :B_1_remarks,
                         B_2A_qty      :qtySupplied['2A'],
@@ -234,7 +266,7 @@ export default function ReturnedFormB() {
                             "Content-Type": 'application/json',
                         },
                             body: JSON.stringify({
-                                code         : myvar2,
+                                code         : myvar,
                                 B_1_qty      :qtySupplied['1'],
                                 // B_1_remarks  :B_1_remarks,
                                 B_2A_qty      :qtySupplied['2A'],
@@ -254,6 +286,9 @@ export default function ReturnedFormB() {
                     )}
             
             >Submit</Button>
+            </Grid>
+            </Grid>
+            </div>
             </div>
         )
     }

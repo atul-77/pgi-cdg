@@ -25,7 +25,7 @@ function App() {
       <Route path={"/form/:docnumber"} component={CardiacForm}/>
       <Route path={"/consultantDash"} component={Dashboard}/>
       <Route path={"/unitmanDash"} component={ManagerDashboard}/>
-      <Route path={"/cardiacform_um"} component={CardiacForm_um}/>
+      <Route path={"/cardiacform_um/:docnumber"} component={CardiacForm_um}/>
       <Route path={"/returned/:docnumber"} component={ReturnedCardiacForm}/>
       </Switch>
 

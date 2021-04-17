@@ -1,6 +1,6 @@
 // import React from 'react';
 import React, { useState , useEffect} from 'react';
-import Link from '@material-ui/core/Link';
+// import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -12,7 +12,10 @@ import Switch from "react-switch";
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import { createBrowserHistory } from 'history';
+import { Link} from "react-router-dom";
 const history = createBrowserHistory({forceRefresh:true});
+
+var myvar;
 
 function createData(doc,wardadhaar,name , ViewRequest, Toggle) {
   return {doc,wardadhaar,name ,ViewRequest, Toggle};
@@ -89,7 +92,7 @@ export default function Approved() {
         if(books[i].state != "Approved")continue;
         var naam = books[i].patientname;
         var ward = books[i].wardadhaar;
-        var link = "insert link here";
+        var link = "click here";
         var doc = books[i].docnumber;
         var booktemp = books[i];
         var tog = booktemp;
@@ -134,7 +137,13 @@ export default function Approved() {
               <TableCell>{row.doc}</TableCell>
               <TableCell>{row.naam}</TableCell>
               <TableCell>{row.ward}</TableCell>
-              <TableCell>{row.link}</TableCell>   
+              <TableCell>
+                <Link to={"/cardiacform_um/"+row.doc}>
+                  {/* <Button>click</Button> */}
+                  here
+                  {/* {row.link} */}
+                </Link>
+              </TableCell>   
               <TableCell>
                 {/* var booktemp = {row.tog}; */}
               <Button color="primary" variant = "contained"onClick={()=>{ row.tog.state = "Completed";

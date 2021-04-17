@@ -13,8 +13,10 @@ import styled from 'styled-components';
 import { useLocation } from "react-router";
 import Checkbox from "@material-ui/core/Checkbox";
 import {myvar} from '../user/user.js';
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
 
-const SUBMIT_FORM_API = 'http://127.0.0.1:8000/api/update-cardiac-formb/'
+
 
 const Input = styled.input`
   border-radius: 4px;
@@ -29,9 +31,9 @@ const Input = styled.input`
 
 
 
-export default function FormB() {
+export default function FormB(props) {
 
-    
+    const SUBMIT_FORM_API = 'http://127.0.0.1:8000/api/update-cardiac-formb/'+props.docnumber;
 
     function testhandle(var1){
         var str_3A="";
@@ -63,19 +65,19 @@ export default function FormB() {
     }
 
     const [B_1_remarks,setB_1_remarks]=React.useState("_")
-    const [B_1_qty,setB_1_qty]=React.useState("1")
+    const [B_1_qty,setB_1_qty]=React.useState("0")
     const [B_2A_remarks,setB_2A_remarks]=React.useState("_")
-    const [B_2A_qty,setB_2A_qty]=React.useState("1")
+    const [B_2A_qty,setB_2A_qty]=React.useState("0")
     const [B_2B_remarks,setB_2B_remarks]=React.useState("_")
-    const [B_2B_qty,setB_2B_qty]=React.useState("1")
+    const [B_2B_qty,setB_2B_qty]=React.useState("0")
     const [B_3A_remarks,setB_3A_remarks]=React.useState("_")
-    const [B_3A_qty,setB_3A_qty]=React.useState("1")
+    const [B_3A_qty,setB_3A_qty]=React.useState("0")
     const [B_3B_remarks,setB_3B_remarks]=React.useState("_")
-    const [B_3B_qty,setB_3B_qty]=React.useState("1")
+    const [B_3B_qty,setB_3B_qty]=React.useState("0")
     const [B_3C_remarks,setB_3C_remarks]=React.useState("_")
-    const [B_3C_qty,setB_3C_qty]=React.useState("1")
+    const [B_3C_qty,setB_3C_qty]=React.useState("0")
     const [B_3D_remarks,setB_3D_remarks]=React.useState("_")
-    const [B_3D_qty,setB_3D_qty]=React.useState("1")
+    const [B_3D_qty,setB_3D_qty]=React.useState("0")
 
     var finalB_1_descr = ""
     var finalB_1_brand = ""
@@ -197,7 +199,7 @@ export default function FormB() {
         }
                 <TableHead>
                     <TableRow>
-                        <TableCell style={{color:"white"}}>
+                        <TableCell style={{color:"black"}}>
                             Sr. No.
                         </TableCell>
                         <TableCell style={{color:"black"}}>
@@ -253,15 +255,16 @@ export default function FormB() {
                             </select>  */}
                         </TableCell>
                         <TableCell >
-                            {/* <input
+                            <input
+                            type="number"
+                            min="0"
                             val={B_1_qty}
                             onchange={(event)=>(setB_1_qty(event.target.value))}
-                            ></input>     */}
-                            <select onChange={(event)=>(setB_1_qty(event.target.value))}>     
+                            ></input>    
+                             {/* <select onChange={(event)=>(setB_1_qty(event.target.value))}>     
                             <option value="10">10</option>
-                            {/* <option value="Beaumount Texas">Beaumount Texas</option> */}
-                            <option value="other">other</option>
-                        </select> 
+                            <option value="other">other</option> 
+                            </select>  */}
                         </TableCell>
                         <TableCell >
                             <input val={B_1_remarks} onchange={(event)=>(setB_1_remarks(event.target.value))}></input>
@@ -308,10 +311,16 @@ export default function FormB() {
                             </select>  */}
                         </TableCell>
                         <TableCell >
-                            <select onChange={(event)=>(setB_2A_qty(event.target.value))}>     
+                            <input
+                            type="number"
+                            min="0"
+                            val={B_2A_qty}
+                            onchange={(event)=>(setB_2A_qty(event.target.value))}
+                            ></input> 
+                            {/* <select onChange={(event)=>(setB_2A_qty(event.target.value))}>     
                                 <option value="1">1</option>
                                 <option value="other">other</option>
-                            </select> 
+                            </select>  */}
                         </TableCell>
                         <TableCell >
                             <input></input>
@@ -345,11 +354,16 @@ export default function FormB() {
                                 </div>
                         </TableCell>
                         <TableCell >
-                        {/* <input></input>     */}
-                            <select onChange={(event)=>(setB_2B_qty(event.target.value))}>     
+                        <input
+                            type="number"
+                            min="0"
+                            val={B_2B_qty}
+                            onchange={(event)=>(setB_2B_qty(event.target.value))}
+                            ></input> 
+                            {/* <select onChange={(event)=>(setB_2B_qty(event.target.value))}>     
                                 <option value="1">1</option>
                                 <option value="other">other</option>
-                            </select> 
+                            </select>  */}
                         </TableCell>
                         <TableCell >
                             <input></input>
@@ -379,11 +393,16 @@ export default function FormB() {
                                 </div>
                         </TableCell>
                         <TableCell >
-                        {/* <input></input>     */}
-                        <select onChange={(event)=>(setB_3A_qty(event.target.value))}>     
+                            <input
+                            type="number"
+                            min="0"
+                            val={B_3A_qty}
+                            onchange={(event)=>(setB_3A_qty(event.target.value))}
+                            ></input> 
+                        {/* <select onChange={(event)=>(setB_3A_qty(event.target.value))}>     
                             <option value="1">1</option>
                             <option value="other">other</option>
-                        </select> 
+                        </select>  */}
                         </TableCell>
                         <TableCell >
                         <input onChange={(event)=>(setB_3A_remarks(event.target.value))}></input>
@@ -415,11 +434,16 @@ export default function FormB() {
                                 </div>
                         </TableCell>
                         <TableCell >
-                        {/* <input></input>     */}
-                        <select onChange={(event)=>(setB_3B_qty(event.target.value))}>     
+                        <input
+                            type="number"
+                            min="0"
+                            val={B_3B_qty}
+                            onchange={(event)=>(setB_3B_qty(event.target.value))}
+                            ></input> 
+                        {/* <select onChange={(event)=>(setB_3B_qty(event.target.value))}>     
                             <option value="1">1</option>
                             <option value="other">other</option>
-                        </select> 
+                        </select>  */}
                         </TableCell>
                         <TableCell >
                         <input onChange={(event)=>(setB_3B_remarks(event.target.value))}></input>
@@ -450,10 +474,16 @@ export default function FormB() {
                                 </div>
                         </TableCell>
                         <TableCell >
-                        <select onChange={(event)=>(setB_3C_qty(event.target.value))}>     
+                        <input
+                            type="number"
+                            min="0"
+                            val={B_3C_qty}
+                            onchange={(event)=>(setB_3C_qty(event.target.value))}
+                            ></input> 
+                        {/* <select onChange={(event)=>(setB_3C_qty(event.target.value))}>     
                             <option value="1">1</option>
                             <option value="other">other</option>
-                        </select> 
+                        </select>  */}
                         </TableCell>
                         <TableCell >
                         <input onChange={(event)=>(setB_3C_remarks(event.target.value))}></input>
@@ -484,10 +514,16 @@ export default function FormB() {
                                 </div>
                         </TableCell>
                         <TableCell >
-                        <select onChange={(event)=>(setB_3D_qty(event.target.value))}>     
+                        <input
+                            type="number"
+                            min="0"
+                            val={B_3D_qty}
+                            onchange={(event)=>(setB_3D_qty(event.target.value))}
+                            ></input> 
+                        {/* <select onChange={(event)=>(setB_3D_qty(event.target.value))}>     
                             <option value="1">1</option>
                             <option value="other">other</option>
-                        </select> 
+                        </select>  */}
                         </TableCell>
                         <TableCell >
                         <input onChange={(event)=>(setB_3D_remarks(event.target.value))}></input>
@@ -496,7 +532,27 @@ export default function FormB() {
                     
                     </TableBody>
                 </Table>
-            <Button variant="contained" color="primary"
+            
+            <div style={{padding:"10px"}}>
+                <Grid container >
+                    <Grid item xs={10}>
+                    <TextField
+                        id="outlined-multiline-static"
+                        label="Remarks"
+                        style={{width:"95%"}}
+                        multiline
+                        rows={4}
+                        // cols={12}
+                        // defaultValue="Default Value"
+                        placeholder="enter comments/remarks"
+                        variant="outlined"
+                    />
+                    </Grid>
+                
+                <Grid item xs={2} style={{padding:"3.5%"}}>
+                <Button 
+            
+            variant="contained" color="primary"
                 onClick={()=>(
                     // console.log('values====>\ncompany_name:',B_3A_brand,'\nQty_required:',B_3A_qty,'\nSpecification:',B_3A_descr,'\nRemarks:',B_3A_remarks)
                     console.log("yekarlopehle",testhandle(B_1_spec))
@@ -558,6 +614,9 @@ export default function FormB() {
                 )}
             
             >Submit</Button>
+            </Grid>
+            </Grid>
+            </div>
             </div>
         )
     }

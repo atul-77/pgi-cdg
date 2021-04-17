@@ -39,7 +39,7 @@ import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import ReturnedFormA from './returnedFormA';
 import ReturnedFormB from './returnedFormB';
-import {myvar} from '../user/user.js';
+import { myvar } from '../user/user.js';
 // export const mainListItems = (
 //   <div>
 //     <ListItem button>
@@ -198,7 +198,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ReturnedCardiacForm() {
+export default function ReturnedCardiacForm(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const [form,setForm]=React.useState(0)
@@ -303,7 +303,7 @@ export default function ReturnedCardiacForm() {
             {form===0? 
           <Grid item xs={12}>
           <Paper className={classes.paper}>
-            <ReturnedFormA docnumber={myvar}/>
+            <ReturnedFormA docnumber={props.match.params.docnumber}/>
           </Paper>
         </Grid>
           :
@@ -312,7 +312,7 @@ export default function ReturnedCardiacForm() {
 {form===1?
     <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <ReturnedFormB />
+                <ReturnedFormB docnumber={props.match.params.docnumber}/>
               </Paper>
             </Grid>
 :""}

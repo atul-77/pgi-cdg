@@ -336,7 +336,7 @@ export default class User extends Component{
               pathname: '/form',
               state: {dnumber : this.state.selected_request.docnumber}
             }}> */}
-          {this.state.selected_request.state=="InProgress"?(
+          {this.state.selected_request.state=="Pending"?(
           <Link to={'/form/'+this.state.selected_request.docnumber}>
           <Button color="primary" variant="contained"
               style={{align:"center",marginLeft:"250px"}} 

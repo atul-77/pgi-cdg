@@ -198,7 +198,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CardiacForm_um() {
+export default function CardiacForm_um(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const [form,setForm]=React.useState(0)
@@ -232,7 +232,7 @@ export default function CardiacForm_um() {
               <NotificationsIcon /> 
             </Badge>
           </IconButton> */}
-          <Link to="/user">
+          <Link to="/unitmandash">
           <Button variant="contained" color="secondary">
             Go Back
         </Button>
@@ -303,7 +303,7 @@ export default function CardiacForm_um() {
             {form===0? 
           <Grid item xs={12}>
           <Paper className={classes.paper}>
-            <FormA_um docnumber={myvar}/>
+            <FormA_um docnumber={props.match.params.docnumber}/>
           </Paper>
         </Grid>
           :
@@ -312,7 +312,7 @@ export default function CardiacForm_um() {
 {form===1?
     <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <FormB_um />
+                <FormB_um docnumber={props.match.params.docnumber}/>
               </Paper>
             </Grid>
 :""}

@@ -45,7 +45,7 @@ export default function Approved() {
   const apiURL = "http://127.0.0.1:8000/api/view-request-table";
   // const apiURL = "http://127.0.0.1:8000/api/view-request-table/";
   const updateURL = "http://127.0.0.1:8000/api/get-request-table/" ;
-
+  const REMARKS_API = "http://127.0.0.1:8000/api/update-request-remarks/";
   
   // update(e) {
   //   // update entity - PUT
@@ -68,8 +68,9 @@ export default function Approved() {
 //     );
 // }
 
-  const [books, setBooks] = React. useState(null);
-  const [rows, setRows] = React. useState(createData(123323427897,11,"atul","yo","sfsdf"));
+  // const [books, setBooks] = React. useState(null);
+  const [rows, setRows] = React. useState([]);
+  // const [tempstring,setTempString] = useState("blank string");
   const dobutton = async (docnumber,i,books) => {
     books[i].state = "Pending";
     axios.patch(updateURL+docnumber,books[i]);
@@ -93,8 +94,9 @@ export default function Approved() {
         var link = "insert link here";
         var doc = books[i].docnumber;
         var booktemp = books[i];
+        var remarks = books[i].remarksfromconsultant;
         var tog = booktemp;
-        temp.push({doc,ward,naam,link,tog});
+        temp.push({doc,ward,naam,link,tog,remarks});
       } 
       setRows(temp);
       // books[0].name = "Thischangedname";
@@ -121,6 +123,7 @@ export default function Approved() {
             <TableCell>PATIENT NAME</TableCell>
             <TableCell>WARD-ADHAAR</TableCell>
             <TableCell>VIEW COMPLETE REQUEST</TableCell>
+            <TableCell>REMARKS</TableCell>
             <TableCell>ACTION</TableCell>
             {/* <TableCell align="right">Sale Amount</TableCell> */}
           </TableRow>
@@ -128,16 +131,48 @@ export default function Approved() {
         <TableBody>
 
           {rows.length>0 ? 
-          rows.map((row) => (
+          rows.map((row,idx) => (
             <TableRow key={row.doc}>
               <TableCell>{row.doc}</TableCell>
               <TableCell>{row.naam}</TableCell>
               <TableCell>{row.ward}</TableCell>
-              <TableCell>{row.link}</TableCell>   
+              <TableCell>{row.link}</TableCell>
+              <TableCell>
+                <input type="text"
+                  // value={tempstring}
+                  // value = {rows[idx].remarks}
+                  // onChange={(event)=>{
+                    // setRows(...rows,[rows[idx].remarks]:event.target.value)
+                    // row.remarks = event.target.value;
+                    // console.log("newremarks => ",row.remarks);
+                    // setTempString(event.target.value);
+                    // console.log(tempstring);
+                  // }}
+                ></input>
+              </TableCell>   
               <TableCell>
                 {/* var booktemp = {row.tog}; */}
-              <Button color="primary" variant="contained" onClick={()=>{ row.tog.state = "Pending";
-      axios.patch(updateURL+row.doc,row.tog); 
+              <Button color="primary" variant="contained" 
+              onClick={()=>{ 
+                row.tog.state = "Pending";
+                // axios.patch(updateURL+row.doc,{"remarksfromconsultant":row.remarks});
+                axios.patch(updateURL+row.doc,row.tog); 
+                
+                // fetch(REMARKS_API+row.doc,
+                //   {
+                //     credentials: 'include',
+                //     method:'PATCH',
+                //     headers: {
+                //     Accept: 'application/json',
+                //     "Content-Type": 'application/json',
+                // },
+                //     body: JSON.stringify({
+                //         remarks: tempstring,
+                //         // wardadhaar: "100000000000",
+
+                //     }),
+                // })
+
       }} >
       Move to Pending
       </Button>

@@ -195,12 +195,10 @@ export default function ManagerDashboard() {
               <NotificationsIcon />
             </Badge>
           </IconButton> */}
-          <Link to="/user">
-          {/* <a href='/user'> */}
+          <Link to="/unitmandash">
           <Button variant="contained" color="secondary">
             Go Back
           </Button>
-          {/* </a> */}
           </Link>
         </Toolbar>
       </AppBar>

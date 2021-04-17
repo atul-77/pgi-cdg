@@ -10,6 +10,8 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
 // import { Multiselect } from 'multiselect-react-dropdown';
 import { createBrowserHistory } from 'history';
 // import { useLocation } from "react-router";
@@ -31,12 +33,12 @@ const Input = styled.input`
   `;
 
 
-const myvar2 = 200
-const SUBMIT_FORM_API = 'http://127.0.0.1:8000/api/update-cardiac-supplied-forma/'+myvar2;
-const GET_COMBINED_API = "http://127.0.0.1:8000/api/combined-form/"+myvar2;
+// const myvar2 = 200
+
 
 export default function FormA_um(props) {
-
+    const SUBMIT_FORM_API = 'http://127.0.0.1:8000/api/update-cardiac-supplied-forma/'+props.docnumber;
+    const GET_COMBINED_API = "http://127.0.0.1:8000/api/combined-form/"+props.docnumber;
     const [rows, setRows] = React.useState([]);
     const [qtySupplied, setQtySupplied] = useState({'1':0,'2A':0,'2B':0,'3A':0,'3B':0,'3C':0,'3D':0});
     
@@ -232,7 +234,7 @@ export default function FormA_um(props) {
         }
                 <TableHead>
                     <TableRow>
-                        <TableCell style={{color:"white"}}>
+                        <TableCell style={{color:"black"}}>
                             Sr. No.
                         </TableCell>
                         <TableCell style={{color:"black"}}>
@@ -250,9 +252,9 @@ export default function FormA_um(props) {
                         <TableCell style={{color:"black"}}>
                             Quantity Supplied
                         </TableCell>
-                        <TableCell style={{color:"black"}}>
+                        {/* <TableCell style={{color:"black"}}>
                             Remarks
-                        </TableCell>
+                        </TableCell> */}
 
                     </TableRow>
                 </TableHead>
@@ -281,7 +283,7 @@ export default function FormA_um(props) {
                             >
                             </input>
                         </TableCell>
-                        <TableCell></TableCell>
+                        {/* <TableCell></TableCell> */}
                         </TableRow>
                      ))
                 : ""}
@@ -289,32 +291,29 @@ export default function FormA_um(props) {
                     
                 </TableBody>
             </Table>
-            <Button variant="contained" color="primary"
-                onClick={()=>(
-                    console.log("******submitting*********")
-                    ,console.log(JSON.stringify({
-                        code         : myvar2,
-                        A_1_qty      :qtySupplied['1'],
-                        // A_1_remarks  :A_1_remarks,
-                        A_2A_qty      :qtySupplied['2A'],
-                        // A_2A_remarks  :A_2A_remarks,
-                        A_2B_qty      :qtySupplied['2B'],
-                        // A_2B_remarks  :A_2B_remarks,
-                        A_3A_qty      :qtySupplied['3A'],
-                        // A_3A_remarks  :A_3A_remarks,
-                        A_3B_qty      :qtySupplied['3B'],
-                        // A_3B_remarks  :A_3B_remarks, 
-                    }))
-                    ,fetch(SUBMIT_FORM_API,
-                        {
-                            credentials: 'include',
-                            method:'PATCH',
-                            headers: {
-                            Accept: 'application/json',
-                            "Content-Type": 'application/json',
-                        },
-                            body: JSON.stringify({
-                                code         : myvar2,
+            <div style={{padding:"10px"}}>
+                <Grid container >
+                    <Grid item xs={10}>
+                        <TextField
+                            id="outlined-multiline-static"
+                            label="Remarks"
+                            style={{width:"95%"}}
+                            multiline
+                            rows={4}
+                            // cols={12}
+                            // defaultValue="Default Value"
+                            placeholder="enter comments/remarks"
+                            variant="outlined"
+                        />
+                    </Grid>
+                
+                    <Grid item xs={2} style={{padding:"3.5%"}}>
+
+                    <Button variant="contained" color="primary"
+                        onClick={()=>(
+                            console.log("******submitting*********")
+                            ,console.log(JSON.stringify({
+                                code         : myvar,
                                 A_1_qty      :qtySupplied['1'],
                                 // A_1_remarks  :A_1_remarks,
                                 A_2A_qty      :qtySupplied['2A'],
@@ -325,37 +324,61 @@ export default function FormA_um(props) {
                                 // A_3A_remarks  :A_3A_remarks,
                                 A_3B_qty      :qtySupplied['3B'],
                                 // A_3B_remarks  :A_3B_remarks, 
-                            }),
-                        })
-                    )}
+                            }))
+                            ,fetch(SUBMIT_FORM_API,
+                                {
+                                    credentials: 'include',
+                                    method:'PATCH',
+                                    headers: {
+                                    Accept: 'application/json',
+                                    "Content-Type": 'application/json',
+                                },
+                                    body: JSON.stringify({
+                                        code         : myvar,
+                                        A_1_qty      :qtySupplied['1'],
+                                        // A_1_remarks  :A_1_remarks,
+                                        A_2A_qty      :qtySupplied['2A'],
+                                        // A_2A_remarks  :A_2A_remarks,
+                                        A_2B_qty      :qtySupplied['2B'],
+                                        // A_2B_remarks  :A_2B_remarks,
+                                        A_3A_qty      :qtySupplied['3A'],
+                                        // A_3A_remarks  :A_3A_remarks,
+                                        A_3B_qty      :qtySupplied['3B'],
+                                        // A_3B_remarks  :A_3B_remarks, 
+                                    }),
+                                })
+                            )}
 
-                    // .then((result)=>{store.addNotification({
-                    //     title: "Success",
-                    //     message: "Request added successfully",
-                    //     type: "success",
-                    //     insert: "top",
-                    //     container: "bottom-right",
-                    //     animationIn: ["animate_animated", "animate_fadeIn"],
-                    //     animationOut: ["animate_animated", "animate_fadeOut"],
-                    //     dismiss: {
-                    //       duration: 5000,
-                    //       onScreen: true
-                    //     }
-                    //   });console.log("Success===:",result)})
-                    // .catch((error)=>{store.addNotification({
-                    //     title: "Failed",
-                    //     message: "Request could not be added",
-                    //     type: "danger",
-                    //     insert: "top",
-                    //     container: "bottom-right",
-                    //     animationIn: ["animate_animated", "animate_fadeIn"],
-                    //     animationOut: ["animate_animated", "animate_fadeOut"],
-                    //     dismiss: {
-                    //       duration: 5000,
-                    //       onScreen: true
-                    //     }
-                    //   });console.log("Error===:",error)})
-            >Submit</Button>
+                            // .then((result)=>{store.addNotification({
+                            //     title: "Success",
+                            //     message: "Request added successfully",
+                            //     type: "success",
+                            //     insert: "top",
+                            //     container: "bottom-right",
+                            //     animationIn: ["animate_animated", "animate_fadeIn"],
+                            //     animationOut: ["animate_animated", "animate_fadeOut"],
+                            //     dismiss: {
+                            //       duration: 5000,
+                            //       onScreen: true
+                            //     }
+                            //   });console.log("Success===:",result)})
+                            // .catch((error)=>{store.addNotification({
+                            //     title: "Failed",
+                            //     message: "Request could not be added",
+                            //     type: "danger",
+                            //     insert: "top",
+                            //     container: "bottom-right",
+                            //     animationIn: ["animate_animated", "animate_fadeIn"],
+                            //     animationOut: ["animate_animated", "animate_fadeOut"],
+                            //     dismiss: {
+                            //       duration: 5000,
+                            //       onScreen: true
+                            //     }
+                            //   });console.log("Error===:",error)})
+                    >Submit</Button>
+                    </Grid>
+                </Grid>
             </div>
+        </div>
         )
     }

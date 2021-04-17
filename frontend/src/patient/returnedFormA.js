@@ -11,7 +11,9 @@ import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import { createBrowserHistory } from 'history';
 import axios from 'axios';
-//import {myvar} from '../user.js';
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
+import { myvar } from '../user/user.js';
 
 const history = createBrowserHistory();
 
@@ -27,12 +29,13 @@ const Input = styled.input`
   `;
 
 
-const myvar2 = 200
-const SUBMIT_FORM_API = 'http://127.0.0.1:8000/api/update-cardiac-supplied-forma/'+myvar2;
-const GET_COMBINED_API = "http://127.0.0.1:8000/api/combined-form/"+myvar2;
+// const myvar2 = 200
+
+
 
 export default function ReturnedFormA(props) {
-    
+    const SUBMIT_FORM_API = 'http://127.0.0.1:8000/api/update-cardiac-supplied-forma/'+props.docnumber;
+    const GET_COMBINED_API = "http://127.0.0.1:8000/api/combined-form/"+props.docnumber;
     const pink = {
         backgroundColor: 'pink'
     }
@@ -45,7 +48,7 @@ export default function ReturnedFormA(props) {
     
 
     const fetchData = async () => {
-        console.log("in fetch");
+        console.log("in fetch",myvar,props.docnumber,"here");
         const response = await axios.get(GET_COMBINED_API)
         const form = await response.data;
         console.log("response\n",form);
@@ -236,7 +239,7 @@ export default function ReturnedFormA(props) {
         }
                 <TableHead>
                     <TableRow>
-                        <TableCell style={{color:"white"}}>
+                        <TableCell style={{color:"black"}}>
                             Sr. No.
                         </TableCell>
                         <TableCell style={{color:"black"}}>
@@ -257,9 +260,9 @@ export default function ReturnedFormA(props) {
                         <TableCell style={{color:"black"}}>
                             Difference
                         </TableCell>
-                        <TableCell style={{color:"black"}}>
+                        {/* <TableCell style={{color:"black"}}>
                             Remarks
-                        </TableCell>
+                        </TableCell> */}
 
                     </TableRow>
                 </TableHead>
@@ -288,16 +291,18 @@ export default function ReturnedFormA(props) {
                             >
                             </input>
                         </TableCell>
+                        
                         {row.difference > 0?
-                        <TableCell style={{background:"yellow"}}>{row.difference}</TableCell>
+                        <TableCell style={{background:"#fc6456"}}>{row.difference}</TableCell>
                         :""}
                         {row.difference < 0?
-                        <TableCell style={{background:"red"}}>{row.difference}</TableCell>
+                        <TableCell style={{background:"yellow"}}>{row.difference}</TableCell>
                         :""}
                         {row.difference == 0?
-                        <TableCell>{row.difference}</TableCell>
+                        <TableCell style={{background:"#6bff89"}}>{row.difference}</TableCell>
                         :""}
-                        <TableCell></TableCell>
+
+                        {/* <TableCell></TableCell> */}
                         </TableRow>
                      ))
                 : ""}
@@ -305,11 +310,29 @@ export default function ReturnedFormA(props) {
                     
                 </TableBody>
             </Table>
-            <Button variant="contained" color="primary"
+            <div style={{padding:"10px"}}>
+                <Grid container >
+                    <Grid item xs={10}>
+                    <TextField
+                        id="outlined-multiline-static"
+                        label="Remarks"
+                        style={{width:"95%"}}
+                        multiline
+                        rows={4}
+                        // cols={12}
+                        // defaultValue="Default Value"
+                        placeholder="enter comments/remarks"
+                        variant="outlined"
+                    />
+                    </Grid>
+                
+                <Grid item xs={2} style={{padding:"3.5%"}}>
+                <Button  
+            variant="contained" color="primary"
                 onClick={()=>(
                     console.log("******submitting*********")
                     ,console.log(JSON.stringify({
-                        code         : myvar2,
+                        code         : myvar,
                         A_1_qty      :qtySupplied['1'],
                         // A_1_remarks  :A_1_remarks,
                         A_2A_qty      :qtySupplied['2A'],
@@ -330,7 +353,7 @@ export default function ReturnedFormA(props) {
                             "Content-Type": 'application/json',
                         },
                             body: JSON.stringify({
-                                code         : myvar2,
+                                code         : myvar,
                                 A_1_qty      :qtySupplied['1'],
                                 // A_1_remarks  :A_1_remarks,
                                 A_2A_qty      :qtySupplied['2A'],
@@ -372,6 +395,9 @@ export default function ReturnedFormA(props) {
                     //     }
                     //   });console.log("Error===:",error)})
             >Submit</Button>
+            </Grid>
+            </Grid>
+            </div>
             </div>
         )
     }

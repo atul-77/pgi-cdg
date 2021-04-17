@@ -80,12 +80,37 @@ class RequestView(APIView):
         
         msg = serializer.errors
         return Response({'BAD':msg},status=status.HTTP_400_BAD_REQUEST)
+    
+class UpdateRequestRemarksView(RetrieveUpdateDestroyAPIView):
+    queryset = Requests.objects.all()
+    serializer_class = RequestSerializer
+    lookup_field='docnumber'
+    def patch(self, request,docnumber,format=None):
+        if not self.request.session.exists(self.request.session.session_key):
+            self.request.session.create()
+        
+        serializer = self.serializer_class(data=request.data)
+        
+        if serializer.is_valid():
+            queryset = Requests.objects.filter(docnumber=docnumber)
+            row = queryset[0]
+            # print("*********************************\n",patientname,"\n***************************")
+            row.remarksfromconsultant = serializer.data.get('remarks',row.remarksfromconsultant)
+            row.save(update_fields=[
+                "remarksfromconsultant" 
+            ])
+
+            return Response({'GOOD':'OK'}, status=status.HTTP_200_OK)
+        
+        msg = serializer.errors
+        return Response({'BAD':msg},status=status.HTTP_400_BAD_REQUEST)
+
 # class CreateUsers(APIView):
 #     serializer_class = CreateUsersSerializer
 #     def post(self,request,format=None):
 #         if not self.request.session.exists(self.request.session.session_key):
 #         pass
-#class GetUserTable(ListAPIView):
+#   class GetUserTable(ListAPIView):
 ##    queryset = Users.objects.all()
 #    serializer_class = UsersSerializer
 
@@ -255,6 +280,11 @@ class UpdateCardiacFormAView(RetrieveUpdateDestroyAPIView):
                 A_3B_brand=A_3B_brand,A_3B_descr=A_3B_descr,A_3B_qty=A_3B_qty,
                 )
                 newRow.save()
+
+                newSuppliedRow = CardiacSupplied(
+                    docnumber=docnumber
+                )
+                newSuppliedRow.save()
                 print("\n***** \nDONE \n****\n")
                 return Response({'msg': 'created new entry'}, status=status.HTTP_201_CREATED)
                 
@@ -348,6 +378,10 @@ class UpdateCardiacFormBView(RetrieveUpdateDestroyAPIView):
                 B_3D_brand=B_3D_brand,B_3D_descr=B_3D_descr,B_3D_qty=B_3D_qty,
                 )
                 newRow.save()
+                newSuppliedRow = CardiacSupplied(
+                    docnumber=docnumber
+                )
+                newSuppliedRow.save()
                 print("\n************ \nDONE \n***********\n")
                 return Response({'msg': 'created new entry'}, status=status.HTTP_201_CREATED)
                 
@@ -589,7 +623,7 @@ class UpdateCardiacSuppliedFormBView(RetrieveUpdateDestroyAPIView):
 
 class CombineCardiacView(ListAPIView):
     serializer_class_request = CardiacRequestedSerializer
-    serializer_class_supply = CardiacSuppliedSerializer
+    serializer_class_supply =  CardiacSuppliedSerializer
     lookup_field = 'docnumber'
 
     def get_queryset_request(self,docnumber):
@@ -597,13 +631,14 @@ class CombineCardiacView(ListAPIView):
     def get_queryset_supply(self,docnumber):
         return CardiacSupplied.objects.filter(docnumber=docnumber)
 
-    def list(self, request,docnumber, *args, **kwargs):
-        request = self.serializer_class_request(self.get_queryset_request(docnumber=docnumber), many=True)
-        supply = self.serializer_class_supply(self.get_queryset_supply(docnumber=docnumber), many=True)
+    def list(self, request, docnumber, *args, **kwargs):
+        requested = self.serializer_class_request(self.get_queryset_request(docnumber=docnumber), many=True)
+        supplied = self.serializer_class_supply(self.get_queryset_supply(docnumber=docnumber), many=True)
         #print(supply.data.get('A_1_name'))
+        print("======= request ===================\ndocnumber =",docnumber,"\n",self.request)
         return Response({
-            "**Requested**": request.data,
-            "**Supplied**": supply.data
+            "**Requested**": requested.data,
+            "**Supplied**": supplied.data
         })
 
 

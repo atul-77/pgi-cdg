@@ -198,7 +198,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CardiacForm() {
+export default function CardiacForm(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const [form,setForm]=React.useState(0)
@@ -303,7 +303,7 @@ export default function CardiacForm() {
             {form===0? 
           <Grid item xs={12}>
           <Paper className={classes.paper}>
-            <FormA docnumber={myvar}/>
+            <FormA docnumber={props.match.params.docnumber}/>
           </Paper>
         </Grid>
           :
@@ -312,7 +312,7 @@ export default function CardiacForm() {
 {form===1?
     <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <FormB />
+                <FormB docnumber={props.match.params.docnumber}/>
               </Paper>
             </Grid>
 :""}

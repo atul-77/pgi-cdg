@@ -12,6 +12,8 @@ import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import { Multiselect } from 'multiselect-react-dropdown';
 import { createBrowserHistory } from 'history';
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
 // import { useLocation } from "react-router";
 import { store } from 'react-notifications-component';
 
@@ -30,11 +32,12 @@ const Input = styled.input`
   border: solid 2px #0052cc;
   `;
 
-const SUBMIT_FORM_API = 'http://127.0.0.1:8000/api/update-cardiac-forma/'
+
 
 
 export default function FormA(props) {
 
+    const SUBMIT_FORM_API = 'http://127.0.0.1:8000/api/update-cardiac-forma/'
 
     // useEffect(() => {
     //     console.log(myvar);
@@ -192,7 +195,7 @@ export default function FormA(props) {
         }
                 <TableHead>
                     <TableRow>
-                        <TableCell style={{color:"white"}}>
+                        <TableCell style={{color:"black"}}>
                             Sr. No.
                         </TableCell>
                         <TableCell style={{color:"black"}}>
@@ -207,9 +210,9 @@ export default function FormA(props) {
                         <TableCell style={{color:"black"}}>
                             Quantity Required
                         </TableCell>
-                        <TableCell style={{color:"black"}}>
+                        {/* <TableCell style={{color:"black"}}>
                             Remarks
-                        </TableCell>
+                        </TableCell> */}
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -237,9 +240,9 @@ export default function FormA(props) {
                         <TableCell >
                         <input type="number" val="10" onChange={(event)=>(setA_1_qty(event.target.value))}></input>
                         </TableCell>
-                        <TableCell >
+                        {/* <TableCell >
                             <input val={A_1_remarks} onChange={(event)=>(setA_1_remarks(event.target.value))}></input>
-                        </TableCell>
+                        </TableCell> */}
                     </TableRow>
                     <TableRow style={{marginTop:"0px"}}>
                         <TableCell >2A</TableCell>
@@ -263,9 +266,9 @@ export default function FormA(props) {
                         <TableCell >
                             <input type="number" val="10" onChange={(event)=>(setA_2A_qty(event.target.value))}></input>
                         </TableCell>
-                        <TableCell >
+                        {/* <TableCell >
                             <input val={A_2A_remarks} onChange={(event)=>(setA_2A_remarks(event.target.value))}></input>
-                        </TableCell>
+                        </TableCell> */}
                     </TableRow>
                     <TableRow style={{marginTop:"0px"}}>
                         <TableCell >3A</TableCell>
@@ -342,9 +345,9 @@ export default function FormA(props) {
                                 )
                             } */}
                         </TableCell>
-                        <TableCell >
+                        {/* <TableCell >
                             <input val={A_3A_remarks} onChange={(event)=>(setA_3A_remarks(event.target.value))}></input>
-                        </TableCell>
+                        </TableCell> */}
                     </TableRow>
                     <TableRow style={{marginTop:"0px"}}>
                         <TableCell >3B</TableCell>
@@ -368,9 +371,9 @@ export default function FormA(props) {
                         <TableCell >
                         <input type="number" val="10" onChange={(event)=>(setA_3B_qty(event.target.value))}></input>
                         </TableCell>
-                        <TableCell >
+                        {/* <TableCell >
                         <input val={A_3B_remarks} onChange={(event)=>(setA_3B_remarks(event.target.value))}></input>
-                        </TableCell>
+                        </TableCell> */}
                     </TableRow> 
                     
                     <TableRow style={{marginTop:"0px"}}>
@@ -391,9 +394,9 @@ export default function FormA(props) {
                         <TableCell >
                         <input type="number" val="10" onChange={(event)=>(setA_4_qty(event.target.value))}></input> 
                         </TableCell>
-                        <TableCell >
+                        {/* <TableCell >
                         <input onChange={(event)=>(setA_4_remarks(event.target.value))}></input>
-                        </TableCell>
+                        </TableCell> */}
                     </TableRow>
                     
                     {/* <TableRow style={{marginTop:"0px"}}>
@@ -425,7 +428,27 @@ export default function FormA(props) {
                     </TableRow> */}
                     </TableBody>
                 </Table>
-            <Button variant="contained" color="primary"
+            
+                <div style={{padding:"10px"}}>
+                <Grid container >
+                    <Grid item xs={10}>
+                    <TextField
+                        id="outlined-multiline-static"
+                        label="Remarks"
+                        style={{width:"95%"}}
+                        multiline
+                        rows={4}
+                        // cols={12}
+                        // defaultValue="Default Value"
+                        placeholder="enter comments/remarks"
+                        variant="outlined"
+                    />
+                    </Grid>
+                
+                <Grid item xs={2} style={{padding:"3.5%"}}>
+                <Button  
+            
+            variant="contained" color="primary"
                 onClick={()=>(
                     // console.log('values====>\ncompany_name:',A_3A_brand,'\nQty_required:',A_3A_qty,'\nSpecification:',A_3A_descr,'\nRemarks:',A_3A_remarks,"\n------------- ",props.docnumber,"\n----------------")
                     //,console.log(testhandle(checkboxSelected_1),"---",testhandle(checkboxSelected_2),"---",testhandle(checkboxSelected_3),"---",testhandle(checkboxSelected_4))
@@ -497,6 +520,9 @@ export default function FormA(props) {
                     //   });console.log("Error===:",error)})
                 )}
             >Submit</Button>
+            </Grid>
+            </Grid>
+            </div>
             </div>
         )
     }

@@ -115,7 +115,7 @@ export default function AddRequest(){
         const [crNumber,setCrNumber]=useState("_");
         const [wardAdhaar,setWardAdhaar]=useState(0);
         const [wardName,setWardName]=useState("_");
-        const [patientName,setPatientName]=useState("_");
+        // const [patientName,setPatientName]=useState("_");
         const [docNumber,setDocNumber]=useState("_");
         const [consultantUname,setConsultantUname]=useState("_");
         const [height,setHeight] = useState(0);

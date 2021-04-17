@@ -9,16 +9,16 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Button from "@material-ui/core/Button";
-import styled from 'styled-components';
+import TextField from "@material-ui/core/TextField";
+import Grid from "@material-ui/core/Grid";
+// import styled from 'styled-components';
 // import { useLocation } from "react-router";
 // import Checkbox from "@material-ui/core/Checkbox";
 import {myvar} from '../user.js';
 import axios from 'axios';
 
-const myvar2 = 200;
-const SUBMIT_FORM_API = 'http://127.0.0.1:8000/api/update-cardiac-supplied-formb/'+myvar2;
-// const GET_FORM_API = "http://127.0.0.1:8000/api/get-cardiac-request-table/"+myvar2;
-const GET_COMBINED_API = "http://127.0.0.1:8000/api/combined-form/"+myvar2;
+// const myvar2 = 200;
+
 
 // const Input = styled.input`
 //   border-radius: 4px;
@@ -38,7 +38,9 @@ const GET_COMBINED_API = "http://127.0.0.1:8000/api/combined-form/"+myvar2;
 
 
 
-export default function FormB_um() {
+export default function FormB_um(props) {
+    const SUBMIT_FORM_API = 'http://127.0.0.1:8000/api/update-cardiac-supplied-formb/'+props.docnumber;
+    const GET_COMBINED_API = "http://127.0.0.1:8000/api/combined-form/"+props.docnumber;
     const [rows, setRows] = React.useState([]);
     const [qtySupplied, setQtySupplied] = useState({'1':0,'2A':0,'2B':0,'3A':0,'3B':0,'3C':0,'3D':0});
     
@@ -143,7 +145,7 @@ export default function FormB_um() {
         }
                 <TableHead>
                     <TableRow>
-                        <TableCell style={{color:"white"}}>
+                        <TableCell style={{color:"black"}}>
                             Sr. No.
                         </TableCell>
                         <TableCell style={{color:"black"}}>
@@ -161,9 +163,9 @@ export default function FormB_um() {
                         <TableCell>
                             Quantity Supplied
                         </TableCell>
-                        <TableCell style={{color:"black"}}>
+                        {/* <TableCell style={{color:"black"}}>
                             Remarks
-                        </TableCell>
+                        </TableCell> */}
                         
                     </TableRow>
                 </TableHead>
@@ -191,7 +193,7 @@ export default function FormB_um() {
                             >
                             </input>
                         </TableCell>
-                        <TableCell></TableCell>
+                        {/* <TableCell></TableCell> */}
                         </TableRow>
                      ))
                 : ""}
@@ -199,56 +201,79 @@ export default function FormB_um() {
 
                 </TableBody>
             </Table>
-            <Button variant="contained" color="primary"
-                onClick={()=>(
-                    
-                    console.log("********** SUBMIT ***********")
-                    ,console.log(JSON.stringify({
-                        code         : myvar2,
-                        B_1_qty      :qtySupplied['1'],
-                        // B_1_remarks  :B_1_remarks,
-                        B_2A_qty      :qtySupplied['2A'],
-                        // B_2A_remarks  :B_2A_remarks,
-                        B_2B_qty      :qtySupplied['2B'],
-                        // B_2B_remarks  :B_2B_remarks,
-                        B_3A_qty      :qtySupplied['3A'],
-                        // B_3A_remarks  :B_3A_remarks,
-                        B_3B_qty      :qtySupplied['3B'],
-                        // B_3B_remarks  :B_3B_remarks,
-                        B_3C_qty      :qtySupplied['3C'],
-                        // B_3C_remarks  :B_3C_remarks,
-                        B_3D_qty      :qtySupplied['3D'],
-                        // B_3D_remarks  :B_3D_remarks, 
-                    }))
-                    ,fetch(SUBMIT_FORM_API,
-                        {
-                            credentials: 'include',
-                            method:'PATCH',
-                            headers: {
-                            Accept: 'application/json',
-                            "Content-Type": 'application/json',
-                        },
-                            body: JSON.stringify({
-                                code         : myvar2,
-                                B_1_qty      :qtySupplied['1'],
-                                // B_1_remarks  :B_1_remarks,
-                                B_2A_qty      :qtySupplied['2A'],
-                                // B_2A_remarks  :B_2A_remarks,
-                                B_2B_qty      :qtySupplied['2B'],
-                                // B_2B_remarks  :B_2B_remarks,
-                                B_3A_qty      :qtySupplied['3A'],
-                                // B_3A_remarks  :B_3A_remarks,
-                                B_3B_qty      :qtySupplied['3B'],
-                                // B_3B_remarks  :B_3B_remarks,
-                                B_3C_qty      :qtySupplied['3C'],
-                                // B_3C_remarks  :B_3C_remarks,
-                                B_3D_qty      :qtySupplied['3D'],
-                                // B_3D_remarks  :B_3D_remarks, 
-                            }),
-                        })
-                    )}
             
-            >Submit</Button>
+            <div style={{padding:"10px"}}>
+                <Grid container >
+                    <Grid item xs={10}>
+                    <TextField
+                        id="outlined-multiline-static"
+                        label="Remarks"
+                        style={{width:"95%"}}
+                        multiline
+                        rows={4}
+                        // cols={12}
+                        // defaultValue="Default Value"
+                        placeholder="enter comments/remarks"
+                        variant="outlined"
+                    />
+                    </Grid>
+                
+                <Grid item xs={2} style={{padding:"3.5%"}}>
+                <Button 
+                style={{padding:"10px"} }
+                variant="contained" color="primary"
+                    onClick={()=>(
+                        
+                        console.log("********** SUBMIT ***********")
+                        ,console.log(JSON.stringify({
+                            code         : myvar,
+                            B_1_qty      :qtySupplied['1'],
+                            // B_1_remarks  :B_1_remarks,
+                            B_2A_qty      :qtySupplied['2A'],
+                            // B_2A_remarks  :B_2A_remarks,
+                            B_2B_qty      :qtySupplied['2B'],
+                            // B_2B_remarks  :B_2B_remarks,
+                            B_3A_qty      :qtySupplied['3A'],
+                            // B_3A_remarks  :B_3A_remarks,
+                            B_3B_qty      :qtySupplied['3B'],
+                            // B_3B_remarks  :B_3B_remarks,
+                            B_3C_qty      :qtySupplied['3C'],
+                            // B_3C_remarks  :B_3C_remarks,
+                            B_3D_qty      :qtySupplied['3D'],
+                            // B_3D_remarks  :B_3D_remarks, 
+                        }))
+                        ,fetch(SUBMIT_FORM_API,
+                            {
+                                credentials: 'include',
+                                method:'PATCH',
+                                headers: {
+                                Accept: 'application/json',
+                                "Content-Type": 'application/json',
+                            },
+                                body: JSON.stringify({
+                                    code         : myvar,
+                                    B_1_qty      :qtySupplied['1'],
+                                    // B_1_remarks  :B_1_remarks,
+                                    B_2A_qty      :qtySupplied['2A'],
+                                    // B_2A_remarks  :B_2A_remarks,
+                                    B_2B_qty      :qtySupplied['2B'],
+                                    // B_2B_remarks  :B_2B_remarks,
+                                    B_3A_qty      :qtySupplied['3A'],
+                                    // B_3A_remarks  :B_3A_remarks,
+                                    B_3B_qty      :qtySupplied['3B'],
+                                    // B_3B_remarks  :B_3B_remarks,
+                                    B_3C_qty      :qtySupplied['3C'],
+                                    // B_3C_remarks  :B_3C_remarks,
+                                    B_3D_qty      :qtySupplied['3D'],
+                                    // B_3D_remarks  :B_3D_remarks, 
+                                }),
+                            })
+                        )}
+                
+                >Submit</Button>
+                </Grid>
+            </Grid>
+            </div>
             </div>
         )
     }

@@ -13,6 +13,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Toolbar from '@material-ui/core/Toolbar'
 import axios from 'axios';
+
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -49,9 +50,9 @@ function descendingComparator(a, b, orderBy) {
   };
  
 
-const apiURL="http://127.0.0.1:8000/api/combined-form/200";
+const apiURL="http://127.0.0.1:8000/api/combined-form/";
 
-export default function ReturnedTable() {
+export default function ReturnedTable(props) {
     // var rows = [
     //     createData('Frozen yoghurt', 159, 6.0, 24, 4.0,4,4),
     //     createData('Ice cream sandwich', 237, 9.0, 37, 4.3,4,4),
@@ -63,7 +64,7 @@ export default function ReturnedTable() {
     const [rows, setRows] = React.useState([createData(123323427897,11,"atul","yo","sfsdf")]);
     const fetchData = async () => {
         console.log("in fetch");
-        const response = await axios.get(apiURL)
+        const response = await axios.get(apiURL+props.docnumber)
         // const response = await fetch(apiURL);
         const books = await response.data;
         console.log(books);
