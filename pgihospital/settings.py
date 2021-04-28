@@ -157,9 +157,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'edzdhl+o42_-sv9a8fde#ge!o%kpv4fiu9yced4x8j=g3hiv73'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 CORS_ALLOW_ALL_ORIGINS = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -175,7 +175,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'knox',
     'corsheaders',
-    #'frontend.apps.FrontendConfig'
+    'frontend',
 ]
 
 MIDDLEWARE = [
@@ -188,6 +188,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     
 ]
 
@@ -262,7 +263,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'frontend/build/static'),
 ]
@@ -276,3 +277,4 @@ REST_FRAMEWORK = {
     'DATETIME_FORMAT': "%m/%d/%Y %H:%M:%S",
 }
 AUTH_USER_MODEL = 'api.User'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')

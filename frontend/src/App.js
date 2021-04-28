@@ -12,6 +12,10 @@ import Dashboard from './user/dashboard/Dashboard';
 import ManagerDashboard from './user/unitmanager/ManagerDashboard';
 import CardiacForm_um from './user/unitmanager/cardiacforms_um';
 import ReturnedCardiacForm from './patient/returnedcardiacform';
+import axios from 'axios';
+axios.defaults.xsrfCookieName = 'csrftoken'
+axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+
 function App() {
   return (
     <Router>
